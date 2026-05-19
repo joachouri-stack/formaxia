@@ -526,6 +526,7 @@ section{ position: relative; }
   position:relative; overflow:hidden;
 }
 .sol-card:hover{ border-color: var(--or); transform: translateY(-2px); }
+.sol-card{ cursor: pointer; }
 .sol-card .icon{
   width: 56px; height: 56px;
   border-radius: 50%;
@@ -628,6 +629,7 @@ section{ position: relative; }
 .day{ margin-bottom: 64px; }
 .modules{ display:grid; grid-template-columns: repeat(5, 1fr); gap: 0; border-top: 1px solid var(--gris-line); }
 .modules .module{ border-right: 1px solid var(--gris-line); border-bottom: 1px solid var(--gris-line); padding: 28px 22px; min-height: 220px; display:flex; flex-direction:column; transition: background .2s; }
+.modules .module{ cursor: pointer; }
 .modules .module:hover{ background: rgba(232,97,10,0.04); }
 .modules .module:nth-child(5n){ border-right:0 }
 @media (max-width: 980px){
@@ -1930,6 +1932,95 @@ function onScroll(){
 }
 window.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
+
+/* ─────────────────────────────────────────────────────────────────
+   Fiches cliquables — Solution (Usage 01–03) → #programme
+                       Modules (M01–M10)     → #contact (pré-remplit le message)
+   ───────────────────────────────────────────────────────────────── */
+function smoothTo(id){
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+document.querySelectorAll('.sol-card').forEach(card => {
+  card.setAttribute('role', 'link');
+  card.setAttribute('tabindex', '0');
+  const go = () => smoothTo('programme');
+  card.addEventListener('click', go);
+  card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); }});
+});
+
+document.querySelectorAll('.modules .module').forEach(card => {
+  card.setAttribute('role', 'link');
+  card.setAttribute('tabindex', '0');
+  const go = () => {
+    const num = card.querySelector('.m-num')?.textContent?.trim() || '';
+    const title = card.querySelector('.m-title')?.textContent?.trim() || '';
+    const msg = document.getElementById('msg');
+    if (msg && num){
+      const prefill = `Je suis intéressé·e par le ${num} — ${title}.`;
+      if (!msg.value.includes(prefill)){
+        msg.value = msg.value ? msg.value.trimEnd() + '\n' + prefill : prefill;
+      }
+    }
+    smoothTo('contact');
+  };
+  card.addEventListener('click', go);
+  card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); }});
+});
+
+/* ─────────────────────────────────────────────────────────────────
+   Formulaire de contact → mailto:
+   Aucune infra requise : on construit un mailto avec tous les champs
+   et on ouvre le client mail de l'utilisateur.
+   ───────────────────────────────────────────────────────────────── */
+(function setupContactForm(){
+  const form = document.getElementById('contactForm');
+  if (!form) return;
+  const TO = 'contact@formaxia.fr';
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    if (!form.reportValidity()) return;
+    const v = id => (document.getElementById(id)?.value || '').trim();
+
+    const subject = `Demande de formation — ${v('prenom')} ${v('nom')}`;
+    const body = [
+      `Prénom : ${v('prenom')}`,
+      `Nom : ${v('nom')}`,
+      `Métier / Entreprise : ${v('metier')}`,
+      `Nombre à former : ${v('taille')}`,
+      `Email : ${v('email')}`,
+      `Téléphone : ${v('tel')}`,
+      `Format souhaité : ${v('format')}`,
+      '',
+      'Message :',
+      v('msg') || '(aucun message)',
+      '',
+      '---',
+      'Envoyé depuis formaxia.fr'
+    ].join('\r\n');
+
+    const href = `mailto:${TO}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    const btn = form.querySelector('button[type="submit"]');
+    const original = btn ? btn.innerHTML : null;
+    if (btn){
+      btn.disabled = true;
+      btn.innerHTML = 'Ouverture de votre messagerie…';
+    }
+
+    window.location.href = href;
+
+    setTimeout(() => {
+      if (btn){ btn.disabled = false; btn.innerHTML = original; }
+      const legal = form.querySelector('.legal');
+      if (legal){
+        legal.textContent = `Votre messagerie devrait s'ouvrir. Sinon, écrivez-nous directement à ${TO}.`;
+        legal.style.color = 'var(--or-deep)';
+      }
+    }, 800);
+  });
+})();
 
 /* Back to top */
 backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
