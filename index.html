@@ -1,0 +1,2120 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Formaxia — Gagnez 10 heures par semaine grâce à l'IA</title>
+<meta name="description" content="Formation IA pour artisans et PME du BTP. 14h pour transformer votre administratif. 100% financé par OPCO Constructys." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap" />
+
+<script>
+/* TWEAKS: sector accent (BTP / Commerce / etc.) — single variable swap, per the brief.
+   The brief is explicit that only the accent moves between sectors;
+   the gold / black / off-white stays fixed. */
+window.TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "sector": "#c9a84c",
+  "accent": "#C9A84C",
+  "showGoldRules": true,
+  "density": "regular",
+  "heroImage": "",
+  "sessionImage": "",
+  "portraitImage": ""
+}/*EDITMODE-END*/;
+</script>
+
+<style>
+/* ─────────────────────────────────────────────────────────────────
+   TOKENS — système couleurs évolutif (brief)
+   ───────────────────────────────────────────────────────────────── */
+:root{
+  --noir:       #0a0a0f;     /* primaire fixe */
+  --or:         #c9a84c;     /* or premium fixe */
+  --or-soft:    #d8bb6a;
+  --or-deep:    #a88736;
+  --blanc:      #f8f6f1;     /* blanc cassé fixe */
+  --blanc-pure: #ffffff;
+  --gris:       #2a2a35;     /* anthracite */
+  --gris-2:     #3a3a47;
+  --gris-3:     #5a5a68;
+  --gris-line:  #e6e1d6;
+  --gris-line-2:#efeae0;
+  --accent:     #E8610A;     /* BTP par défaut — seul ce token change par secteur */
+  --accent-deep:#c4500a;
+
+  --ff-display: "Playfair Display", "Times New Roman", serif;
+  --ff-text:    "DM Sans", -apple-system, system-ui, sans-serif;
+  --ff-mono:    "DM Mono", ui-monospace, "SF Mono", monospace;
+
+  --maxw: 1240px;
+  --gut:  clamp(20px, 4vw, 56px);
+  --rad:  2px;
+  --rad-card: 4px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{margin:0;padding:0}
+body{
+  background: var(--blanc);
+  color: var(--noir);
+  font-family: var(--ff-text);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:transparent}
+:focus-visible{outline:2px solid var(--or); outline-offset:3px}
+
+/* ─────────────────────────────────────────────────────────────────
+   TYPOGRAPHIE
+   ───────────────────────────────────────────────────────────────── */
+.h-display{
+  font-family: var(--ff-display);
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+  margin: 0;
+  text-wrap: balance;
+}
+h1.h-display{ font-size: clamp(44px, 6.4vw, 92px); }
+h2.h-display{ font-size: clamp(34px, 4.6vw, 64px); }
+h3.h-display{ font-size: clamp(24px, 2.2vw, 32px); font-weight:500; }
+.h-display em{ font-style: italic; color: var(--or); font-weight:400; }
+.h-display .accent-word{ color: var(--accent); font-style: italic; font-weight:400; }
+
+.eyebrow{
+  font-family: var(--ff-mono);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--or-deep);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.eyebrow::before{
+  content:"";
+  width: 28px; height: 1px;
+  background: currentColor;
+  display: inline-block;
+  opacity: .7;
+}
+.eyebrow.center{ justify-content:center }
+.eyebrow.light{ color: var(--or-soft) }
+
+.lede{
+  font-size: clamp(17px, 1.4vw, 20px);
+  line-height: 1.55;
+  color: var(--gris-3);
+  max-width: 56ch;
+  text-wrap: pretty;
+}
+.mono{ font-family: var(--ff-mono); letter-spacing: 0.04em; }
+.num{ font-family: var(--ff-mono); font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+
+/* ─────────────────────────────────────────────────────────────────
+   LAYOUT
+   ───────────────────────────────────────────────────────────────── */
+.wrap{ max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gut); }
+section{ position: relative; }
+.section-pad{ padding: clamp(72px, 9vw, 140px) 0; }
+.section-rule{
+  height: 1px; background: var(--gris-line); margin: 0 var(--gut);
+}
+.dark{ background: var(--noir); color: var(--blanc); }
+.dark .lede{ color: rgba(248,246,241,.7) }
+.dark .eyebrow{ color: var(--or-soft) }
+.dark .section-rule{ background: rgba(201,168,76,.18) }
+
+.grid{ display:grid; gap: clamp(28px, 3vw, 56px); }
+.g-2{ grid-template-columns: repeat(2, 1fr); }
+.g-3{ grid-template-columns: repeat(3, 1fr); }
+.g-4{ grid-template-columns: repeat(4, 1fr); }
+.g-5{ grid-template-columns: repeat(5, 1fr); }
+@media (max-width: 980px){
+  .g-2,.g-3,.g-4,.g-5{ grid-template-columns: 1fr; }
+  .g-3.tight-mobile{ grid-template-columns: 1fr 1fr; }
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   HEADER
+   ───────────────────────────────────────────────────────────────── */
+.header{
+  position: fixed; top:0; left:0; right:0; z-index:50;
+  padding: 14px var(--gut);
+  display:flex; align-items:center; justify-content: space-between;
+  gap: 24px;
+  transition: background .35s ease, backdrop-filter .35s ease, border-color .35s ease;
+  border-bottom: 1px solid transparent;
+}
+.header.scrolled{
+  background: rgba(10,10,15,0.78);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border-bottom-color: rgba(201,168,76,.16);
+}
+.header .logo{ color: var(--blanc); }
+.header.scrolled .logo{ color: var(--blanc); }
+.header.light-bg:not(.scrolled){ color: var(--noir); }
+.header.light-bg:not(.scrolled) .logo{ color: var(--noir); }
+.header.light-bg:not(.scrolled) .nav a{ color: var(--noir); }
+
+.logo{
+  font-family: var(--ff-display);
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  display:inline-flex; align-items:center; gap:10px;
+}
+.logo .mark{
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 30%, var(--or-soft), var(--or) 50%, var(--or-deep) 100%);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.15);
+  position: relative;
+}
+.logo .mark::after{
+  content:"";
+  position:absolute; inset: 30%;
+  border-radius: 50%;
+  background: var(--noir);
+  box-shadow: inset 0 0 0 1px var(--or-deep);
+}
+.logo b{ font-weight:600 }
+.logo .tld{ color: var(--or); font-weight:500; }
+
+.nav{ display:flex; gap: 28px; align-items:center; }
+.nav a{
+  font-size: 14px; font-weight:500; color: var(--blanc);
+  opacity: .82;
+  transition: opacity .2s, color .2s;
+  position: relative;
+}
+.nav a:hover{ opacity:1; color: var(--or); }
+.nav a::after{
+  content:""; position:absolute; left:0; right:0; bottom:-6px;
+  height: 1px; background: var(--or); transform: scaleX(0); transform-origin:left;
+  transition: transform .25s ease;
+}
+.nav a:hover::after{ transform: scaleX(1); }
+
+.cta{
+  display:inline-flex; align-items:center; gap:10px;
+  padding: 12px 20px;
+  background: var(--or);
+  color: var(--noir);
+  font-weight: 500; font-size: 14px;
+  letter-spacing: 0.01em;
+  border-radius: var(--rad);
+  transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
+  box-shadow: 0 1px 0 rgba(0,0,0,.06), 0 0 0 1px rgba(168,135,54,.0);
+}
+.cta:hover{ background: var(--or-soft); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(201,168,76,.28); }
+.cta .arrow{ transition: transform .2s ease; }
+.cta:hover .arrow{ transform: translateX(3px); }
+
+.cta.ghost{
+  background: transparent; color: inherit;
+  box-shadow: inset 0 0 0 1px currentColor;
+}
+.cta.ghost:hover{ background: rgba(201,168,76,.08); box-shadow: inset 0 0 0 1px var(--or); color: var(--or); }
+.cta.accent{ background: var(--accent); color: #fff; }
+.cta.accent:hover{ background: var(--accent-deep); }
+
+.menu-burger{ display:none; color: var(--blanc); }
+.menu-burger svg{ stroke: var(--blanc); }
+@media (max-width: 1080px){
+  .nav{ display:none }
+  .nav.open{
+    display:flex; flex-direction:column; gap:0;
+    position: fixed; inset: 64px 0 0 0;
+    background: var(--noir);
+    padding: 32px var(--gut);
+    border-top: 1px solid rgba(201,168,76,.16);
+  }
+  .nav.open a{ font-size: 22px; padding: 18px 0; border-bottom: 1px solid rgba(248,246,241,.08); opacity:.95; }
+  .menu-burger{ display:inline-flex; align-items:center; justify-content:center; width:40px;height:40px; color: var(--blanc); }
+  .menu-burger svg{ width:22px;height:22px }
+  .header .cta-wrap .cta:not(.burger-only){ display:none }
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   HERO
+   ───────────────────────────────────────────────────────────────── */
+.hero{
+  background: var(--noir);
+  color: var(--blanc);
+  padding: clamp(140px, 16vw, 200px) 0 clamp(72px, 8vw, 110px);
+  position: relative;
+  overflow: hidden;
+}
+.hero::before{
+  /* subtle warm grain + radial light */
+  content:""; position:absolute; inset:0;
+  background:
+    radial-gradient(60% 80% at 80% 20%, rgba(201,168,76,.10), transparent 60%),
+    radial-gradient(50% 60% at 15% 85%, rgba(232,97,10,.07), transparent 70%);
+  pointer-events:none;
+}
+.hero-grid{
+  display: grid; grid-template-columns: minmax(0,1.15fr) minmax(0,1fr);
+  gap: clamp(40px, 5vw, 88px);
+  align-items: end;
+}
+@media (max-width: 1080px){ .hero-grid{ grid-template-columns: 1fr; } }
+
+.hero h1{ color: var(--blanc); margin-top: 28px; }
+.hero h1 em{ color: var(--or); }
+.hero .sub{
+  margin-top: 28px;
+  font-size: clamp(17px, 1.5vw, 21px);
+  line-height: 1.55;
+  color: rgba(248,246,241,.78);
+  max-width: 58ch;
+  text-wrap: pretty;
+}
+.hero .ctas{
+  margin-top: 40px;
+  display: flex; gap: 14px; flex-wrap: wrap;
+}
+.hero .ctas .cta.ghost{ color: var(--blanc) }
+.hero .ctas .cta.ghost:hover{ color: var(--or) }
+
+.badges{
+  margin-top: 40px;
+  display: grid; grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 14px 28px; max-width: 640px;
+}
+@media (max-width: 560px){ .badges{ grid-template-columns: 1fr } }
+.badge{
+  display:flex; align-items:flex-start; gap:10px;
+  font-size: 14px; color: rgba(248,246,241,.82);
+}
+.badge .ck{
+  flex: 0 0 18px; width:18px; height:18px;
+  border-radius: 50%;
+  background: rgba(201,168,76,.12);
+  color: var(--or);
+  display:inline-flex; align-items:center; justify-content:center;
+  margin-top: 2px;
+}
+.badge .ck svg{ width:11px; height: 11px; }
+
+/* Hero side card — featured image placeholder */
+.hero-side{
+  position: relative;
+}
+.placeholder{
+  position: relative;
+  background:
+    repeating-linear-gradient(135deg,
+      rgba(201,168,76,.10) 0 1px,
+      transparent 1px 14px),
+    linear-gradient(180deg, #1a1a22, #11111a);
+  border: 1px solid rgba(201,168,76,.22);
+  border-radius: var(--rad-card);
+  aspect-ratio: 4/5;
+  display:flex; align-items:flex-end; padding: 22px;
+  overflow:hidden;
+}
+.placeholder.light{
+  background:
+    repeating-linear-gradient(135deg,
+      rgba(10,10,15,.06) 0 1px,
+      transparent 1px 14px),
+    linear-gradient(180deg, #efeadd, #e6dfce);
+  border-color: rgba(10,10,15,.08);
+}
+.placeholder.tall{ aspect-ratio: 3/4 }
+.placeholder.wide{ aspect-ratio: 16/9 }
+.placeholder.square{ aspect-ratio: 1/1 }
+.placeholder .ph-label{
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--or);
+  display:inline-flex; align-items:center; gap:8px;
+}
+.placeholder.light .ph-label{ color: var(--accent-deep) }
+.placeholder .ph-label::before{
+  content:"+"; font-family: var(--ff-mono); font-size: 14px; color: currentColor;
+}
+.placeholder .ph-corner{
+  position:absolute; top: 14px; left: 14px;
+  font-family: var(--ff-mono); font-size: 10px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(248,246,241,.4);
+}
+.placeholder.light .ph-corner{ color: rgba(10,10,15,.4) }
+.placeholder .ph-corner-r{
+  position:absolute; top: 14px; right: 14px;
+  font-family: var(--ff-mono); font-size: 10px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(248,246,241,.4);
+}
+.placeholder.light .ph-corner-r{ color: rgba(10,10,15,.4) }
+.placeholder.has-image{ background-color: transparent; }
+.placeholder.has-image .ph-label{ display:none }
+.placeholder.has-image .ph-corner,
+.placeholder.has-image .ph-corner-r{
+  background: rgba(10,10,15,.55);
+  padding: 4px 8px;
+  border-radius: 999px;
+  color: rgba(248,246,241,.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.hero-meta{
+  position:absolute; top: 18px; right: 18px;
+  font-family: var(--ff-mono); font-size: 11px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--or);
+  background: rgba(201,168,76,.08);
+  border: 1px solid rgba(201,168,76,.3);
+  padding: 6px 10px;
+  border-radius: 999px;
+}
+.hero-meta .dot{
+  display:inline-block; width:6px; height:6px; border-radius:50%;
+  background: var(--or); margin-right:8px;
+  box-shadow: 0 0 0 3px rgba(201,168,76,.18);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{ 0%,100%{opacity:1} 50%{opacity:.45} }
+
+.hero-tag-row{
+  font-family: var(--ff-mono); font-size: 12px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--or);
+  display:flex; align-items:center; gap: 18px;
+}
+.hero-tag-row .pill{
+  padding: 5px 12px;
+  border:1px solid rgba(201,168,76,.4);
+  border-radius: 999px;
+  color: var(--or-soft);
+}
+.hero-tag-row .sep{ height:1px; flex:1; background: rgba(201,168,76,.25); max-width: 80px; }
+
+/* Hero floating spec card */
+.spec-card{
+  position:absolute; left: -28px; bottom: -28px;
+  background: var(--blanc);
+  color: var(--noir);
+  padding: 18px 22px;
+  border-radius: var(--rad-card);
+  box-shadow: 0 18px 50px rgba(0,0,0,.45);
+  display:flex; gap: 18px; align-items:center;
+  max-width: 320px;
+}
+.spec-card .big{
+  font-family: var(--ff-mono);
+  font-size: 36px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.spec-card .lbl{
+  font-size: 12px; color: var(--gris-3);
+  text-wrap: balance;
+}
+.spec-card .lbl b{ color: var(--noir); font-weight:500; display:block; }
+
+@media (max-width: 1080px){
+  .spec-card{ position: static; margin-top: 18px; max-width: none; }
+}
+
+/* Marquee strip with running stats */
+.strip{
+  background: var(--noir);
+  color: var(--or);
+  border-top: 1px solid rgba(201,168,76,.16);
+  border-bottom: 1px solid rgba(201,168,76,.16);
+  padding: 16px 0;
+  font-family: var(--ff-mono);
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  overflow: hidden;
+}
+.strip-track{
+  display: flex; gap: 56px;
+  white-space: nowrap;
+  animation: scroll 38s linear infinite;
+  width: max-content;
+}
+.strip-track span{ display:inline-flex; align-items:center; gap:14px; }
+.strip-track .dot{ width:6px; height:6px; border-radius:50%; background: var(--or); }
+.strip-track b{ color: var(--blanc); font-family: var(--ff-display); font-weight:500; font-style:italic; }
+@keyframes scroll{
+  from{ transform: translateX(0) }
+  to  { transform: translateX(-50%) }
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   PROBLEMS
+   ───────────────────────────────────────────────────────────────── */
+.problems{ background: var(--blanc); }
+.problems-head{
+  display:grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: end;
+  margin-bottom: 64px;
+}
+@media (max-width: 980px){ .problems-head{ grid-template-columns: 1fr; gap: 28px; } }
+.problems-list{
+  border-top: 1px solid var(--gris-line);
+}
+.problem-row{
+  display:grid; grid-template-columns: 80px 1fr auto;
+  gap: 24px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--gris-line);
+  align-items: center;
+}
+.problem-row .n{
+  font-family: var(--ff-mono); font-size: 12px;
+  letter-spacing: 0.14em; color: var(--gris-3);
+}
+.problem-row .t{
+  font-family: var(--ff-display);
+  font-size: clamp(22px, 2.4vw, 30px);
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.problem-row .t em{ color: var(--accent); font-style: italic; }
+.problem-row .hrs{
+  font-family: var(--ff-mono); font-size: 12px;
+  letter-spacing: 0.14em; color: var(--gris-3);
+  text-align: right;
+  white-space: nowrap;
+}
+.problem-row:hover{ background: rgba(232,97,10,0.025); }
+@media (max-width: 720px){
+  .problem-row{ grid-template-columns: 56px 1fr; }
+  .problem-row .hrs{ grid-column: 2; text-align: left; }
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   SOLUTION (3 colonnes)
+   ───────────────────────────────────────────────────────────────── */
+.solution{ background: var(--noir); color: var(--blanc); }
+.solution h2 em{ color: var(--or) }
+.sol-head{ max-width: 920px; margin-bottom: clamp(48px, 6vw, 88px); }
+.sol-cards{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+@media (max-width: 980px){ .sol-cards{ grid-template-columns: 1fr } }
+.sol-card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.005));
+  border: 1px solid rgba(201,168,76,.14);
+  border-radius: var(--rad-card);
+  padding: 36px 32px;
+  display:flex; flex-direction:column;
+  min-height: 380px;
+  transition: border-color .25s, transform .25s;
+  position:relative; overflow:hidden;
+}
+.sol-card:hover{ border-color: var(--or); transform: translateY(-2px); }
+.sol-card .icon{
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: rgba(201,168,76,.10);
+  display:flex; align-items:center; justify-content:center;
+  color: var(--or);
+  margin-bottom: 28px;
+}
+.sol-card .icon svg{ width: 26px; height: 26px; }
+.sol-card .step{
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: var(--or-soft);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.sol-card h3{
+  font-family: var(--ff-display);
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.1;
+  margin: 0 0 14px;
+}
+.sol-card h3 em{ color: var(--or); font-style: italic; }
+.sol-card p{ color: rgba(248,246,241,.7); margin: 0; }
+.sol-card .more{
+  margin-top: auto;
+  padding-top: 28px;
+  display:inline-flex; align-items:center; gap:10px;
+  font-family: var(--ff-mono); font-size: 12px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--or);
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   STATS
+   ───────────────────────────────────────────────────────────────── */
+.stats{
+  background:
+    linear-gradient(180deg, var(--noir), #060609);
+  color: var(--blanc);
+  border-top: 1px solid rgba(201,168,76,.18);
+  border-bottom: 1px solid rgba(201,168,76,.18);
+}
+.stats-grid{
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+@media (max-width: 980px){ .stats-grid{ grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px){ .stats-grid{ grid-template-columns: 1fr; } }
+.stat{
+  padding: 28px 32px;
+  border-right: 1px solid rgba(201,168,76,.16);
+  position:relative;
+}
+.stats-grid .stat:last-child{ border-right:0 }
+@media (max-width: 980px){
+  .stat:nth-child(2n){ border-right:0 }
+  .stat:nth-child(-n+2){ border-bottom: 1px solid rgba(201,168,76,.16); }
+}
+@media (max-width: 560px){
+  .stat{ border-right:0; border-bottom: 1px solid rgba(201,168,76,.16); }
+  .stat:last-child{ border-bottom:0 }
+}
+.stat .v{
+  font-family: var(--ff-mono);
+  font-size: clamp(48px, 5.6vw, 76px);
+  font-weight: 400;
+  color: var(--or);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  display:flex; align-items: baseline; gap: 6px;
+}
+.stat .v .u{ font-size: 0.4em; color: var(--or-soft); font-weight: 400; letter-spacing: 0.04em; }
+.stat .k{
+  margin-top: 14px;
+  font-size: 14px; color: rgba(248,246,241,.65);
+  line-height: 1.45;
+  max-width: 30ch;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   PROGRAMME APERÇU
+   ───────────────────────────────────────────────────────────────── */
+.programme{ background: var(--blanc); }
+.prog-head{
+  display:grid; grid-template-columns: 1.1fr 1fr; gap: 64px;
+  align-items: end; margin-bottom: 56px;
+}
+@media (max-width: 980px){ .prog-head{ grid-template-columns: 1fr; } }
+.day-tag{
+  display:inline-flex; align-items: center; gap: 12px;
+  font-family: var(--ff-mono); font-size: 12px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gris); margin-bottom: 24px;
+}
+.day-tag .dot{ width:8px; height:8px; border-radius:50%; background: var(--accent); }
+.day-tag .num{ font-weight:500 }
+
+.day{ margin-bottom: 64px; }
+.modules{ display:grid; grid-template-columns: repeat(5, 1fr); gap: 0; border-top: 1px solid var(--gris-line); }
+.modules .module{ border-right: 1px solid var(--gris-line); border-bottom: 1px solid var(--gris-line); padding: 28px 22px; min-height: 220px; display:flex; flex-direction:column; transition: background .2s; }
+.modules .module:hover{ background: rgba(232,97,10,0.04); }
+.modules .module:nth-child(5n){ border-right:0 }
+@media (max-width: 980px){
+  .modules{ grid-template-columns: repeat(2, 1fr); }
+  .modules .module{ border-right: 1px solid var(--gris-line) }
+  .modules .module:nth-child(2n){ border-right: 0 }
+}
+@media (max-width: 560px){
+  .modules{ grid-template-columns: 1fr; }
+  .modules .module{ border-right: 0 }
+}
+.module .m-num{
+  font-family: var(--ff-mono); font-size: 11px; letter-spacing: 0.14em;
+  color: var(--accent); text-transform: uppercase; margin-bottom: 18px;
+}
+.module .m-title{
+  font-family: var(--ff-display);
+  font-size: 19px; font-weight: 500; line-height: 1.2;
+  letter-spacing: -0.005em;
+  margin: 0 0 12px;
+}
+.module .m-sub{
+  font-size: 13px; color: var(--gris-3); line-height: 1.5;
+  flex: 1;
+}
+.module .m-dur{
+  margin-top: 18px;
+  font-family: var(--ff-mono); font-size: 11px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--gris-3);
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   TÉMOIGNAGES
+   ───────────────────────────────────────────────────────────────── */
+.testimonials{ background: var(--blanc); border-top: 1px solid var(--gris-line); }
+.t-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+@media (max-width: 980px){ .t-grid{ grid-template-columns: 1fr } }
+.t-card{
+  background: var(--blanc-pure);
+  border: 1px solid var(--gris-line);
+  border-radius: var(--rad-card);
+  padding: 36px 32px;
+  display:flex; flex-direction: column;
+  transition: border-color .25s, transform .25s, box-shadow .25s;
+}
+.t-card:hover{ border-color: var(--or); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(10,10,15,.06); }
+.t-card .quote{
+  font-family: var(--ff-display);
+  font-size: 22px; line-height: 1.35;
+  font-weight: 400;
+  margin: 0;
+  flex: 1;
+  text-wrap: pretty;
+}
+.t-card .quote::before{
+  content: "“"; font-family: var(--ff-display); font-size: 64px;
+  color: var(--or); line-height: 0; vertical-align: -18px; margin-right: 4px;
+}
+.t-author{
+  margin-top: 32px;
+  display: grid; grid-template-columns: 52px 1fr; gap: 14px;
+  align-items: center;
+}
+.avatar{
+  width: 52px; height:52px; border-radius:50%;
+  background:
+    repeating-linear-gradient(135deg, rgba(201,168,76,.18) 0 1px, transparent 1px 5px),
+    linear-gradient(135deg, #d8c89b, #b7945a);
+  border: 1px solid rgba(201,168,76,.4);
+  display:flex; align-items:center; justify-content:center;
+  font-family: var(--ff-mono); font-size: 14px; font-weight:500;
+  color: var(--noir);
+}
+.t-author .nm{ font-weight: 500; font-size: 15px; }
+.t-author .rl{ font-family: var(--ff-mono); font-size: 12px; color: var(--gris-3); letter-spacing: 0.08em; }
+.t-gain{
+  margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--gris-line);
+  display:flex; align-items: baseline; gap: 8px;
+  font-family: var(--ff-mono); font-size: 12px; color: var(--gris-3);
+  letter-spacing: 0.12em; text-transform: uppercase;
+}
+.t-gain b{ color: var(--accent); font-weight:500; font-size: 18px; letter-spacing: -0.01em; }
+
+/* ─────────────────────────────────────────────────────────────────
+   FINANCEMENT
+   ───────────────────────────────────────────────────────────────── */
+.financement{ background: var(--noir); color: var(--blanc); }
+.fin-grid{
+  display:grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 5vw, 80px);
+  align-items: start;
+}
+@media (max-width: 980px){ .fin-grid{ grid-template-columns: 1fr } }
+.fin-steps{ counter-reset: step; margin: 28px 0 0; padding: 0; list-style:none; }
+.fin-step{
+  display:grid; grid-template-columns: 56px 1fr;
+  gap: 20px; padding: 22px 0;
+  border-top: 1px solid rgba(201,168,76,.15);
+  align-items: center;
+}
+.fin-step:last-child{ border-bottom: 1px solid rgba(201,168,76,.15); }
+.fin-step .n{
+  font-family: var(--ff-mono); font-size: 14px;
+  color: var(--or); letter-spacing: 0.08em;
+}
+.fin-step .t{ font-family: var(--ff-display); font-size: 22px; font-weight:400; line-height:1.25; }
+.fin-step .t em{ color: var(--or); font-style: italic; }
+
+.fin-detail{
+  background: linear-gradient(180deg, rgba(201,168,76,.05), rgba(201,168,76,0));
+  border: 1px solid rgba(201,168,76,.3);
+  border-radius: var(--rad-card);
+  padding: 40px;
+}
+.fin-detail .row{
+  display:flex; justify-content: space-between; align-items: baseline;
+  padding: 18px 0;
+  border-bottom: 1px dashed rgba(201,168,76,.2);
+}
+.fin-detail .row:last-of-type{ border-bottom: 0 }
+.fin-detail .row .k{ color: rgba(248,246,241,.7); font-size: 14px; }
+.fin-detail .row .v{ font-family: var(--ff-mono); font-size: 18px; color: var(--or); letter-spacing: -0.01em; }
+.fin-detail .row.total{ padding-top: 24px; margin-top: 8px; border-top: 1px solid rgba(201,168,76,.4); border-bottom:0; }
+.fin-detail .row.total .k{ color: var(--blanc); font-weight: 500; font-size: 15px; }
+.fin-detail .row.total .v{ font-size: 28px; color: var(--or); }
+.fin-detail .seal{
+  margin-top: 28px;
+  background: rgba(201,168,76,.10);
+  border: 1px solid rgba(201,168,76,.35);
+  padding: 18px;
+  border-radius: var(--rad-card);
+  display: grid; grid-template-columns: 44px 1fr; gap: 16px; align-items: center;
+}
+.fin-detail .seal .ico{
+  width:44px; height:44px; border-radius:50%;
+  background: rgba(201,168,76,.18); color: var(--or);
+  display:flex; align-items:center; justify-content:center;
+}
+.fin-detail .seal .ico svg{ width: 22px; height: 22px; }
+.fin-detail .seal .t{ font-weight: 500; font-size: 14px; }
+.fin-detail .seal .s{ font-size: 13px; color: rgba(248,246,241,.6); }
+
+/* ─────────────────────────────────────────────────────────────────
+   FORMATION (la formation)
+   ───────────────────────────────────────────────────────────────── */
+.formation{ background: var(--blanc); border-top: 1px solid var(--gris-line); }
+.form-grid{ display:grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(40px, 5vw, 80px); align-items: start; }
+@media (max-width: 980px){ .form-grid{ grid-template-columns: 1fr } }
+.form-side{ position: sticky; top: 100px; }
+.list-check{ list-style:none; padding:0; margin: 28px 0 0; }
+.list-check li{
+  display:grid; grid-template-columns: 28px 1fr;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--gris-line-2);
+  font-size: 16px;
+}
+.list-check li .ck{
+  width: 22px; height: 22px; border-radius: 50%;
+  background: rgba(201,168,76,.12); color: var(--or-deep);
+  display:flex; align-items: center; justify-content: center;
+  margin-top: 2px;
+}
+.list-check li .ck svg{ width: 12px; height: 12px; }
+
+.formats{ display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 28px; }
+@media (max-width: 560px){ .formats{ grid-template-columns: 1fr } }
+.format{
+  border: 1px solid var(--gris-line);
+  background: var(--blanc-pure);
+  padding: 22px;
+  border-radius: var(--rad-card);
+}
+.format .lbl{
+  font-family: var(--ff-mono); font-size: 11px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--accent);
+}
+.format .ttl{
+  margin-top: 6px;
+  font-family: var(--ff-display); font-size: 22px; font-weight: 500;
+  line-height: 1.15;
+}
+.format .sub{ margin-top: 6px; font-size: 13px; color: var(--gris-3); }
+
+/* ─────────────────────────────────────────────────────────────────
+   FAQ
+   ───────────────────────────────────────────────────────────────── */
+.faq{ background: var(--blanc); }
+.faq-grid{
+  display: grid; grid-template-columns: 0.9fr 1.1fr;
+  gap: clamp(40px, 5vw, 80px);
+  align-items: start;
+}
+@media (max-width: 980px){ .faq-grid{ grid-template-columns: 1fr } }
+.faq-list{ border-top: 1px solid var(--gris-line); }
+.faq-item{ border-bottom: 1px solid var(--gris-line); }
+.faq-q{
+  display: grid; grid-template-columns: 1fr 32px;
+  gap: 16px; align-items: center;
+  padding: 24px 0; width: 100%; text-align: left;
+  cursor: pointer;
+  transition: color .2s;
+}
+.faq-q:hover{ color: var(--or-deep) }
+.faq-q .qt{
+  font-family: var(--ff-display); font-size: clamp(18px, 1.6vw, 22px);
+  font-weight: 500; line-height: 1.3;
+  text-wrap: pretty;
+}
+.faq-q .qn{
+  font-family: var(--ff-mono); font-size: 11px; color: var(--gris-3);
+  letter-spacing: 0.14em;
+  display:block; margin-bottom: 8px;
+}
+.faq-q .ico{
+  width: 32px; height: 32px;
+  border: 1px solid var(--gris-line);
+  border-radius: 50%;
+  display:flex; align-items:center; justify-content:center;
+  transition: background .2s, color .2s, border-color .2s, transform .25s;
+  color: var(--gris);
+}
+.faq-q .ico svg{ width: 14px; height: 14px; }
+.faq-item.open .faq-q .ico{ background: var(--or); color: var(--noir); border-color: var(--or); transform: rotate(45deg); }
+.faq-a{
+  display: grid; grid-template-rows: 0fr;
+  transition: grid-template-rows .35s ease;
+}
+.faq-a > div{ overflow: hidden; }
+.faq-a p{
+  margin: 0 0 24px;
+  font-size: 16px; color: var(--gris-3); line-height: 1.6;
+  max-width: 64ch;
+}
+.faq-item.open .faq-a{ grid-template-rows: 1fr; }
+
+/* ─────────────────────────────────────────────────────────────────
+   ABOUT (Johane)
+   ───────────────────────────────────────────────────────────────── */
+.about{ background: var(--noir); color: var(--blanc); }
+.about-grid{
+  display:grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(40px, 5vw, 88px);
+  align-items: center;
+}
+@media (max-width: 980px){ .about-grid{ grid-template-columns: 1fr } }
+.about-quote{
+  font-family: var(--ff-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(22px, 2.4vw, 30px);
+  line-height: 1.35;
+  color: var(--blanc);
+  text-wrap: pretty;
+}
+.about-quote::before{ content:"« "; color: var(--or); }
+.about-quote::after{ content:" »"; color: var(--or); }
+.signature{
+  margin-top: 28px;
+  display: grid; grid-template-columns: auto 1fr; gap: 16px;
+  align-items: center;
+}
+.signature .nm{ font-family: var(--ff-display); font-size: 22px; font-weight:500; }
+.signature .ttl{ font-family: var(--ff-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--or); margin-top: 4px; }
+.sig-mark{ font-family: var(--ff-display); font-style: italic; color: var(--or); font-size: 36px; line-height: 1; }
+
+.credentials{
+  margin-top: 36px;
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  border-top: 1px solid rgba(201,168,76,.18);
+  border-bottom: 1px solid rgba(201,168,76,.18);
+}
+.cred{
+  padding: 22px 24px;
+  border-right: 1px solid rgba(201,168,76,.18);
+  border-bottom: 1px solid rgba(201,168,76,.18);
+}
+.credentials .cred:nth-child(2n){ border-right: 0 }
+.credentials .cred:nth-last-child(-n+2){ border-bottom: 0 }
+@media (max-width: 560px){
+  .credentials{ grid-template-columns: 1fr; }
+  .credentials .cred{ border-right: 0; }
+  .credentials .cred:last-child{ border-bottom: 0 }
+}
+.cred .lbl{ font-family: var(--ff-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--or-soft); }
+.cred .v{ margin-top: 6px; font-family: var(--ff-display); font-size: 18px; font-weight: 500; }
+
+/* ─────────────────────────────────────────────────────────────────
+   CONTACT
+   ───────────────────────────────────────────────────────────────── */
+.contact{ background: var(--blanc); border-top: 1px solid var(--gris-line); }
+.contact-grid{
+  display:grid; grid-template-columns: 1fr 1.1fr; gap: clamp(40px, 5vw, 80px);
+  align-items: start;
+}
+@media (max-width: 980px){ .contact-grid{ grid-template-columns: 1fr } }
+
+.contact-info-line{
+  display:grid; grid-template-columns: 140px 1fr;
+  gap: 18px; padding: 18px 0;
+  border-top: 1px solid var(--gris-line);
+  align-items: baseline;
+}
+.contact-info-line:last-child{ border-bottom: 1px solid var(--gris-line) }
+.contact-info-line .k{ font-family: var(--ff-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gris-3); }
+.contact-info-line .v{ font-size: 16px; font-weight: 500; }
+.contact-info-line .v a:hover{ color: var(--or-deep) }
+
+.form{
+  background: var(--blanc-pure);
+  border: 1px solid var(--gris-line);
+  border-radius: var(--rad-card);
+  padding: 40px;
+}
+.form .row{ display:grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+@media (max-width: 560px){ .form .row{ grid-template-columns: 1fr; } }
+.field{ display:flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+.field label{
+  font-family: var(--ff-mono); font-size: 11px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--gris-3);
+}
+.field input,.field select,.field textarea{
+  font: inherit;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--gris-line);
+  padding: 12px 0;
+  font-size: 16px;
+  color: var(--noir);
+  font-family: var(--ff-text);
+  outline: 0;
+  transition: border-color .2s;
+}
+.field input:focus,.field select:focus,.field textarea:focus{
+  border-bottom-color: var(--or);
+}
+.field textarea{ resize: vertical; min-height: 80px; }
+.form .submit-row{
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 18px; align-items: center;
+  margin-top: 16px;
+}
+.form .legal{
+  font-family: var(--ff-mono); font-size: 11px;
+  letter-spacing: 0.08em; color: var(--gris-3);
+}
+.form .submit-row .cta{ background: var(--accent); color: #fff; }
+.form .submit-row .cta:hover{ background: var(--accent-deep); }
+@media (max-width: 560px){ .form .submit-row{ grid-template-columns: 1fr } }
+
+/* ─────────────────────────────────────────────────────────────────
+   FOOTER
+   ───────────────────────────────────────────────────────────────── */
+.footer{ background: var(--noir); color: var(--blanc); padding: 80px 0 32px; }
+.footer-top{
+  display:grid; grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 56px; padding-bottom: 56px;
+  border-bottom: 1px solid rgba(201,168,76,.16);
+}
+@media (max-width: 980px){ .footer-top{ grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px){ .footer-top{ grid-template-columns: 1fr } }
+.footer .slogan{
+  font-family: var(--ff-display);
+  font-style: italic;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.35;
+  max-width: 28ch;
+  color: rgba(248,246,241,.85);
+  margin: 22px 0 0;
+}
+.footer h5{
+  font-family: var(--ff-mono); font-size: 11px; font-weight: 400;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--or);
+  margin: 0 0 18px;
+}
+.footer ul{ list-style:none; padding:0; margin: 0; display:flex; flex-direction: column; gap: 10px; }
+.footer ul a{ font-size: 14px; color: rgba(248,246,241,.7); }
+.footer ul a:hover{ color: var(--or) }
+
+.footer-badges{
+  display:flex; flex-wrap: wrap; gap: 10px; margin-top: 18px;
+}
+.foot-badge{
+  display:inline-flex; align-items:center; gap:8px;
+  padding: 6px 12px;
+  border: 1px solid rgba(201,168,76,.3);
+  border-radius: 999px;
+  font-family: var(--ff-mono); font-size: 11px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--or-soft);
+}
+.foot-badge .dot{ width: 6px; height: 6px; border-radius:50%; background: var(--or); }
+
+.footer-bottom{
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 18px; padding-top: 32px;
+  font-family: var(--ff-mono); font-size: 12px;
+  letter-spacing: 0.08em;
+  color: rgba(248,246,241,.5);
+  flex-wrap: wrap;
+}
+.footer-bottom a{ color: rgba(248,246,241,.7) }
+.footer-bottom a:hover{ color: var(--or) }
+.footer-bottom .legal-links{ display: flex; gap: 24px; flex-wrap: wrap; }
+
+/* ─────────────────────────────────────────────────────────────────
+   PROGRESS BAR + BACK-TO-TOP
+   ───────────────────────────────────────────────────────────────── */
+.progress{
+  position: fixed; top:0; left:0; right:0; height: 2px;
+  background: rgba(201,168,76,.12);
+  z-index: 60;
+}
+.progress .bar{
+  height:100%; width:0%; background: var(--or);
+  transition: width .08s linear;
+}
+.back-to-top{
+  position: fixed; right: 28px; bottom: 28px;
+  width: 44px; height: 44px;
+  background: var(--noir); color: var(--or);
+  border: 1px solid rgba(201,168,76,.4);
+  border-radius: 50%;
+  display:flex; align-items:center; justify-content:center;
+  opacity: 0; transform: translateY(8px);
+  transition: opacity .25s, transform .25s, background .2s, color .2s;
+  z-index: 40;
+}
+.back-to-top.show{ opacity: 1; transform: translateY(0); }
+.back-to-top:hover{ background: var(--or); color: var(--noir); }
+.back-to-top svg{ width:18px; height:18px; }
+
+/* ─────────────────────────────────────────────────────────────────
+   FADE-IN ANIMATIONS
+   ───────────────────────────────────────────────────────────────── */
+.reveal{ opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
+.reveal.in{ opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce){
+  .reveal{ opacity:1; transform:none }
+  .strip-track{ animation: none }
+  .hero-meta .dot{ animation: none }
+}
+
+/* Helpers */
+.dim{ color: var(--gris-3) }
+.italic{ font-style: italic; }
+.serif{ font-family: var(--ff-display); }
+.center{ text-align:center }
+.spacer-s{ height: 24px }
+.spacer-m{ height: 56px }
+.muted-line{ height:1px; background: var(--gris-line); margin: 24px 0; }
+.dark .muted-line{ background: rgba(201,168,76,.15); }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════
+     PROGRESS + HEADER
+     ════════════════════════════════════════════════════════════ -->
+<div class="progress" aria-hidden="true"><div class="bar" id="progressBar"></div></div>
+
+<header class="header" id="header">
+  <a href="#accueil" class="logo" aria-label="Formaxia accueil">
+    <span class="mark" aria-hidden="true"></span>
+    <span><b>Formaxia</b></span>
+  </a>
+  <nav class="nav" id="nav" aria-label="Navigation principale">
+    <a href="#accueil">Accueil</a>
+    <a href="#formation">La Formation</a>
+    <a href="#programme">Programme</a>
+    <a href="#financement">Financement</a>
+    <a href="#faq">FAQ</a>
+    <a href="#about">À Propos</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="cta-wrap" style="display:flex; align-items:center; gap:12px;">
+    <a href="#contact" class="cta">Je veux gagner du temps
+      <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+    <button class="menu-burger" id="burger" aria-label="Menu">
+      <svg id="burgerIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- ════════════════════════════════════════════════════════════
+     HERO
+     ════════════════════════════════════════════════════════════ -->
+<section class="hero" id="accueil" data-screen-label="Accueil">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-tag-row reveal">
+          <span class="pill">Formation IA · Édition BTP 2026</span>
+          <span class="sep" aria-hidden="true"></span>
+        </div>
+        <h1 class="h-display reveal" style="transition-delay:.08s">
+          Gagnez <em>10 heures</em> par semaine sur votre administratif.
+        </h1>
+        <p class="sub reveal" style="transition-delay:.16s">
+          Devis en 5 minutes. Planning automatique. Emails rédigés à votre place. <br />
+          <span style="color:var(--or-soft); font-style: italic; font-family: var(--ff-display);">L'IA travaille — vous gérez votre chantier.</span>
+        </p>
+        <div class="ctas reveal" style="transition-delay:.24s">
+          <a href="#contact" class="cta">Je veux gagner du temps
+            <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="#programme" class="cta ghost">Voir le programme</a>
+        </div>
+        <div class="badges reveal" style="transition-delay:.32s">
+          <div class="badge"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Formation <b style="font-weight:500;color:var(--blanc)">100% financée</b> OPCO Constructys</span></div>
+          <div class="badge"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span><b style="font-weight:500;color:var(--blanc)">0€</b> de reste à charge pour votre entreprise</span></div>
+          <div class="badge"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Certification <b style="font-weight:500;color:var(--blanc)">RS6776</b> officielle</span></div>
+          <div class="badge"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span><b style="font-weight:500;color:var(--blanc)">2 jours · 14 heures</b> de pratique</span></div>
+        </div>
+      </div>
+
+      <div class="hero-side reveal" style="transition-delay:.4s">
+        <div class="placeholder tall" id="heroPh" role="img" aria-label="Photo : artisan sur chantier avec tablette">
+          <span class="ph-corner">img-01 · hero</span>
+          <span class="hero-meta"><span class="dot"></span>Session 04 · Avignon</span>
+          <span class="ph-label">artisan_chantier_tablette.jpg</span>
+        </div>
+        <div class="spec-card">
+          <div class="big num">+10h</div>
+          <div class="lbl"><b>Par semaine, en moyenne</b>économisées dès la 1<sup>re</sup> semaine</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Marquee strip -->
+<div class="strip" aria-hidden="true">
+  <div class="strip-track">
+    <span><span class="dot"></span>Qualiopi</span>
+    <span>OPCO Constructys agréé</span>
+    <span><b>RS6776</b> · Certification officielle</span>
+    <span>14 heures de pratique</span>
+    <span>0 € de reste à charge</span>
+    <span><b>+10h</b> économisées / semaine</span>
+    <span>5 à 15 stagiaires max</span>
+    <span>Présentiel ou distanciel</span>
+    <!-- duplicate for seamless loop -->
+    <span><span class="dot"></span>Qualiopi</span>
+    <span>OPCO Constructys agréé</span>
+    <span><b>RS6776</b> · Certification officielle</span>
+    <span>14 heures de pratique</span>
+    <span>0 € de reste à charge</span>
+    <span><b>+10h</b> économisées / semaine</span>
+    <span>5 à 15 stagiaires max</span>
+    <span>Présentiel ou distanciel</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════
+     PROBLÈMES
+     ════════════════════════════════════════════════════════════ -->
+<section class="problems section-pad" data-screen-label="Problèmes">
+  <div class="wrap">
+    <div class="problems-head reveal">
+      <div>
+        <span class="eyebrow">01 · Le constat</span>
+        <h2 class="h-display" style="margin-top:18px">
+          Vous en avez assez<br />de <em>perdre du temps</em> ?
+        </h2>
+      </div>
+      <p class="lede">
+        Vous êtes un pro du terrain. Pas un secrétaire, pas un comptable, pas un commercial. Pourtant, chaque semaine, des heures partent dans l'administratif. Voici ce qui doit s'arrêter.
+      </p>
+    </div>
+
+    <div class="problems-list">
+      <div class="problem-row reveal">
+        <span class="n">01 / 05</span>
+        <div class="t">Passer des heures sur vos <em>devis</em> alors que vos clients attendent.</div>
+        <span class="hrs">~ 3h / devis</span>
+      </div>
+      <div class="problem-row reveal">
+        <span class="n">02 / 05</span>
+        <div class="t">Répondre aux emails <em>le soir</em>, après une journée sur le chantier.</div>
+        <span class="hrs">~ 5h / semaine</span>
+      </div>
+      <div class="problem-row reveal">
+        <span class="n">03 / 05</span>
+        <div class="t">Chercher vos documents <em>partout</em> — dans la camionnette, dans la boîte mail, dans un classeur.</div>
+        <span class="hrs">~ 2h / semaine</span>
+      </div>
+      <div class="problem-row reveal">
+        <span class="n">04 / 05</span>
+        <div class="t">Rater des <em>clients</em> faute de temps pour les rappeler ou faire la proposition.</div>
+        <span class="hrs">2 à 4 / mois</span>
+      </div>
+      <div class="problem-row reveal">
+        <span class="n">05 / 05</span>
+        <div class="t">Gérer la paperasse <em>le week-end</em> au lieu d'être avec votre famille.</div>
+        <span class="hrs">~ 4h / week-end</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     SOLUTION
+     ════════════════════════════════════════════════════════════ -->
+<section class="solution section-pad" data-screen-label="Solution">
+  <div class="wrap">
+    <div class="sol-head reveal">
+      <span class="eyebrow light">02 · La solution</span>
+      <h2 class="h-display" style="margin-top:18px; color:var(--blanc);">
+        Et si l'IA faisait <em>tout ça</em><br />à votre place ?
+      </h2>
+      <p class="lede" style="margin-top:24px; color: rgba(248,246,241,.7);">
+        Trois usages concrets, configurés sur vos vrais cas pendant la formation. Pas de théorie, pas de jargon — un workflow opérationnel dès le lundi suivant.
+      </p>
+    </div>
+
+    <div class="sol-cards">
+      <div class="sol-card reveal">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="3" width="16" height="18" rx="1.5"/>
+            <line x1="8" y1="8" x2="16" y2="8"/>
+            <line x1="8" y1="12" x2="16" y2="12"/>
+            <line x1="8" y1="16" x2="13" y2="16"/>
+          </svg>
+        </div>
+        <div class="step">Usage 01</div>
+        <h3>Devis en <em>5 minutes</em><br /> chrono.</h3>
+        <p>Générez un devis complet, calibré à votre style et votre marge, en quelques clics. Templates inclus, prêts à envoyer.</p>
+        <span class="more">Modules 03 + 09 →</span>
+      </div>
+
+      <div class="sol-card reveal" style="transition-delay:.1s">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="5" width="18" height="16" rx="1.5"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+            <line x1="8" y1="3" x2="8" y2="7"/>
+            <line x1="16" y1="3" x2="16" y2="7"/>
+            <rect x="7" y="13" width="3" height="3"/>
+            <rect x="14" y="13" width="3" height="3"/>
+          </svg>
+        </div>
+        <div class="step">Usage 02</div>
+        <h3>Planning <em>automatique</em>,<br /> imprévus gérés.</h3>
+        <p>Organisez votre chantier, coordonnez vos équipes et absorbez les imprévus sans tout réécrire à la main. L'IA s'occupe du recalage.</p>
+        <span class="more">Modules 05 + 08 →</span>
+      </div>
+
+      <div class="sol-card reveal" style="transition-delay:.2s">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 5h16v11H7l-3 3z"/>
+            <line x1="8" y1="10" x2="16" y2="10"/>
+            <line x1="8" y1="13" x2="13" y2="13"/>
+          </svg>
+        </div>
+        <div class="step">Usage 03</div>
+        <h3>Communication <em>sans</em><br /> <em>stress</em>, jamais.</h3>
+        <p>Emails, rapports, réponses clients, avis Google — rédigés automatiquement à votre style. Vous validez, vous envoyez. Voilà.</p>
+        <span class="more">Modules 04 + 06 →</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     STATS
+     ════════════════════════════════════════════════════════════ -->
+<section class="stats" data-screen-label="Chiffres clés">
+  <div class="wrap">
+    <div class="stats-grid">
+      <div class="stat reveal">
+        <div class="v"><span data-count="10">0</span><span class="u">h</span></div>
+        <div class="k">Économisées par semaine en moyenne, dès la première semaine post-formation.</div>
+      </div>
+      <div class="stat reveal" style="transition-delay:.1s">
+        <div class="v"><span data-count="5">0</span><span class="u">min</span></div>
+        <div class="k">Pour générer un devis complet, calibré et professionnel — au lieu de 3 heures.</div>
+      </div>
+      <div class="stat reveal" style="transition-delay:.2s">
+        <div class="v"><span data-count="0">0</span><span class="u">€</span></div>
+        <div class="k">De reste à charge pour votre entreprise. Constructys finance l'intégralité.</div>
+      </div>
+      <div class="stat reveal" style="transition-delay:.3s">
+        <div class="v"><span data-count="546">0</span><span class="u">€</span></div>
+        <div class="k">Pris en charge à 100% par OPCO Constructys pour chaque participant.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     PROGRAMME
+     ════════════════════════════════════════════════════════════ -->
+<section class="programme section-pad" id="programme" data-screen-label="Programme">
+  <div class="wrap">
+    <div class="prog-head reveal">
+      <div>
+        <span class="eyebrow">03 · Le programme</span>
+        <h2 class="h-display" style="margin-top:18px">
+          <em>14 heures</em> pour transformer votre façon de travailler.
+        </h2>
+      </div>
+      <p class="lede">
+        Dix modules pratiques. Zéro théorie inutile. Chaque module travaille sur vos propres cas — vos devis, vos chantiers, vos emails. Vous repartez avec un workflow opérationnel.
+      </p>
+    </div>
+
+    <div class="day reveal">
+      <div class="day-tag"><span class="dot"></span><span class="num">Jour 01</span><span>—</span><span>7 heures</span></div>
+      <div class="modules">
+        <div class="module">
+          <div class="m-num">Module 01</div>
+          <h4 class="m-title">Comprendre l'IA sans se perdre</h4>
+          <p class="m-sub">Ce que l'IA peut vraiment faire pour vous — et ce qu'elle ne peut pas faire.</p>
+          <div class="m-dur">45 min</div>
+        </div>
+        <div class="module">
+          <div class="m-num">Module 02</div>
+          <h4 class="m-title">Les outils qui changent tout</h4>
+          <p class="m-sub">ChatGPT, Claude, Copilot — lequel choisir et comment l'utiliser gratuitement dès demain.</p>
+          <div class="m-dur">1 h</div>
+        </div>
+        <div class="module">
+          <div class="m-num">Module 03</div>
+          <h4 class="m-title">Vos devis en 5 minutes chrono</h4>
+          <p class="m-sub">Générez des devis complets et professionnels automatiquement — templates inclus.</p>
+          <div class="m-dur">1 h 30</div>
+        </div>
+        <div class="module">
+          <div class="m-num">Module 04</div>
+          <h4 class="m-title">Fini la paperasse administrative</h4>
+          <p class="m-sub">Emails, comptes-rendus, factures — l'IA les rédige à votre place, à votre style.</p>
+          <div class="m-dur">1 h 30</div>
+        </div>
+        <div class="module">
+          <div class="m-num">Module 05</div>
+          <h4 class="m-title">Gérez votre chantier comme un pro</h4>
+          <p class="m-sub">Planning, coordination d'équipe, gestion des imprévus — tout devient simple.</p>
+          <div class="m-dur">1 h 15</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day reveal">
+      <div class="day-tag"><span class="dot"></span><span class="num">Jour 02</span><span>—</span><span>7 heures</span></div>
+      <div class="modules">
+        <div class="module">
+          <div class="m-num">Module 06</div>
+          <h4 class="m-title">Trouvez plus de clients avec l'IA</h4>
+          <p class="m-sub">Emails commerciaux, réponses aux avis Google, présentation de vos services — sans effort.</p>
+          <div class="m-dur">1 h 30</div>
+        </div>
+        <div class="module">
+          <div class="m-num">Module 07</div>
+          <h4 class="m-title">Analysez plans &amp; documents</h4>
+          <p class="m-sub">CCTP, DPGF, plans techniques — l'IA lit, résume et explique à votre place.</p>
+          <div class="m-dur">1 h</div>
+        </div>
+        <div class="module">
+          <div class="m-num">Module 08</div>
+          <h4 class="m-title">Rapports de chantier automatiques</h4>
+          <p class="m-sub">Générez vos rapports d'avancement en 3 minutes — partagez en 1 clic.</p>
+          <div class="m-dur">1 h</div>
+        </div>
+        <div class="module">
+          <div class="m-num">Module 09</div>
+          <h4 class="m-title">Mise en pratique sur vos vrais cas</h4>
+          <p class="m-sub">On travaille sur VOS devis, VOS chantiers, VOS situations réelles — feedback immédiat.</p>
+          <div class="m-dur">1 h 30</div>
+        </div>
+        <div class="module">
+          <div class="m-num">Module 10</div>
+          <h4 class="m-title">Votre workflow IA personnalisé</h4>
+          <p class="m-sub">Repartez avec un plan d'action sur mesure, vos outils configurés, et la certification RS6776.</p>
+          <div class="m-dur">1 h</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top: 56px; display:flex; flex-wrap:wrap; gap: 14px; align-items: center; justify-content: space-between;">
+      <p class="dim" style="font-family:var(--ff-mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase;">
+        Ce que vous recevez en fin de session — Guide 50 pages · Pack templates · Ressources 1 an · Certificat · Préparation RS6776
+      </p>
+      <a href="#contact" class="cta">Je réserve ma place gratuite
+        <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     TÉMOIGNAGES
+     ════════════════════════════════════════════════════════════ -->
+<section class="testimonials section-pad" data-screen-label="Témoignages">
+  <div class="wrap">
+    <div class="problems-head reveal" style="margin-bottom: 48px;">
+      <div>
+        <span class="eyebrow">04 · Sur le terrain</span>
+        <h2 class="h-display" style="margin-top:18px">Ils ont récupéré <em>leur temps</em>.</h2>
+      </div>
+      <p class="lede">
+        Trois retours de professionnels qui ont suivi la formation. Mêmes outils, mêmes méthodes — appliqués à leur entreprise.
+      </p>
+    </div>
+
+    <div class="t-grid">
+      <article class="t-card reveal">
+        <p class="quote">Avant je passais 3 heures sur un devis. Maintenant c'est 10 minutes. J'ai signé 2 clients de plus ce mois-ci.</p>
+        <div class="t-author">
+          <div class="avatar" aria-hidden="true">MD</div>
+          <div>
+            <div class="nm">Marc D.</div>
+            <div class="rl">Plombier indépendant · Lyon</div>
+          </div>
+        </div>
+        <div class="t-gain"><b>+2</b><span>clients signés ce mois</span></div>
+      </article>
+
+      <article class="t-card reveal" style="transition-delay:.1s">
+        <p class="quote">J'ai cinq équipes sur cinq chantiers en parallèle. Le planning, les rapports, tout passe par l'IA maintenant. Mes week-ends sont à moi.</p>
+        <div class="t-author">
+          <div class="avatar" aria-hidden="true">SL</div>
+          <div>
+            <div class="nm">Sophie L.</div>
+            <div class="rl">Cheffe d'entreprise BTP · Marseille</div>
+          </div>
+        </div>
+        <div class="t-gain"><b>12h</b><span>par semaine récupérées</span></div>
+      </article>
+
+      <article class="t-card reveal" style="transition-delay:.2s">
+        <p class="quote">Honnêtement, j'étais sceptique. Deux jours plus tard, je faisais mes comptes-rendus en parlant à mon téléphone. C'est terminé pour moi le bureau du soir.</p>
+        <div class="t-author">
+          <div class="avatar" aria-hidden="true">KB</div>
+          <div>
+            <div class="nm">Karim B.</div>
+            <div class="rl">Chef de chantier · Bordeaux</div>
+          </div>
+        </div>
+        <div class="t-gain"><b>0</b><span>soirée admin / semaine</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     FINANCEMENT
+     ════════════════════════════════════════════════════════════ -->
+<section class="financement section-pad" id="financement" data-screen-label="Financement">
+  <div class="wrap">
+    <div class="fin-grid">
+      <div class="reveal">
+        <span class="eyebrow light">05 · Financement</span>
+        <h2 class="h-display" style="margin-top:18px; color:var(--blanc)">
+          Votre formation ne vous coûte <em>pas un centime</em>.
+        </h2>
+        <p class="lede" style="color: rgba(248,246,241,.7); margin-top:24px">
+          En tant qu'entreprise du BTP, vous cotisez chaque année à Constructys. Cet argent est fait pour financer vos formations — ne le laissez pas dormir.
+        </p>
+        <ol class="fin-steps">
+          <li class="fin-step"><span class="n">01</span><span class="t">Vous remplissez le formulaire</span></li>
+          <li class="fin-step"><span class="n">02</span><span class="t">On vous rappelle sous <em>24h</em></span></li>
+          <li class="fin-step"><span class="n">03</span><span class="t">On monte le dossier Constructys <em>ensemble</em></span></li>
+          <li class="fin-step"><span class="n">04</span><span class="t">Constructys valide et finance — <em>15 jours</em></span></li>
+          <li class="fin-step"><span class="n">05</span><span class="t">Vous assistez à la formation — <em>0€</em> à payer</span></li>
+        </ol>
+      </div>
+
+      <div class="fin-detail reveal" style="transition-delay:.15s">
+        <span class="eyebrow light">Le détail financier</span>
+        <div style="margin-top: 20px;">
+          <div class="row"><span class="k">Prix de la formation</span><span class="v num">546 €</span></div>
+          <div class="row"><span class="k">Prise en charge Constructys</span><span class="v num" style="color:var(--accent)">– 546 €</span></div>
+          <div class="row"><span class="k">Frais de déplacement</span><span class="v num">Remboursés</span></div>
+          <div class="row total"><span class="k">Reste à charge entreprise</span><span class="v num">0 €</span></div>
+        </div>
+
+        <div class="seal">
+          <div class="ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="t">Constructys finance 100%</div>
+            <div class="s">Toute entreprise BTP, TP ou négoce — moins de 50 salariés, salarié ou non.</div>
+          </div>
+        </div>
+
+        <div style="margin-top: 28px; display:flex; flex-direction:column; gap:10px;">
+          <a href="#contact" class="cta" style="justify-content:center; width:100%;">Vérifier mon éligibilité gratuitement
+            <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     FORMATION
+     ════════════════════════════════════════════════════════════ -->
+<section class="formation section-pad" id="formation" data-screen-label="La Formation">
+  <div class="wrap">
+    <div class="form-grid">
+      <div class="reveal">
+        <span class="eyebrow">06 · La formation</span>
+        <h2 class="h-display" style="margin-top:18px">
+          Conçue pour les pros du <em>terrain</em> — pas pour les geeks.
+        </h2>
+        <p class="lede" style="margin-top:24px">
+          Pas de jargon technique. Pas de cours théoriques ennuyeux. On travaille directement sur <em class="italic serif">vos</em> cas concrets — vos devis, vos chantiers, votre entreprise.
+        </p>
+
+        <div class="placeholder light wide" id="sessionPh" style="margin-top:36px">
+          <span class="ph-corner">img-02 · session</span>
+          <span class="ph-corner-r">14h · pratique</span>
+          <span class="ph-label">artisan_formation_groupe.jpg</span>
+        </div>
+
+        <div style="margin-top: 28px; display:grid; grid-template-columns: repeat(2, 1fr); gap: 14px;">
+          <a href="#programme" class="cta ghost" style="justify-content:center">Voir le programme →</a>
+          <a href="#contact" class="cta" style="justify-content:center">Réserver ma place →</a>
+        </div>
+      </div>
+
+      <aside class="form-side">
+        <h3 class="h-display" style="font-size: 26px;">Pour qui ?</h3>
+        <ul class="list-check">
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Artisans indépendants — plombiers, électriciens, peintres, maçons…</li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Chefs d'entreprise du BTP</li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Chefs de chantier</li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Toute entreprise BTP de moins de 50 salariés</li>
+        </ul>
+
+        <div class="spacer-m"></div>
+
+        <h3 class="h-display" style="font-size: 26px;">Ce que vous repartez avec</h3>
+        <ul class="list-check">
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Maîtrise complète des outils IA BTP</li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Pack de templates de devis prêts à l'emploi</li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Guide pratique IA BTP — 50 pages à conserver</li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Accès aux ressources en ligne — 1 an</li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Certification RS6776 officielle</li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Support post-formation inclus</li>
+        </ul>
+
+        <div class="formats">
+          <div class="format">
+            <div class="lbl">Format A</div>
+            <div class="ttl">Présentiel</div>
+            <div class="sub">Avignon ou intra-entreprise. Groupes 5 à 15 pers.</div>
+          </div>
+          <div class="format">
+            <div class="lbl">Format B</div>
+            <div class="ttl">Distanciel</div>
+            <div class="sub">Visio en direct, sessions interactives, mêmes contenus.</div>
+          </div>
+          <div class="format">
+            <div class="lbl">Rythme</div>
+            <div class="ttl">2 jours consécutifs</div>
+            <div class="sub">Ou espacés selon l'agenda de votre entreprise.</div>
+          </div>
+          <div class="format">
+            <div class="lbl">Tarif</div>
+            <div class="ttl">546 € HT <span style="font-size: 14px; color: var(--accent); font-family: var(--ff-mono); margin-left:6px;">→ 0 €</span></div>
+            <div class="sub">Intégralement financé par OPCO Constructys.</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     FAQ
+     ════════════════════════════════════════════════════════════ -->
+<section class="faq section-pad" id="faq" data-screen-label="FAQ">
+  <div class="wrap">
+    <div class="faq-grid">
+      <div class="reveal">
+        <span class="eyebrow">07 · Questions</span>
+        <h2 class="h-display" style="margin-top:18px">
+          Toutes vos questions — <em>réponses honnêtes</em>.
+        </h2>
+        <p class="lede" style="margin-top:24px">
+          Pas de langue de bois. Si vous ne trouvez pas votre réponse ici, posez-la directement par téléphone ou via le formulaire — réponse sous 24h.
+        </p>
+        <a href="#contact" class="cta ghost" style="margin-top:32px; color:var(--noir); box-shadow: inset 0 0 0 1px var(--noir);">Poser ma question →</a>
+      </div>
+
+      <div class="faq-list reveal">
+        <!-- items rendered below -->
+        <details class="faq-item" name="faq" open>
+          <summary class="faq-q">
+            <div>
+              <span class="qn">Question 01</span>
+              <span class="qt">Je ne suis pas du tout à l'aise avec la technologie — c'est pour moi ?</span>
+            </div>
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </summary>
+          <div class="faq-a"><div><p>Oui — aucun prérequis technique nécessaire. Si vous savez utiliser WhatsApp, vous pouvez apprendre l'IA. On construit ensemble, étape par étape, sur vos propres outils.</p></div></div>
+        </details>
+
+        <details class="faq-item" name="faq">
+          <summary class="faq-q">
+            <div>
+              <span class="qn">Question 02</span>
+              <span class="qt">Est-ce que je vais vraiment gagner du temps, ou c'est du marketing ?</span>
+            </div>
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </summary>
+          <div class="faq-a"><div><p>Nos participants économisent en moyenne 10 heures par semaine dès la première semaine post-formation. On mesure, on suit, on ajuste. Si la promesse n'est pas tenue à J+7, on revient.</p></div></div>
+        </details>
+
+        <details class="faq-item" name="faq">
+          <summary class="faq-q">
+            <div>
+              <span class="qn">Question 03</span>
+              <span class="qt">Combien ça me coûte vraiment ?</span>
+            </div>
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </summary>
+          <div class="faq-a"><div><p>0 €. Constructys finance les 546 € intégralement pour les entreprises BTP de moins de 50 salariés. Vos frais de déplacement sont remboursés en plus.</p></div></div>
+        </details>
+
+        <details class="faq-item" name="faq">
+          <summary class="faq-q">
+            <div>
+              <span class="qn">Question 04</span>
+              <span class="qt">Combien de temps dure la formation ?</span>
+            </div>
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </summary>
+          <div class="faq-a"><div><p>2 jours — 14 heures, consécutifs ou espacés selon votre agenda. On s'adapte à votre saison de chantier.</p></div></div>
+        </details>
+
+        <details class="faq-item" name="faq">
+          <summary class="faq-q">
+            <div>
+              <span class="qn">Question 05</span>
+              <span class="qt">C'est en présentiel ou en ligne ?</span>
+            </div>
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </summary>
+          <div class="faq-a"><div><p>Les deux — vous choisissez selon votre préférence et votre disponibilité. Présentiel à Avignon ou en intra-entreprise, distanciel en visio interactive.</p></div></div>
+        </details>
+
+        <details class="faq-item" name="faq">
+          <summary class="faq-q">
+            <div>
+              <span class="qn">Question 06</span>
+              <span class="qt">C'est quoi la certification RS6776 ?</span>
+            </div>
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </summary>
+          <div class="faq-a"><div><p>Une certification officielle reconnue par l'État qui valide vos compétences en IA générative. Inscrite au Répertoire Spécifique de France Compétences — un vrai diplôme, pas une attestation maison.</p></div></div>
+        </details>
+
+        <details class="faq-item" name="faq">
+          <summary class="faq-q">
+            <div>
+              <span class="qn">Question 07</span>
+              <span class="qt">Je peux former toute mon équipe ?</span>
+            </div>
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </summary>
+          <div class="faq-a"><div><p>Oui — groupes de 5 à 15 personnes. Chaque personne est financée séparément par Constructys. Possibilité d'organiser une session intra-entreprise dédiée.</p></div></div>
+        </details>
+
+        <details class="faq-item" name="faq">
+          <summary class="faq-q">
+            <div>
+              <span class="qn">Question 08</span>
+              <span class="qt">Combien de temps entre la demande et la formation ?</span>
+            </div>
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </summary>
+          <div class="faq-a"><div><p>Entre 3 et 6 semaines selon les disponibilités de Constructys et notre planning. On vous donne une date confirmée dès la validation du dossier.</p></div></div>
+        </details>
+
+        <details class="faq-item" name="faq">
+          <summary class="faq-q">
+            <div>
+              <span class="qn">Question 09</span>
+              <span class="qt">Que se passe-t-il après la formation ?</span>
+            </div>
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </summary>
+          <div class="faq-a"><div><p>Accès aux ressources en ligne pendant 1 an, support WhatsApp, et préparation à la certification RS6776. Vous n'êtes pas lâché dans la nature.</p></div></div>
+        </details>
+
+        <details class="faq-item" name="faq">
+          <summary class="faq-q">
+            <div>
+              <span class="qn">Question 10</span>
+              <span class="qt">Mon dossier Constructys — qui s'en occupe ?</span>
+            </div>
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </summary>
+          <div class="faq-a"><div><p>Nous — vous n'avez rien à faire. On monte le dossier complet, on l'envoie, on le suit, on relance. Vous récupérez juste votre numéro d'OPCO.</p></div></div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     ABOUT
+     ════════════════════════════════════════════════════════════ -->
+<section class="about section-pad" id="about" data-screen-label="À Propos">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="placeholder tall" id="portraitPh" style="aspect-ratio: 4/5;">
+          <span class="ph-corner">portrait · 01</span>
+          <span class="ph-corner-r">Avignon, 2026</span>
+          <span class="ph-label">johane_achouri.jpg</span>
+        </div>
+      </div>
+      <div class="reveal" style="transition-delay:.1s">
+        <span class="eyebrow light">08 · Johane Achouri</span>
+        <h2 class="h-display" style="margin-top:18px; color:var(--blanc); font-size: clamp(28px, 3.4vw, 44px);">
+          La formation IA qui <em>parle le langage</em> du terrain.
+        </h2>
+        <p class="about-quote" style="margin-top:36px">
+          J'ai créé Formaxia parce que j'en avais assez de voir des professionnels talentueux perdre des heures sur de la paperasse, alors qu'ils pourraient être sur le chantier — ou avec leur famille.
+        </p>
+
+        <div class="signature">
+          <span class="sig-mark">JA</span>
+          <div>
+            <div class="nm">Johane Achouri</div>
+            <div class="ttl">Fondateur · Formateur certifié RS6776</div>
+          </div>
+        </div>
+
+        <div class="credentials">
+          <div class="cred"><div class="lbl">Expertise · 01</div><div class="v">Spécialiste IA &amp; automatisation</div></div>
+          <div class="cred"><div class="lbl">Expertise · 02</div><div class="v">Créateur de SaaS sans coder</div></div>
+          <div class="cred"><div class="lbl">Certifications · 01</div><div class="v">Qualiopi · Constructys agréé</div></div>
+          <div class="cred"><div class="lbl">Certifications · 02</div><div class="v">Formateur RS6776 officiel</div></div>
+        </div>
+
+        <p class="dim" style="margin-top: 28px; font-family: var(--ff-mono); font-size: 12px; letter-spacing:.12em; text-transform:uppercase; color: var(--or-soft);">
+          Praticité · Accessibilité · Résultats · Transparence
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     CONTACT
+     ════════════════════════════════════════════════════════════ -->
+<section class="contact section-pad" id="contact" data-screen-label="Contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="reveal">
+        <span class="eyebrow">09 · Réservation</span>
+        <h2 class="h-display" style="margin-top:18px">
+          Réservez votre place — <em>gratuitement</em>.
+        </h2>
+        <p class="lede" style="margin-top:24px">
+          Remplissez ce formulaire — on vous rappelle sous 24h pour cadrer votre projet et monter le dossier Constructys avec vous. Sans engagement, sans surprise.
+        </p>
+
+        <div class="contact-info-line"><span class="k">Email</span><span class="v"><a href="/cdn-cgi/l/email-protection#d7b4b8b9a3b6b4a397b1b8a5bab6afbeb6f9b1a5"><span class="__cf_email__" data-cfemail="9efdf1f0eafffdeadef8f1ecf3ffe6f7ffb0f8ec">[email&#160;protected]</span></a></span></div>
+        <div class="contact-info-line"><span class="k">Réponse</span><span class="v">Sous 24h ouvrées</span></div>
+        <div class="contact-info-line"><span class="k">Disponibilité</span><span class="v">Lundi → Vendredi · 9h–18h</span></div>
+        <div class="contact-info-line"><span class="k">Localisation</span><span class="v">Avignon · France entière (intra)</span></div>
+
+        <div style="margin-top: 36px; display:flex; gap:10px; flex-wrap:wrap;">
+          <span class="foot-badge" style="color:var(--or-deep); border-color: rgba(201,168,76,.4);"><span class="dot"></span>Qualiopi</span>
+          <span class="foot-badge" style="color:var(--or-deep); border-color: rgba(201,168,76,.4);"><span class="dot"></span>Constructys</span>
+          <span class="foot-badge" style="color:var(--or-deep); border-color: rgba(201,168,76,.4);"><span class="dot"></span>RS6776</span>
+        </div>
+      </div>
+
+      <form class="form reveal" id="contactForm" style="transition-delay:.1s">
+        <div class="row">
+          <div class="field"><label for="prenom">Prénom</label><input id="prenom" type="text" required /></div>
+          <div class="field"><label for="nom">Nom</label><input id="nom" type="text" required /></div>
+        </div>
+        <div class="row">
+          <div class="field"><label for="metier">Métier / Entreprise</label><input id="metier" type="text" placeholder="ex. Plombier — Dupont SARL" required /></div>
+          <div class="field"><label for="taille">Nombre à former</label>
+            <select id="taille">
+              <option>Moi seul·e</option>
+              <option>2 à 5 personnes</option>
+              <option>6 à 10 personnes</option>
+              <option>10 à 15 personnes</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="field"><label for="email">Email professionnel</label><input id="email" type="email" required /></div>
+          <div class="field"><label for="tel">Téléphone</label><input id="tel" type="tel" required /></div>
+        </div>
+        <div class="field"><label for="format">Format souhaité</label>
+          <select id="format">
+            <option>Présentiel — Avignon</option>
+            <option>Présentiel — Intra-entreprise</option>
+            <option>Distanciel — Visio</option>
+            <option>À déterminer ensemble</option>
+          </select>
+        </div>
+        <div class="field"><label for="msg">Message (optionnel)</label><textarea id="msg" placeholder="Vos questions, votre contexte, vos contraintes…"></textarea></div>
+
+        <div class="submit-row">
+          <span class="legal">Réponse sous 24h · Sans engagement · Données protégées RGPD</span>
+          <button type="submit" class="cta">Je réserve ma place
+            <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     FOOTER
+     ════════════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <a href="#accueil" class="logo">
+          <span class="mark" aria-hidden="true"></span>
+          <span><b>Formaxia</b></span>
+        </a>
+        <p class="slogan">L'IA au service des professionnels du terrain.</p>
+        <div class="footer-badges">
+          <span class="foot-badge"><span class="dot"></span>Qualiopi</span>
+          <span class="foot-badge"><span class="dot"></span>Constructys</span>
+          <span class="foot-badge"><span class="dot"></span>RS6776</span>
+        </div>
+      </div>
+      <div>
+        <h5>Navigation</h5>
+        <ul>
+          <li><a href="#accueil">Accueil</a></li>
+          <li><a href="#formation">La Formation</a></li>
+          <li><a href="#programme">Programme</a></li>
+          <li><a href="#financement">Financement</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="/cdn-cgi/l/email-protection#8be8e4e5ffeae8ffcbede4f9e6eaf3e2eaa5edf9"><span class="__cf_email__" data-cfemail="9efdf1f0eafffdeadef8f1ecf3ffe6f7ffb0f8ec">[email&#160;protected]</span></a></li>
+          <li><span style="color: rgba(248,246,241,.7);">Avignon, France</span></li>
+          <li><span style="color: rgba(248,246,241,.7);">Lun → Ven · 9h–18h</span></li>
+          <li><a href="#contact">Réserver ma place →</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Réseaux</h5>
+        <ul>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">YouTube</a></li>
+          <li><a href="#">WhatsApp Business</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© Formaxia 2026 · Édité par Johane Achouri · SIRET — à compléter</span>
+      <div class="legal-links">
+        <a href="#">Mentions légales</a>
+        <a href="#">Politique de confidentialité</a>
+        <a href="#">CGV</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Back to top -->
+<button class="back-to-top" id="backToTop" aria-label="Retour en haut">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+</button>
+
+<!-- ════════════════════════════════════════════════════════════
+     SCRIPTS
+     ════════════════════════════════════════════════════════════ -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+/* Header scroll state */
+const header = document.getElementById('header');
+const progressBar = document.getElementById('progressBar');
+const backToTop = document.getElementById('backToTop');
+function onScroll(){
+  const y = window.scrollY;
+  header.classList.toggle('scrolled', y > 24);
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  progressBar.style.width = h > 0 ? Math.min(100, (y / h) * 100) + '%' : '0%';
+  backToTop.classList.toggle('show', y > 500);
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+
+/* Back to top */
+backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+/* Mobile menu */
+const burger = document.getElementById('burger');
+const nav = document.getElementById('nav');
+burger.addEventListener('click', () => {
+  nav.classList.toggle('open');
+});
+nav.addEventListener('click', e => { if (e.target.tagName === 'A') nav.classList.remove('open'); });
+
+/* Reveal on scroll */
+const io = new IntersectionObserver((entries) => {
+  for (const e of entries) {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
+  }
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* Animated number counters */
+const countIO = new IntersectionObserver((entries) => {
+  for (const e of entries) {
+    if (!e.isIntersecting) continue;
+    const el = e.target;
+    const target = parseInt(el.dataset.count, 10);
+    const duration = 1500;
+    const start = performance.now();
+    function tick(t){
+      const p = Math.min(1, (t - start) / duration);
+      const v = Math.round(target * (1 - Math.pow(1 - p, 3)));
+      el.textContent = v.toLocaleString('fr-FR');
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+    countIO.unobserve(el);
+  }
+}, { threshold: 0.4 });
+document.querySelectorAll('[data-count]').forEach(el => countIO.observe(el));
+
+/* FAQ — using <details>, the browser handles open/close.
+   We mirror [open] to .open so our CSS animations can read it. */
+document.querySelectorAll('.faq-item').forEach(d => {
+  const sync = () => d.classList.toggle('open', d.open);
+  sync();
+  d.addEventListener('toggle', sync);
+});
+
+/* Form — no-op submit, polite feedback */
+document.getElementById('contactForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const btn = e.target.querySelector('button[type="submit"]');
+  const original = btn.innerHTML;
+  btn.innerHTML = 'Merci — on vous rappelle sous 24h ✓';
+  btn.style.background = '#1c8a4a';
+  btn.style.color = '#fff';
+  setTimeout(() => { btn.innerHTML = original; btn.style.background=''; btn.style.color=''; e.target.reset(); }, 3500);
+});
+
+/* Apply tweak defaults at startup (the React panel mutates the same CSS vars) */
+function applyImage(id, url){
+  const el = document.getElementById(id);
+  if (!el) return;
+  if (url && String(url).trim()){
+    el.style.backgroundImage = `url("${url}")`;
+    el.style.backgroundSize = 'cover';
+    el.style.backgroundPosition = 'center';
+    el.classList.add('has-image');
+  } else {
+    el.style.backgroundImage = '';
+    el.classList.remove('has-image');
+  }
+}
+window.applyImage = applyImage;
+
+(function applyDefaults(){
+  const d = window.TWEAK_DEFAULTS;
+  if (!d) return;
+  document.documentElement.style.setProperty('--accent', d.accent);
+  applyImage('heroPh', d.heroImage);
+  applyImage('sessionPh', d.sessionImage);
+  applyImage('portraitPh', d.portraitImage);
+})();
+</script>
+
+<!-- React island for Tweaks panel -->
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+
+<div id="tweaks-root"></div>
+<script type="text/babel">
+function FormaxiaTweaks(){
+  const [t, setTweak] = useTweaks(window.TWEAK_DEFAULTS);
+
+  // Sync accent → CSS var live
+  React.useEffect(() => {
+    document.documentElement.style.setProperty('--accent', t.accent);
+    // derive a darker "accent-deep"
+    const darker = (hex) => {
+      const h = hex.replace('#','');
+      const n = parseInt(h.length===3 ? h.replace(/./g,c=>c+c) : h, 16);
+      const r = (n>>16)&255, g=(n>>8)&255, b=n&255;
+      const f = 0.8;
+      const dr = Math.max(0, Math.round(r*f)), dg = Math.max(0, Math.round(g*f)), db = Math.max(0, Math.round(b*f));
+      return '#' + [dr,dg,db].map(v => v.toString(16).padStart(2,'0')).join('');
+    };
+    document.documentElement.style.setProperty('--accent-deep', darker(t.accent));
+  }, [t.accent]);
+
+  // Density → adjust section padding scale
+  React.useEffect(() => {
+    const map = { compact: '.84', regular: '1', comfy: '1.18' };
+    document.documentElement.style.setProperty('--density', map[t.density] || '1');
+    // Tweak the section padding clamp through a CSS var override on body
+    document.body.style.setProperty('--maxw', t.density === 'compact' ? '1120px' : t.density === 'comfy' ? '1320px' : '1240px');
+  }, [t.density]);
+
+  return (
+    <TweaksPanel title="Formaxia · Tweaks">
+      <TweakSection label="Secteur (accent évolutif)" />
+      <TweakColor
+        label="Accent par secteur"
+        value={t.accent}
+        options={['#E8610A', '#1A3A5C', '#1F8A5B', '#7A1F1F', '#C9A84C']}
+        onChange={(v) => setTweak({ accent: v, sector: v.toLowerCase() })}
+      />
+      <p style={{margin:'4px 0 0', fontSize:'10.5px', color:'rgba(41,38,27,.55)', lineHeight:1.4}}>
+        Orange · BTP — Bleu · Commerce — Vert · Agri — Bordeaux · Bouche — Or.
+      </p>
+
+      <TweakSection label="Photos · collez une URL" />
+      <TweakText
+        label="Hero — artisan + tablette"
+        value={t.heroImage}
+        placeholder="https://….jpg"
+        onChange={(v) => { setTweak('heroImage', v); window.applyImage('heroPh', v); }}
+      />
+      <div style={{display:'flex', gap:'4px', flexWrap:'wrap', marginTop:'-2px'}}>
+        {[
+          ['Aperçu 1', 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=900&q=80'],
+          ['Aperçu 2', 'https://images.unsplash.com/photo-1581094271901-8022df4466f9?w=900&q=80'],
+          ['Aperçu 3', 'https://images.unsplash.com/photo-1581092335397-9583eb92d232?w=900&q=80'],
+          ['Effacer', '']
+        ].map(([lbl, url]) => (
+          <button key={lbl} type="button" className="twk-btn secondary"
+            style={{fontSize:'10.5px', height:'22px', padding:'0 8px', flex:'0 0 auto'}}
+            onClick={() => { setTweak('heroImage', url); window.applyImage('heroPh', url); }}>{lbl}</button>
+        ))}
+      </div>
+
+      <TweakText
+        label="Session — formation"
+        value={t.sessionImage}
+        placeholder="URL image session…"
+        onChange={(v) => { setTweak('sessionImage', v); window.applyImage('sessionPh', v); }}
+      />
+      <TweakText
+        label="Portrait — Johane"
+        value={t.portraitImage}
+        placeholder="URL portrait…"
+        onChange={(v) => { setTweak('portraitImage', v); window.applyImage('portraitPh', v); }}
+      />
+
+      <TweakSection label="Mise en page" />
+      <TweakRadio
+        label="Densité"
+        value={t.density}
+        options={['compact', 'regular', 'comfy']}
+        onChange={(v) => setTweak('density', v)}
+      />
+    </TweaksPanel>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('tweaks-root'));
+root.render(<FormaxiaTweaks />);
+</script>
+
+</body>
+</html>
