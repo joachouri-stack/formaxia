@@ -642,6 +642,56 @@ section{ position: relative; }
 .day-tag .num{ font-weight:500 }
 
 .day{ margin-bottom: 64px; }
+
+/* Programme — aperçu compact (2 jours, sans le détail des 10 modules) */
+.prog-days{
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+  margin-bottom: 56px;
+}
+@media (max-width: 860px){ .prog-days{ grid-template-columns: 1fr; } }
+.prog-day{
+  background: var(--blanc);
+  border: 1px solid var(--gris-line);
+  padding: 36px 32px;
+  display: flex; flex-direction: column;
+  transition: border-color .25s, transform .25s, box-shadow .25s;
+}
+.prog-day:hover{
+  border-color: var(--or);
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(10,10,15,0.06);
+}
+.prog-day-title{
+  font-family: var(--ff-head);
+  font-size: clamp(22px, 2.2vw, 28px);
+  font-weight: 500;
+  line-height: 1.2;
+  margin: 0 0 16px;
+  color: var(--noir);
+}
+.prog-day-desc{
+  font-size: 15px; line-height: 1.6;
+  color: var(--gris);
+  margin: 0 0 24px;
+}
+.prog-day-list{
+  list-style: none; padding: 0; margin: 0;
+  border-top: 1px solid var(--gris-line);
+}
+.prog-day-list li{
+  padding: 14px 0;
+  border-bottom: 1px solid var(--gris-line);
+  font-size: 14.5px; color: var(--gris);
+  display: flex; align-items: center; gap: 12px;
+}
+.prog-day-list li::before{
+  content: "";
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--or);
+  flex: 0 0 auto;
+}
+
 .modules{ display:grid; grid-template-columns: repeat(5, 1fr); gap: 0; border-top: 1px solid var(--gris-line); }
 .modules .module{ border-right: 1px solid var(--gris-line); border-bottom: 1px solid var(--gris-line); padding: 28px 22px; min-height: 220px; display:flex; flex-direction:column; transition: background .2s; }
 .modules .module{ cursor: pointer; }
@@ -1115,9 +1165,8 @@ section{ position: relative; }
   </a>
   <nav class="nav" id="nav" aria-label="Navigation principale">
     <a href="#accueil">Accueil</a>
-    <a href="#formation">La Formation</a>
-    <a href="programme.html">Programme</a>
     <a href="#financement">Financement</a>
+    <a href="programme.html">Programme</a>
     <a href="#faq">FAQ</a>
     <a href="#about">À Propos</a>
     <a href="#contact">Contact</a>
@@ -1203,59 +1252,12 @@ section{ position: relative; }
 </div>
 
 <!-- ════════════════════════════════════════════════════════════
-     PROBLÈMES
-     ════════════════════════════════════════════════════════════ -->
-<section class="problems section-pad" data-screen-label="Problèmes">
-  <div class="wrap">
-    <div class="problems-head reveal">
-      <div>
-        <span class="eyebrow">01 · Le constat</span>
-        <h2 class="h-display" style="margin-top:18px">
-          Vous en avez assez<br />de <em>perdre du temps</em> ?
-        </h2>
-      </div>
-      <p class="lede">
-        Vous êtes un pro du terrain. Pas un secrétaire, pas un comptable, pas un commercial. Pourtant, chaque semaine, des heures partent dans l'administratif. Voici ce qui doit s'arrêter.
-      </p>
-    </div>
-
-    <div class="problems-list">
-      <div class="problem-row reveal">
-        <span class="n">01 / 05</span>
-        <div class="t">Passer des heures sur vos <em>devis</em> alors que vos clients attendent.</div>
-        <span class="hrs">~ 3h / devis</span>
-      </div>
-      <div class="problem-row reveal">
-        <span class="n">02 / 05</span>
-        <div class="t">Répondre aux emails <em>le soir</em>, après une journée sur le chantier.</div>
-        <span class="hrs">~ 5h / semaine</span>
-      </div>
-      <div class="problem-row reveal">
-        <span class="n">03 / 05</span>
-        <div class="t">Chercher vos documents <em>partout</em> — dans la camionnette, dans la boîte mail, dans un classeur.</div>
-        <span class="hrs">~ 2h / semaine</span>
-      </div>
-      <div class="problem-row reveal">
-        <span class="n">04 / 05</span>
-        <div class="t">Rater des <em>clients</em> faute de temps pour les rappeler ou faire la proposition.</div>
-        <span class="hrs">2 à 4 / mois</span>
-      </div>
-      <div class="problem-row reveal">
-        <span class="n">05 / 05</span>
-        <div class="t">Gérer la paperasse <em>le week-end</em> au lieu d'être avec votre famille.</div>
-        <span class="hrs">~ 4h / week-end</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════════════════════════════════════════════
      SOLUTION
      ════════════════════════════════════════════════════════════ -->
 <section class="solution section-pad" data-screen-label="Solution">
   <div class="wrap">
     <div class="sol-head reveal">
-      <span class="eyebrow light">02 · La solution</span>
+      <span class="eyebrow light">01 · La solution</span>
       <h2 class="h-display" style="margin-top:18px; color:var(--blanc);">
         Et si l'IA faisait <em>tout ça</em><br />à votre place ?
       </h2>
@@ -1341,6 +1343,60 @@ section{ position: relative; }
 </section>
 
 <!-- ════════════════════════════════════════════════════════════
+     FINANCEMENT
+     ════════════════════════════════════════════════════════════ -->
+<section class="financement section-pad" id="financement" data-screen-label="Financement">
+  <div class="wrap">
+    <div class="fin-grid">
+      <div class="reveal">
+        <span class="eyebrow light">02 · Financement</span>
+        <h2 class="h-display" style="margin-top:18px; color:var(--blanc)">
+          Votre formation ne vous coûte <em>pas un centime</em>.
+        </h2>
+        <p class="lede" style="color: rgba(248,246,241,.7); margin-top:24px">
+          En tant qu'entreprise du BTP, vous cotisez chaque année à Constructys. Cet argent est fait pour financer vos formations — ne le laissez pas dormir.
+        </p>
+        <ol class="fin-steps">
+          <li class="fin-step"><span class="n">01</span><span class="t">Vous remplissez le formulaire</span></li>
+          <li class="fin-step"><span class="n">02</span><span class="t">On vous rappelle sous <em>24h</em></span></li>
+          <li class="fin-step"><span class="n">03</span><span class="t">On monte le dossier Constructys <em>ensemble</em></span></li>
+          <li class="fin-step"><span class="n">04</span><span class="t">Constructys valide et finance — <em>15 jours</em></span></li>
+          <li class="fin-step"><span class="n">05</span><span class="t">Vous assistez à la formation — <em>0€</em> à payer</span></li>
+        </ol>
+      </div>
+
+      <div class="fin-detail reveal" style="transition-delay:.15s">
+        <span class="eyebrow light">Le détail financier</span>
+        <div style="margin-top: 20px;">
+          <div class="row"><span class="k">Prix de la formation</span><span class="v num">546 €</span></div>
+          <div class="row"><span class="k">Prise en charge Constructys</span><span class="v num" style="color:var(--accent)">– 546 €</span></div>
+          <div class="row"><span class="k">Frais de déplacement</span><span class="v num">Remboursés</span></div>
+          <div class="row total"><span class="k">Reste à charge entreprise</span><span class="v num">0 €</span></div>
+        </div>
+
+        <div class="seal">
+          <div class="ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="t">Constructys finance 100%</div>
+            <div class="s">Toute entreprise BTP, TP ou négoce — moins de 50 salariés, salarié ou non.</div>
+          </div>
+        </div>
+
+        <div style="margin-top: 28px; display:flex; flex-direction:column; gap:10px;">
+          <a href="#contact" class="cta" style="justify-content:center; width:100%;">Vérifier mon éligibilité gratuitement
+            <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
      PROGRAMME
      ════════════════════════════════════════════════════════════ -->
 <section class="programme section-pad" id="programme" data-screen-label="Programme">
@@ -1357,76 +1413,31 @@ section{ position: relative; }
       </p>
     </div>
 
-    <div class="day reveal">
-      <div class="day-tag"><span class="dot"></span><span class="num">Jour 01</span><span>—</span><span>7 heures</span></div>
-      <div class="modules">
-        <div class="module">
-          <div class="m-num">Module 01</div>
-          <h4 class="m-title">Comprendre l'IA sans se perdre</h4>
-          <p class="m-sub">Ce que l'IA peut vraiment faire pour vous — et ce qu'elle ne peut pas faire.</p>
-          <div class="m-dur">45 min</div>
-        </div>
-        <div class="module">
-          <div class="m-num">Module 02</div>
-          <h4 class="m-title">Les outils qui changent tout</h4>
-          <p class="m-sub">ChatGPT, Claude, Copilot — lequel choisir et comment l'utiliser gratuitement dès demain.</p>
-          <div class="m-dur">1 h</div>
-        </div>
-        <div class="module">
-          <div class="m-num">Module 03</div>
-          <h4 class="m-title">Vos devis en 5 minutes chrono</h4>
-          <p class="m-sub">Générez des devis complets et professionnels automatiquement — templates inclus.</p>
-          <div class="m-dur">1 h 30</div>
-        </div>
-        <div class="module">
-          <div class="m-num">Module 04</div>
-          <h4 class="m-title">Fini la paperasse administrative</h4>
-          <p class="m-sub">Emails, comptes-rendus, factures — l'IA les rédige à votre place, à votre style.</p>
-          <div class="m-dur">1 h 30</div>
-        </div>
-        <div class="module">
-          <div class="m-num">Module 05</div>
-          <h4 class="m-title">Gérez votre chantier comme un pro</h4>
-          <p class="m-sub">Planning, coordination d'équipe, gestion des imprévus — tout devient simple.</p>
-          <div class="m-dur">1 h 15</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="day reveal">
-      <div class="day-tag"><span class="dot"></span><span class="num">Jour 02</span><span>—</span><span>7 heures</span></div>
-      <div class="modules">
-        <div class="module">
-          <div class="m-num">Module 06</div>
-          <h4 class="m-title">Trouvez plus de clients avec l'IA</h4>
-          <p class="m-sub">Emails commerciaux, réponses aux avis Google, présentation de vos services — sans effort.</p>
-          <div class="m-dur">1 h 30</div>
-        </div>
-        <div class="module">
-          <div class="m-num">Module 07</div>
-          <h4 class="m-title">Analysez plans &amp; documents</h4>
-          <p class="m-sub">CCTP, DPGF, plans techniques — l'IA lit, résume et explique à votre place.</p>
-          <div class="m-dur">1 h</div>
-        </div>
-        <div class="module">
-          <div class="m-num">Module 08</div>
-          <h4 class="m-title">Rapports de chantier automatiques</h4>
-          <p class="m-sub">Générez vos rapports d'avancement en 3 minutes — partagez en 1 clic.</p>
-          <div class="m-dur">1 h</div>
-        </div>
-        <div class="module">
-          <div class="m-num">Module 09</div>
-          <h4 class="m-title">Mise en pratique sur vos vrais cas</h4>
-          <p class="m-sub">On travaille sur VOS devis, VOS chantiers, VOS situations réelles — feedback immédiat.</p>
-          <div class="m-dur">1 h 30</div>
-        </div>
-        <div class="module">
-          <div class="m-num">Module 10</div>
-          <h4 class="m-title">Votre workflow IA personnalisé</h4>
-          <p class="m-sub">Repartez avec un plan d'action sur mesure, vos outils configurés, et la certification RS6776.</p>
-          <div class="m-dur">1 h</div>
-        </div>
-      </div>
+    <div class="prog-days">
+      <article class="prog-day reveal">
+        <div class="day-tag"><span class="dot"></span><span class="num">Jour 01</span><span>—</span><span>7 heures</span></div>
+        <h3 class="prog-day-title">Fondations & outils du quotidien</h3>
+        <p class="prog-day-desc">Comprendre l'IA, choisir vos outils, automatiser vos devis et votre paperasse, piloter votre chantier.</p>
+        <ul class="prog-day-list">
+          <li>Comprendre l'IA sans se perdre</li>
+          <li>Les outils qui changent tout</li>
+          <li>Devis en 5 minutes</li>
+          <li>Fini la paperasse administrative</li>
+          <li>Gestion de chantier pro</li>
+        </ul>
+      </article>
+      <article class="prog-day reveal" style="transition-delay:.1s">
+        <div class="day-tag"><span class="dot"></span><span class="num">Jour 02</span><span>—</span><span>7 heures</span></div>
+        <h3 class="prog-day-title">Acquisition client & certification</h3>
+        <p class="prog-day-desc">Trouver plus de clients, analyser plans &amp; DCE, automatiser vos rapports, valider la certification RS6776.</p>
+        <ul class="prog-day-list">
+          <li>Trouvez plus de clients avec l'IA</li>
+          <li>Analyse plans &amp; documents</li>
+          <li>Rapports de chantier automatiques</li>
+          <li>Mise en pratique sur vos vrais cas</li>
+          <li>Workflow personnalisé + certification</li>
+        </ul>
+      </article>
     </div>
 
     <div class="reveal" style="margin-top: 56px; display:flex; flex-wrap:wrap; gap: 14px; align-items: center; justify-content: space-between;">
@@ -1501,142 +1512,13 @@ section{ position: relative; }
 </section>
 
 <!-- ════════════════════════════════════════════════════════════
-     FINANCEMENT
-     ════════════════════════════════════════════════════════════ -->
-<section class="financement section-pad" id="financement" data-screen-label="Financement">
-  <div class="wrap">
-    <div class="fin-grid">
-      <div class="reveal">
-        <span class="eyebrow light">05 · Financement</span>
-        <h2 class="h-display" style="margin-top:18px; color:var(--blanc)">
-          Votre formation ne vous coûte <em>pas un centime</em>.
-        </h2>
-        <p class="lede" style="color: rgba(248,246,241,.7); margin-top:24px">
-          En tant qu'entreprise du BTP, vous cotisez chaque année à Constructys. Cet argent est fait pour financer vos formations — ne le laissez pas dormir.
-        </p>
-        <ol class="fin-steps">
-          <li class="fin-step"><span class="n">01</span><span class="t">Vous remplissez le formulaire</span></li>
-          <li class="fin-step"><span class="n">02</span><span class="t">On vous rappelle sous <em>24h</em></span></li>
-          <li class="fin-step"><span class="n">03</span><span class="t">On monte le dossier Constructys <em>ensemble</em></span></li>
-          <li class="fin-step"><span class="n">04</span><span class="t">Constructys valide et finance — <em>15 jours</em></span></li>
-          <li class="fin-step"><span class="n">05</span><span class="t">Vous assistez à la formation — <em>0€</em> à payer</span></li>
-        </ol>
-      </div>
-
-      <div class="fin-detail reveal" style="transition-delay:.15s">
-        <span class="eyebrow light">Le détail financier</span>
-        <div style="margin-top: 20px;">
-          <div class="row"><span class="k">Prix de la formation</span><span class="v num">546 €</span></div>
-          <div class="row"><span class="k">Prise en charge Constructys</span><span class="v num" style="color:var(--accent)">– 546 €</span></div>
-          <div class="row"><span class="k">Frais de déplacement</span><span class="v num">Remboursés</span></div>
-          <div class="row total"><span class="k">Reste à charge entreprise</span><span class="v num">0 €</span></div>
-        </div>
-
-        <div class="seal">
-          <div class="ico">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/>
-            </svg>
-          </div>
-          <div>
-            <div class="t">Constructys finance 100%</div>
-            <div class="s">Toute entreprise BTP, TP ou négoce — moins de 50 salariés, salarié ou non.</div>
-          </div>
-        </div>
-
-        <div style="margin-top: 28px; display:flex; flex-direction:column; gap:10px;">
-          <a href="#contact" class="cta" style="justify-content:center; width:100%;">Vérifier mon éligibilité gratuitement
-            <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════════════════════════════════════════════
-     FORMATION
-     ════════════════════════════════════════════════════════════ -->
-<section class="formation section-pad" id="formation" data-screen-label="La Formation">
-  <div class="wrap">
-    <div class="form-grid">
-      <div class="reveal">
-        <span class="eyebrow">06 · La formation</span>
-        <h2 class="h-display" style="margin-top:18px">
-          Conçue pour les pros du <em>terrain</em> — pas pour les geeks.
-        </h2>
-        <p class="lede" style="margin-top:24px">
-          Pas de jargon technique. Pas de cours théoriques ennuyeux. On travaille directement sur <em class="italic serif">vos</em> cas concrets — vos devis, vos chantiers, votre entreprise.
-        </p>
-
-        <div class="placeholder light wide" id="sessionPh" style="margin-top:36px">
-          <span class="ph-corner">img-02 · session</span>
-          <span class="ph-corner-r">14h · pratique</span>
-          <span class="ph-label">artisan_formation_groupe.jpg</span>
-        </div>
-
-        <div style="margin-top: 28px; display:grid; grid-template-columns: repeat(2, 1fr); gap: 14px;">
-          <a href="programme.html" class="cta ghost" style="justify-content:center">Voir le programme →</a>
-          <a href="#contact" class="cta" style="justify-content:center">Réserver ma place →</a>
-        </div>
-      </div>
-
-      <aside class="form-side">
-        <h3 class="h-display" style="font-size: 26px;">Pour qui ?</h3>
-        <ul class="list-check">
-          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Artisans indépendants — plombiers, électriciens, peintres, maçons…</li>
-          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Chefs d'entreprise du BTP</li>
-          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Chefs de chantier</li>
-          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Toute entreprise BTP de moins de 50 salariés</li>
-        </ul>
-
-        <div class="spacer-m"></div>
-
-        <h3 class="h-display" style="font-size: 26px;">Ce que vous repartez avec</h3>
-        <ul class="list-check">
-          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Maîtrise complète des outils IA BTP</li>
-          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Pack de templates de devis prêts à l'emploi</li>
-          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Guide pratique IA BTP — 50 pages à conserver</li>
-          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Accès aux ressources en ligne — 1 an</li>
-          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Certification RS6776 officielle</li>
-          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Support post-formation inclus</li>
-        </ul>
-
-        <div class="formats">
-          <div class="format">
-            <div class="lbl">Format A</div>
-            <div class="ttl">Présentiel</div>
-            <div class="sub">Avignon ou intra-entreprise. Groupes 5 à 15 pers.</div>
-          </div>
-          <div class="format">
-            <div class="lbl">Format B</div>
-            <div class="ttl">Distanciel</div>
-            <div class="sub">Visio en direct, sessions interactives, mêmes contenus.</div>
-          </div>
-          <div class="format">
-            <div class="lbl">Rythme</div>
-            <div class="ttl">2 jours consécutifs</div>
-            <div class="sub">Ou espacés selon l'agenda de votre entreprise.</div>
-          </div>
-          <div class="format">
-            <div class="lbl">Tarif</div>
-            <div class="ttl">546 € HT <span style="font-size: 14px; color: var(--accent); font-family: var(--ff-mono); margin-left:6px;">→ 0 €</span></div>
-            <div class="sub">Intégralement financé par OPCO Constructys.</div>
-          </div>
-        </div>
-      </aside>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════════════════════════════════════════════
      FAQ
      ════════════════════════════════════════════════════════════ -->
 <section class="faq section-pad" id="faq" data-screen-label="FAQ">
   <div class="wrap">
     <div class="faq-grid">
       <div class="reveal">
-        <span class="eyebrow">07 · Questions</span>
+        <span class="eyebrow">05 · Questions</span>
         <h2 class="h-display" style="margin-top:18px">
           Toutes vos questions — <em>réponses honnêtes</em>.
         </h2>
@@ -1685,28 +1567,6 @@ section{ position: relative; }
           <summary class="faq-q">
             <div>
               <span class="qn">Question 04</span>
-              <span class="qt">Combien de temps dure la formation ?</span>
-            </div>
-            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
-          </summary>
-          <div class="faq-a"><div><p>2 jours — 14 heures, consécutifs ou espacés selon votre agenda. On s'adapte à votre saison de chantier.</p></div></div>
-        </details>
-
-        <details class="faq-item" name="faq">
-          <summary class="faq-q">
-            <div>
-              <span class="qn">Question 05</span>
-              <span class="qt">C'est en présentiel ou en ligne ?</span>
-            </div>
-            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
-          </summary>
-          <div class="faq-a"><div><p>Les deux — vous choisissez selon votre préférence et votre disponibilité. Présentiel à Avignon ou en intra-entreprise, distanciel en visio interactive.</p></div></div>
-        </details>
-
-        <details class="faq-item" name="faq">
-          <summary class="faq-q">
-            <div>
-              <span class="qn">Question 06</span>
               <span class="qt">C'est quoi la certification RS6776 ?</span>
             </div>
             <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
@@ -1717,7 +1577,7 @@ section{ position: relative; }
         <details class="faq-item" name="faq">
           <summary class="faq-q">
             <div>
-              <span class="qn">Question 07</span>
+              <span class="qn">Question 05</span>
               <span class="qt">Je peux former toute mon équipe ?</span>
             </div>
             <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
@@ -1728,29 +1588,7 @@ section{ position: relative; }
         <details class="faq-item" name="faq">
           <summary class="faq-q">
             <div>
-              <span class="qn">Question 08</span>
-              <span class="qt">Combien de temps entre la demande et la formation ?</span>
-            </div>
-            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
-          </summary>
-          <div class="faq-a"><div><p>Entre 3 et 6 semaines selon les disponibilités de Constructys et notre planning. On vous donne une date confirmée dès la validation du dossier.</p></div></div>
-        </details>
-
-        <details class="faq-item" name="faq">
-          <summary class="faq-q">
-            <div>
-              <span class="qn">Question 09</span>
-              <span class="qt">Que se passe-t-il après la formation ?</span>
-            </div>
-            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
-          </summary>
-          <div class="faq-a"><div><p>Accès aux ressources en ligne pendant 1 an, support WhatsApp, et préparation à la certification RS6776. Vous n'êtes pas lâché dans la nature.</p></div></div>
-        </details>
-
-        <details class="faq-item" name="faq">
-          <summary class="faq-q">
-            <div>
-              <span class="qn">Question 10</span>
+              <span class="qn">Question 06</span>
               <span class="qt">Mon dossier Constructys — qui s'en occupe ?</span>
             </div>
             <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
@@ -1772,7 +1610,7 @@ section{ position: relative; }
         <div class="placeholder tall" id="portraitPh" style="aspect-ratio: 4/5;"></div>
       </div>
       <div class="reveal" style="transition-delay:.1s">
-        <span class="eyebrow light">08 · Johane Achouri</span>
+        <span class="eyebrow light">06 · Johane Achouri</span>
         <h2 class="h-display" style="margin-top:18px; color:var(--blanc); font-size: clamp(28px, 3.4vw, 44px);">
           La formation IA qui <em>parle le langage</em> du terrain.
         </h2>
@@ -1810,7 +1648,7 @@ section{ position: relative; }
   <div class="wrap">
     <div class="contact-grid">
       <div class="reveal">
-        <span class="eyebrow">09 · Réservation</span>
+        <span class="eyebrow">07 · Réservation</span>
         <h2 class="h-display" style="margin-top:18px">
           Réservez votre place — <em>gratuitement</em>.
         </h2>
@@ -1893,10 +1731,10 @@ section{ position: relative; }
         <h5>Navigation</h5>
         <ul>
           <li><a href="#accueil">Accueil</a></li>
-          <li><a href="#formation">La Formation</a></li>
-          <li><a href="programme.html">Programme</a></li>
           <li><a href="#financement">Financement</a></li>
+          <li><a href="programme.html">Programme</a></li>
           <li><a href="#faq">FAQ</a></li>
+          <li><a href="#about">À Propos</a></li>
         </ul>
       </div>
       <div>
