@@ -9,7 +9,7 @@ Projet conçu pour **Formaxia** — organisme de formation IA pour les professio
 | Fichier | Rôle | Comment l'ouvrir |
 |---|---|---|
 | `Formaxia.html` | Site marketing one-page (hero, problèmes, solution, stats, programme, témoignages, financement, formation, FAQ, à propos, contact, footer) | Ouvrir dans un navigateur — aucune dépendance locale |
-| `Programme-Formaxia.html` | Document pédagogique 16 pages A4 — programme officiel enrichi (méthode RTC, RGPD chantier, 30 prompts DCE/MT, etc.) | Ouvrir dans un navigateur ; bouton **« Imprimer en PDF »** en bas à droite |
+| `programme.html` | Document pédagogique 16 pages A4 — programme officiel enrichi (méthode RTC, RGPD chantier, 30 prompts DCE/MT, etc.) | Ouvrir dans un navigateur ; bouton **« Imprimer en PDF »** en bas à droite |
 | `tweaks-panel.jsx` | Panneau de réglages (accent secteur, URLs photos, densité) chargé par `Formaxia.html` | Doit rester **dans le même dossier** que `Formaxia.html` |
 | `README.md` | Ce fichier | — |
 
@@ -49,7 +49,7 @@ Tout le système est conçu pour qu'**une seule variable CSS** (`--accent`) suff
 
 ### Hébergement statique (Hostinger, Netlify, Vercel, OVH…)
 
-1. Uploader les 3 fichiers (`Formaxia.html`, `Programme-Formaxia.html`, `tweaks-panel.jsx`) à la racine du site
+1. Uploader les 3 fichiers (`Formaxia.html`, `programme.html`, `tweaks-panel.jsx`) à la racine du site
 2. Renommer `Formaxia.html` en `index.html` si vous voulez qu'il s'affiche par défaut
 3. C'est tout — aucune config serveur, aucun build
 
