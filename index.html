@@ -730,7 +730,19 @@ section{ position: relative; }
 /* ─────────────────────────────────────────────────────────────────
    TÉMOIGNAGES
    ───────────────────────────────────────────────────────────────── */
-.testimonials{ background: var(--blanc); border-top: 1px solid var(--gris-line); }
+.testimonials{
+  background: #ece5d3;
+  border-top: 1px solid rgba(201,168,76,.22);
+  border-bottom: 1px solid rgba(201,168,76,.22);
+  position: relative;
+}
+.testimonials::before{
+  content: "";
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--or-soft) 50%, transparent 100%);
+  opacity: .5;
+}
 .t-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
 @media (max-width: 980px){ .t-grid{ grid-template-columns: 1fr } }
 .t-card{
