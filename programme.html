@@ -4,7 +4,22 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Programme Formaxia · L'IA appliquée au Bâtiment et à la Gestion de Chantier</title>
-<meta name="description" content="Programme détaillé — 2 jours · 10 modules · 14 heures. Édition enrichie 2026." />
+<meta name="description" content="Programme détaillé — 2 jours · 10 modules · 14 heures. Édition enrichie 2026. Formation IA pour artisans et PME du BTP, financée par OPCO Constructys." />
+
+<link rel="canonical" href="https://formaxia.fr/programme.html" />
+
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://formaxia.fr/programme.html" />
+<meta property="og:site_name" content="Formaxia" />
+<meta property="og:title" content="Programme Formaxia · L'IA appliquée au Bâtiment et à la Gestion de Chantier" />
+<meta property="og:description" content="Programme détaillé — 2 jours · 10 modules · 14 heures. Édition enrichie 2026." />
+<meta property="og:image" content="https://formaxia.fr/assets/hero.png" />
+<meta property="og:locale" content="fr_FR" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Programme Formaxia · L'IA appliquée au Bâtiment et à la Gestion de Chantier" />
+<meta name="twitter:description" content="Programme détaillé — 2 jours · 10 modules · 14 heures." />
+<meta name="twitter:image" content="https://formaxia.fr/assets/hero.png" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -630,6 +645,78 @@ ul.checks li::before{
 .colophon .lbl{ font-family: var(--ff-mono); font-size: 8pt; letter-spacing: 0.16em; text-transform: uppercase; color: var(--or-soft); }
 .colophon .v{ font-size: 10pt; margin-top: 4px; color: rgba(248,246,241,.85); }
 
+/* ─────────────────────────────────────────────────────────────────
+   SITE NAV — barre fixe ajoutée pour la navigation web (masquée à l'impression)
+   ───────────────────────────────────────────────────────────────── */
+.site-nav{
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 90;
+  background: rgba(10,10,15,.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(201,168,76,.18);
+  padding: 14px 28px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px;
+  font-family: var(--ff-text);
+}
+.site-nav .brand{
+  display: inline-flex; align-items: center; gap: 12px;
+  color: var(--blanc); text-decoration: none;
+  font-weight: 500; font-size: 15px;
+  transition: color .2s;
+}
+.site-nav .brand:hover{ color: var(--or); }
+.site-nav .brand .mark{
+  width: 22px; height: 22px; border-radius: 4px;
+  background: var(--or);
+  display: inline-block;
+}
+.site-nav .brand .sep{
+  color: rgba(248,246,241,.3);
+  font-family: var(--ff-mono); font-size: 12px;
+  margin: 0 4px;
+}
+.site-nav .brand .tag{
+  color: rgba(248,246,241,.6);
+  font-family: var(--ff-mono); font-size: 11px;
+  letter-spacing: .12em; text-transform: uppercase;
+}
+.site-nav-actions{ display: inline-flex; align-items: center; gap: 14px; }
+.site-nav-actions .back{
+  color: rgba(248,246,241,.7);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color .2s;
+}
+.site-nav-actions .back:hover{ color: var(--or); }
+.site-nav-actions .cta{
+  background: var(--or); color: var(--noir);
+  text-decoration: none; font-weight: 500;
+  padding: 9px 16px; border-radius: 999px;
+  font-size: 14px;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: background .2s, transform .2s;
+}
+.site-nav-actions .cta:hover{ background: var(--or-soft); transform: translateY(-1px); }
+.site-nav-actions .cta svg{ width: 13px; height: 13px; }
+
+/* Padding to push the first cover page below the fixed nav (screen only) */
+@media screen{
+  body{ padding-top: 62px; }
+}
+@media screen and (max-width: 640px){
+  .site-nav{ padding: 10px 14px; }
+  .site-nav .brand .tag{ display: none; }
+  .site-nav-actions .back{ display: none; }
+  .site-nav-actions .cta{ padding: 8px 12px; font-size: 13px; }
+  body{ padding-top: 56px; }
+}
+@media print{
+  .site-nav{ display: none !important; }
+  body{ padding-top: 0 !important; }
+}
+
 .print-cta{
   position: fixed; right: 24px; bottom: 24px;
   z-index: 100;
@@ -881,6 +968,23 @@ ul.checks li::before{
 </style>
 </head>
 <body>
+
+<!-- Barre de navigation fixe (masquée à l'impression) -->
+<nav class="site-nav" aria-label="Navigation principale">
+  <a href="/" class="brand" aria-label="Retour à l'accueil Formaxia">
+    <span class="mark"></span>
+    <span>Formaxia</span>
+    <span class="sep">·</span>
+    <span class="tag">Programme officiel</span>
+  </a>
+  <div class="site-nav-actions">
+    <a href="/" class="back">← Accueil</a>
+    <a href="/#contact" class="cta">
+      Je réserve ma place
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+</nav>
 
 <!-- ════════════════════════════════════════════════════════════
      PAGE 1 — COVER
