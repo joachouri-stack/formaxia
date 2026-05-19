@@ -236,7 +236,7 @@ section{ position: relative; }
   transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
   box-shadow: 0 1px 0 rgba(0,0,0,.06), 0 0 0 1px rgba(168,135,54,.0);
 }
-.cta:hover{ background: var(--or-soft); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(201,168,76,.28); }
+.cta:hover{ background: var(--or-soft); transform: translateY(-2px) scale(1.03); box-shadow: 0 10px 28px rgba(201,168,76,.32); }
 .cta .arrow{ transition: transform .2s ease; }
 .cta:hover .arrow{ transform: translateX(3px); }
 
@@ -244,7 +244,7 @@ section{ position: relative; }
   background: transparent; color: inherit;
   box-shadow: inset 0 0 0 1px currentColor;
 }
-.cta.ghost:hover{ background: rgba(201,168,76,.08); box-shadow: inset 0 0 0 1px var(--or); color: var(--or); }
+.cta.ghost:hover{ background: rgba(201,168,76,.08); box-shadow: inset 0 0 0 1px var(--or); color: var(--or); transform: translateY(-2px) scale(1.03); }
 .cta.accent{ background: var(--accent); color: #fff; }
 .cta.accent:hover{ background: var(--accent-deep); }
 
@@ -540,10 +540,10 @@ section{ position: relative; }
   padding: 36px 32px;
   display:flex; flex-direction:column;
   min-height: 380px;
-  transition: border-color .25s, transform .25s;
+  transition: border-color .3s ease, transform .35s cubic-bezier(.2,.7,.3,1), box-shadow .35s ease;
   position:relative; overflow:hidden;
 }
-.sol-card:hover{ border-color: var(--or); transform: translateY(-2px); }
+.sol-card:hover{ border-color: var(--or); transform: translateY(-4px) scale(1.02); box-shadow: 0 22px 48px rgba(0,0,0,.18); }
 .sol-card{ cursor: pointer; }
 .sol-card .icon{
   width: 56px; height: 56px;
@@ -659,12 +659,12 @@ section{ position: relative; }
   display: flex; flex-direction: column;
   overflow: hidden;
   box-shadow: 0 1px 3px rgba(10,10,15,.04), 0 12px 32px rgba(10,10,15,.04);
-  transition: border-color .25s, transform .25s, box-shadow .25s;
+  transition: border-color .3s ease, transform .35s cubic-bezier(.2,.7,.3,1), box-shadow .35s ease;
 }
 .prog-day:hover{
   border-color: var(--or);
-  transform: translateY(-3px);
-  box-shadow: 0 1px 3px rgba(10,10,15,.04), 0 22px 48px rgba(10,10,15,.08);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 1px 3px rgba(10,10,15,.04), 0 26px 56px rgba(10,10,15,.12);
 }
 .prog-day .day-tag{
   background: linear-gradient(180deg, var(--noir) 0%, #14141c 100%);
@@ -729,9 +729,9 @@ section{ position: relative; }
 }
 
 .modules{ display:grid; grid-template-columns: repeat(5, 1fr); gap: 0; border-top: 1px solid var(--gris-line); }
-.modules .module{ border-right: 1px solid var(--gris-line); border-bottom: 1px solid var(--gris-line); padding: 28px 22px; min-height: 220px; display:flex; flex-direction:column; transition: background .2s; }
+.modules .module{ border-right: 1px solid var(--gris-line); border-bottom: 1px solid var(--gris-line); padding: 28px 22px; min-height: 220px; display:flex; flex-direction:column; transition: background .25s ease, transform .3s cubic-bezier(.2,.7,.3,1), box-shadow .3s ease; }
 .modules .module{ cursor: pointer; }
-.modules .module:hover{ background: rgba(232,97,10,0.04); }
+.modules .module:hover{ background: rgba(232,97,10,0.05); transform: scale(1.015); box-shadow: 0 10px 28px rgba(10,10,15,.06); position: relative; z-index: 2; }
 .modules .module:nth-child(5n){ border-right:0 }
 @media (max-width: 980px){
   .modules{ grid-template-columns: repeat(2, 1fr); }
@@ -787,9 +787,9 @@ section{ position: relative; }
   border-radius: var(--rad-card);
   padding: 36px 32px;
   display:flex; flex-direction: column;
-  transition: border-color .25s, transform .25s, box-shadow .25s;
+  transition: border-color .3s ease, transform .35s cubic-bezier(.2,.7,.3,1), box-shadow .35s ease;
 }
-.t-card:hover{ border-color: var(--or); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(10,10,15,.06); }
+.t-card:hover{ border-color: var(--or); transform: translateY(-4px) scale(1.02); box-shadow: 0 18px 44px rgba(10,10,15,.1); }
 .t-card .quote{
   font-family: var(--ff-display);
   font-size: 22px; line-height: 1.35;
@@ -1220,6 +1220,17 @@ section{ position: relative; }
 .back-to-top.show{ opacity: 1; transform: translateY(0); }
 .back-to-top:hover{ background: var(--or); color: var(--noir); }
 .back-to-top svg{ width:18px; height:18px; }
+
+/* Désactive les zooms/animations si l'utilisateur préfère */
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+  }
+  .cta:hover, .sol-card:hover, .prog-day:hover, .t-card:hover, .modules .module:hover{
+    transform: none !important;
+  }
+}
 
 /* ─────────────────────────────────────────────────────────────────
    FADE-IN ANIMATIONS
