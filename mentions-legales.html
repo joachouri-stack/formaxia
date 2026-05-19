@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+<meta name="theme-color" content="#0a0a0f" />
+<title>Mentions légales · Formaxia</title>
+<meta name="description" content="Mentions légales de Formaxia — organisme de formation IA pour les professionnels du BTP." />
+<link rel="canonical" href="https://formaxia.fr/mentions-legales.html" />
+<meta name="robots" content="index,follow" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" />
+
+<style>
+:root{
+  --noir:#0a0a0f; --or:#c9a84c; --or-soft:#d8bb6a; --or-deep:#a88736;
+  --blanc:#f8f6f1; --gris:#2a2a35; --gris-3:#5a5a68; --gris-line:#e6e1d6;
+}
+*{ box-sizing: border-box; margin: 0; padding: 0; }
+html{ scroll-behavior: smooth; }
+body{
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 16px; line-height: 1.65;
+  color: var(--noir); background: var(--blanc);
+  padding-top: 62px;
+}
+
+/* Top nav (cohérente avec programme.html) */
+.site-nav{
+  position: fixed; top: 0; left: 0; right: 0; z-index: 90;
+  background: rgba(10,10,15,.85);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(201,168,76,.18);
+  padding: 14px 28px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.site-nav .brand{
+  display: inline-flex; align-items: center; gap: 12px;
+  color: var(--blanc); text-decoration: none;
+  font-weight: 500; font-size: 15px; transition: color .2s;
+}
+.site-nav .brand:hover{ color: var(--or); }
+.site-nav .brand .mark{ width: 22px; height: 22px; border-radius: 4px; background: var(--or); }
+.site-nav .brand .sep{ color: rgba(248,246,241,.3); font-family: 'DM Mono', monospace; font-size: 12px; margin: 0 4px; }
+.site-nav .brand .tag{ color: rgba(248,246,241,.6); font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+.site-nav-actions a{ color: rgba(248,246,241,.7); text-decoration: none; font-size: 14px; transition: color .2s; }
+.site-nav-actions a:hover{ color: var(--or); }
+@media (max-width: 640px){
+  .site-nav{ padding: 10px 14px; }
+  .site-nav .brand .tag{ display: none; }
+}
+
+/* Content */
+.wrap{ max-width: 760px; margin: 0 auto; padding: 64px 24px 96px; }
+.eyebrow{
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--or-deep);
+}
+h1{
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 4.4vw, 48px);
+  font-weight: 500; line-height: 1.1;
+  margin: 16px 0 32px;
+  letter-spacing: -0.01em;
+}
+.last-update{
+  font-family: 'DM Mono', monospace;
+  font-size: 12px; color: var(--gris-3);
+  padding-bottom: 32px; border-bottom: 1px solid var(--gris-line);
+  margin-bottom: 40px;
+}
+h2{
+  font-family: 'Playfair Display', serif;
+  font-size: 24px; font-weight: 500;
+  margin: 48px 0 16px;
+  color: var(--noir);
+}
+h3{
+  font-size: 16px; font-weight: 600;
+  margin: 24px 0 8px;
+}
+p, li{ color: var(--gris); margin-bottom: 12px; }
+strong{ color: var(--noir); font-weight: 500; }
+ul{ padding-left: 24px; margin: 12px 0; }
+a{ color: var(--or-deep); }
+a:hover{ color: var(--or); }
+
+.placeholder{
+  background: rgba(201,168,76,.08);
+  border-left: 3px solid var(--or);
+  padding: 4px 12px;
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  color: var(--or-deep);
+  display: inline-block;
+}
+
+.dl{
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 12px 24px;
+  margin: 24px 0;
+  font-size: 15px;
+}
+.dl dt{ font-weight: 500; color: var(--noir); }
+.dl dd{ color: var(--gris); }
+@media (max-width: 640px){ .dl{ grid-template-columns: 1fr; gap: 4px 0; } .dl dd{ margin-bottom: 16px; } }
+
+.back-cta{
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 56px;
+  padding: 12px 22px;
+  background: var(--noir); color: var(--blanc);
+  text-decoration: none; border-radius: 999px;
+  font-size: 14px; font-weight: 500;
+  transition: background .2s;
+}
+.back-cta:hover{ background: #1f1f2c; color: var(--or-soft); }
+</style>
+</head>
+<body>
+
+<nav class="site-nav" aria-label="Navigation principale">
+  <a href="/" class="brand">
+    <span class="mark"></span>
+    <span>Formaxia</span>
+    <span class="sep">·</span>
+    <span class="tag">Mentions légales</span>
+  </a>
+  <div class="site-nav-actions">
+    <a href="/">← Accueil</a>
+  </div>
+</nav>
+
+<main class="wrap">
+  <span class="eyebrow">Informations légales</span>
+  <h1>Mentions légales</h1>
+  <p class="last-update">Dernière mise à jour : 19 mai 2026</p>
+
+  <h2>1. Éditeur du site</h2>
+  <dl class="dl">
+    <dt>Raison sociale</dt><dd><span class="placeholder">[À COMPLÉTER]</span> — Formaxia</dd>
+    <dt>Statut juridique</dt><dd><span class="placeholder">[À COMPLÉTER — ex. EI, SASU, SARL]</span></dd>
+    <dt>SIRET</dt><dd><span class="placeholder">[À COMPLÉTER — 14 chiffres]</span></dd>
+    <dt>N° TVA intracom.</dt><dd><span class="placeholder">[À COMPLÉTER — FR XX XXXXXXXXX]</span></dd>
+    <dt>N° déclaration d'activité</dt><dd><span class="placeholder">[À COMPLÉTER — formation pro]</span> (auprès du Préfet de Région PACA)</dd>
+    <dt>Certification Qualiopi</dt><dd><span class="placeholder">[À COMPLÉTER — n° et date]</span></dd>
+    <dt>Adresse</dt><dd><span class="placeholder">[À COMPLÉTER]</span> — Avignon, France</dd>
+    <dt>Téléphone</dt><dd><span class="placeholder">[À COMPLÉTER]</span></dd>
+    <dt>Email</dt><dd><a href="mailto:contact@formaxia.fr">contact@formaxia.fr</a></dd>
+    <dt>Directeur de publication</dt><dd>Johane Achouri</dd>
+  </dl>
+
+  <h2>2. Hébergeur</h2>
+  <dl class="dl">
+    <dt>Nom</dt><dd><span class="placeholder">[À COMPLÉTER — nom de l'hébergeur de ton VPS, ex. Hetzner, OVH, Scaleway]</span></dd>
+    <dt>Adresse</dt><dd><span class="placeholder">[À COMPLÉTER — adresse postale de l'hébergeur]</span></dd>
+    <dt>Site web</dt><dd><span class="placeholder">[À COMPLÉTER — URL hébergeur]</span></dd>
+  </dl>
+
+  <h2>3. Propriété intellectuelle</h2>
+  <p>L'ensemble des contenus présents sur ce site (textes, graphismes, logos, icônes, images, vidéos, fichiers téléchargeables, programmes, mise en page) est la propriété exclusive de Formaxia, sauf mention contraire. Toute reproduction, représentation, modification, publication, transmission, dénaturation, totale ou partielle, du site ou de son contenu, par quelque procédé que ce soit, et sur quelque support que ce soit, est interdite sans l'autorisation écrite préalable de Formaxia.</p>
+  <p>Toute exploitation non autorisée du site ou de l'un quelconque des éléments qu'il contient est constitutive de contrefaçon et passible de poursuites au titre des articles L.335-2 et suivants du Code de la propriété intellectuelle.</p>
+
+  <h2>4. Liens hypertextes</h2>
+  <p>Le site peut contenir des liens hypertextes vers d'autres sites internet. Formaxia n'exerçant aucun contrôle sur ces sites externes, elle décline toute responsabilité quant à leur contenu.</p>
+
+  <h2>5. Crédits</h2>
+  <p>Conception et développement : Formaxia. Polices : Google Fonts (Playfair Display, DM Sans, DM Mono).</p>
+
+  <h2>6. Données personnelles</h2>
+  <p>Le traitement de vos données personnelles est régi par notre <a href="confidentialite.html">politique de confidentialité</a>, conforme au RGPD et à la loi Informatique et Libertés.</p>
+
+  <h2>7. Droit applicable</h2>
+  <p>Les présentes mentions légales sont régies par le droit français. En cas de litige, et après échec de toute tentative de résolution amiable, les tribunaux français seront seuls compétents.</p>
+
+  <a href="/" class="back-cta">
+    ← Retour à l'accueil
+  </a>
+</main>
+
+</body>
+</html>
