@@ -364,6 +364,14 @@ section{ position: relative; }
 }
 .placeholder.light .ph-corner-r{ color: rgba(10,10,15,.4) }
 .placeholder.has-image{ background-color: transparent; }
+.placeholder .ph-img{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover; object-position:center top;
+  z-index:0;
+}
+.placeholder .ph-corner,
+.placeholder .ph-corner-r{ z-index:1 }
 .placeholder.has-image .ph-label{ display:none }
 .placeholder.has-image .ph-corner,
 .placeholder.has-image .ph-corner-r{
@@ -1746,7 +1754,8 @@ section{ position: relative; }
   <div class="wrap">
     <div class="about-grid">
       <div class="reveal">
-        <div class="placeholder tall" id="portraitPh" style="aspect-ratio: 4/5;">
+        <div class="placeholder tall has-image" id="portraitPh" style="aspect-ratio: 4/5;">
+          <img src="assets/portrait-01.png" alt="Johane Achouri, fondateur de Formaxia" class="ph-img" />
           <span class="ph-corner">portrait · 01</span>
           <span class="ph-corner-r">Avignon, 2026</span>
           <span class="ph-label">johane_achouri.jpg</span>
@@ -1999,12 +2008,18 @@ document.getElementById('contactForm').addEventListener('submit', e => {
 function applyImage(id, url){
   const el = document.getElementById(id);
   if (!el) return;
+  const img = el.querySelector('.ph-img');
   if (url && String(url).trim()){
-    el.style.backgroundImage = `url("${url}")`;
-    el.style.backgroundSize = 'cover';
-    el.style.backgroundPosition = 'center';
+    if (img){
+      img.src = url;
+    } else {
+      el.style.backgroundImage = `url("${url}")`;
+      el.style.backgroundSize = 'cover';
+      el.style.backgroundPosition = 'center';
+    }
     el.classList.add('has-image');
   } else {
+    if (img) img.removeAttribute('src');
     el.style.backgroundImage = '';
     el.classList.remove('has-image');
   }
