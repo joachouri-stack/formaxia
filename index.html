@@ -1646,8 +1646,8 @@ section{ position: relative; }
      ════════════════════════════════════════════════════════════ -->
 <section class="contact section-pad" id="contact" data-screen-label="Contact">
   <div class="wrap">
-    <div class="contact-grid">
-      <div class="reveal">
+    <div>
+      <div class="contact-head reveal" style="text-align:center; max-width:680px; margin: 0 auto 48px;">
         <span class="eyebrow">07 · Réservation</span>
         <h2 class="h-display" style="margin-top:18px">
           Réservez votre place — <em>gratuitement</em>.
@@ -1655,20 +1655,14 @@ section{ position: relative; }
         <p class="lede" style="margin-top:24px">
           Remplissez ce formulaire — on vous rappelle sous 24h pour cadrer votre projet et monter le dossier Constructys avec vous. Sans engagement, sans surprise.
         </p>
-
-        <div class="contact-info-line"><span class="k">Email</span><span class="v"><a href="/cdn-cgi/l/email-protection#d7b4b8b9a3b6b4a397b1b8a5bab6afbeb6f9b1a5"><span class="__cf_email__" data-cfemail="9efdf1f0eafffdeadef8f1ecf3ffe6f7ffb0f8ec">[email&#160;protected]</span></a></span></div>
-        <div class="contact-info-line"><span class="k">Réponse</span><span class="v">Sous 24h ouvrées</span></div>
-        <div class="contact-info-line"><span class="k">Disponibilité</span><span class="v">Lundi → Vendredi · 9h–18h</span></div>
-        <div class="contact-info-line"><span class="k">Localisation</span><span class="v">Avignon · France entière (intra)</span></div>
-
-        <div style="margin-top: 36px; display:flex; gap:10px; flex-wrap:wrap;">
+        <div style="margin-top: 28px; display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
           <span class="foot-badge" style="color:var(--or-deep); border-color: rgba(201,168,76,.4);"><span class="dot"></span>Qualiopi</span>
           <span class="foot-badge" style="color:var(--or-deep); border-color: rgba(201,168,76,.4);"><span class="dot"></span>Constructys</span>
           <span class="foot-badge" style="color:var(--or-deep); border-color: rgba(201,168,76,.4);"><span class="dot"></span>RS6776</span>
         </div>
       </div>
 
-      <form class="form reveal" id="contactForm" style="transition-delay:.1s">
+      <form class="form reveal" id="contactForm" style="max-width:760px; margin:0 auto; transition-delay:.1s">
         <div class="row">
           <div class="field"><label for="prenom">Prénom</label><input id="prenom" type="text" required /></div>
           <div class="field"><label for="nom">Nom</label><input id="nom" type="text" required /></div>
@@ -1740,7 +1734,7 @@ section{ position: relative; }
       <div>
         <h5>Contact</h5>
         <ul>
-          <li><a href="/cdn-cgi/l/email-protection#8be8e4e5ffeae8ffcbede4f9e6eaf3e2eaa5edf9"><span class="__cf_email__" data-cfemail="9efdf1f0eafffdeadef8f1ecf3ffe6f7ffb0f8ec">[email&#160;protected]</span></a></li>
+          <li><a href="mailto:contact@formaxia.fr">contact@formaxia.fr</a></li>
           <li><span style="color: rgba(248,246,241,.7);">Avignon, France</span></li>
           <li><span style="color: rgba(248,246,241,.7);">Lun → Ven · 9h–18h</span></li>
           <li><a href="#contact">Réserver ma place →</a></li>
@@ -1776,7 +1770,7 @@ section{ position: relative; }
 <!-- ════════════════════════════════════════════════════════════
      SCRIPTS
      ════════════════════════════════════════════════════════════ -->
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 /* Header scroll state */
 const header = document.getElementById('header');
 const progressBar = document.getElementById('progressBar');
