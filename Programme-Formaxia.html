@@ -1,0 +1,1934 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Programme Formaxia · L'IA appliquée au Bâtiment et à la Gestion de Chantier</title>
+<meta name="description" content="Programme détaillé — 2 jours · 10 modules · 14 heures. Édition enrichie 2026." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap" />
+
+<style>
+/* ─────────────────────────────────────────────────────────────────
+   TOKENS — chartré Formaxia (cohérent avec Formaxia.html)
+   ───────────────────────────────────────────────────────────────── */
+:root{
+  --noir:       #0a0a0f;
+  --or:         #c9a84c;
+  --or-soft:    #d8bb6a;
+  --or-deep:    #a88736;
+  --blanc:      #f8f6f1;
+  --blanc-pure: #ffffff;
+  --gris:       #2a2a35;
+  --gris-2:     #3a3a47;
+  --gris-3:     #5a5a68;
+  --gris-line:  #e6e1d6;
+  --gris-line-2:#efeae0;
+  --accent:     #E8610A;
+  --accent-deep:#c4500a;
+
+  --ff-display: "Playfair Display", "Times New Roman", serif;
+  --ff-text:    "DM Sans", -apple-system, system-ui, sans-serif;
+  --ff-mono:    "DM Mono", ui-monospace, "SF Mono", monospace;
+}
+
+*,*::before,*::after{ box-sizing:border-box }
+
+/* ─────────────────────────────────────────────────────────────────
+   PAGE — A4 portrait, imprimable
+   ───────────────────────────────────────────────────────────────── */
+html,body{ margin:0; padding:0; background:#33333a; color: var(--noir); font-family: var(--ff-text); }
+body{
+  font-size: 10.5pt;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.page{
+  width: 210mm;
+  height: 297mm;
+  margin: 16px auto;
+  padding: 18mm 16mm 26mm;
+  background: var(--blanc);
+  color: var(--noir);
+  box-shadow: 0 6px 24px rgba(0,0,0,.18);
+  position: relative;
+  overflow: hidden;
+  page-break-after: always;
+  break-after: page;
+  display: flex; flex-direction: column;
+}
+.page:last-child{ page-break-after: auto; break-after: auto; }
+.page.dark{ background: var(--noir); color: var(--blanc); }
+
+/* Page header / footer rail */
+.page-rail{
+  position: absolute; left: 16mm; right: 16mm; top: 10mm;
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: var(--ff-mono);
+  font-size: 8pt;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gris-3);
+  border-bottom: 1px solid var(--gris-line);
+  padding-bottom: 4mm;
+}
+.page.dark .page-rail{ color: rgba(248,246,241,.7); border-bottom-color: rgba(201,168,76,.25); }
+.page-rail .lg{
+  display:inline-flex; align-items:center; gap: 8px;
+  font-family: var(--ff-display); font-weight:600; font-size: 11pt;
+  text-transform:none; letter-spacing: -0.01em; color: var(--noir);
+}
+.page.dark .page-rail .lg{ color: var(--blanc); }
+.page-rail .mark{
+  width: 14px; height: 14px; border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, var(--or-soft), var(--or) 50%, var(--or-deep) 100%);
+  position: relative;
+}
+.page-rail .mark::after{
+  content:""; position:absolute; inset: 30%; border-radius: 50%;
+  background: var(--noir); box-shadow: inset 0 0 0 1px var(--or-deep);
+}
+.page.dark .page-rail .mark::after{ background: var(--blanc); }
+
+.page-foot{
+  position: absolute; left: 16mm; right: 16mm; bottom: 10mm;
+  display:flex; justify-content: space-between; align-items: center;
+  font-family: var(--ff-mono); font-size: 8pt;
+  color: var(--gris-3); letter-spacing: 0.14em; text-transform: uppercase;
+  border-top: 1px solid var(--gris-line); padding-top: 4mm;
+}
+.page.dark .page-foot{ color: rgba(248,246,241,.6); border-top-color: rgba(201,168,76,.25); }
+.page-foot .num b{
+  font-family: var(--ff-display); font-size: 11pt; font-weight: 500;
+  color: var(--noir); font-style: italic; letter-spacing: 0;
+  margin-right: 4px;
+}
+.page.dark .page-foot .num b{ color: var(--or); }
+
+.page-body{
+  flex: 1;
+  padding-top: 16mm;
+  display: flex; flex-direction: column;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   COMPOSANTS TYPO
+   ───────────────────────────────────────────────────────────────── */
+.eyebrow{
+  font-family: var(--ff-mono);
+  font-size: 8pt;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--or-deep);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.eyebrow::before{
+  content:""; width: 24px; height: 1px;
+  background: currentColor; opacity: .7;
+}
+.page.dark .eyebrow{ color: var(--or-soft); }
+.eyebrow.no-rule::before{ display:none }
+
+h1.title{
+  font-family: var(--ff-display);
+  font-weight: 500;
+  font-size: 34pt;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  margin: 18px 0 0;
+}
+h1.title em{ color: var(--or); font-style: italic; font-weight: 400; }
+
+h2.title{
+  font-family: var(--ff-display);
+  font-weight: 500;
+  font-size: 24pt;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin: 12px 0 0;
+}
+h2.title em{ color: var(--or); font-style: italic; }
+
+h3.title{
+  font-family: var(--ff-display);
+  font-weight: 500;
+  font-size: 16pt;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+  margin: 6px 0 0;
+}
+
+.lede{
+  font-size: 12pt;
+  line-height: 1.5;
+  color: var(--gris-3);
+  margin-top: 10px;
+  max-width: 60ch;
+  text-wrap: pretty;
+}
+.page.dark .lede{ color: rgba(248,246,241,.75); }
+
+.mono{ font-family: var(--ff-mono); letter-spacing: 0.04em; }
+.num{ font-family: var(--ff-mono); font-variant-numeric: tabular-nums; letter-spacing: -0.005em; }
+.serif-it{ font-family: var(--ff-display); font-style: italic; font-weight: 400; }
+
+/* ─────────────────────────────────────────────────────────────────
+   COVER
+   ───────────────────────────────────────────────────────────────── */
+.cover{
+  background: var(--noir);
+  color: var(--blanc);
+}
+.cover .page-rail{ color: rgba(248,246,241,.7); border-bottom-color: rgba(201,168,76,.25); }
+.cover .page-foot{ color: rgba(248,246,241,.6); border-top-color: rgba(201,168,76,.25); }
+.cover .page-rail .lg{ color: var(--blanc); }
+.cover-grid{
+  flex: 1;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 20mm;
+  padding-top: 28mm;
+}
+.cover h1{
+  font-family: var(--ff-display);
+  font-weight: 400;
+  font-size: 48pt;
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  margin: 0;
+  color: var(--blanc);
+  text-wrap: balance;
+}
+.cover h1 em{ color: var(--or); font-style: italic; font-weight: 400; }
+.cover .deck{
+  font-family: var(--ff-display);
+  font-style: italic;
+  font-size: 18pt;
+  color: var(--or-soft);
+  margin-top: 12mm;
+  max-width: 18em;
+  line-height: 1.3;
+}
+.cover-meta{
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid rgba(201,168,76,.25);
+  border-bottom: 1px solid rgba(201,168,76,.25);
+  padding: 8mm 0;
+}
+.cover-meta .m{
+  border-right: 1px solid rgba(201,168,76,.15);
+  padding: 0 4mm;
+}
+.cover-meta .m:last-child{ border-right: 0; }
+.cover-meta .k{
+  font-family: var(--ff-mono); font-size: 8pt;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--or-soft);
+}
+.cover-meta .v{
+  font-family: var(--ff-display);
+  font-size: 16pt; font-weight: 500;
+  margin-top: 6px;
+}
+.cover-meta .v .u{ font-size: 9pt; color: var(--or-soft); font-family: var(--ff-mono); }
+
+.cover-tag{
+  position: absolute; top: 28mm; right: 16mm;
+  font-family: var(--ff-mono); font-size: 8pt;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--or);
+  background: rgba(201,168,76,.08);
+  border: 1px solid rgba(201,168,76,.3);
+  padding: 6px 12px;
+  border-radius: 999px;
+}
+
+.cover-edition{
+  position:absolute; bottom: 22mm; left: 16mm;
+  font-family: var(--ff-mono);
+  font-size: 8pt;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(248,246,241,.5);
+}
+.cover-edition b{ color: var(--or); font-weight: 400; }
+
+/* ─────────────────────────────────────────────────────────────────
+   VUE D'ENSEMBLE
+   ───────────────────────────────────────────────────────────────── */
+.stats-row{
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--gris-line);
+  border-bottom: 1px solid var(--gris-line);
+  margin: 12mm 0 0;
+}
+.stat{
+  padding: 5mm 5mm 5mm 0;
+  border-right: 1px solid var(--gris-line);
+}
+.stats-row .stat:last-child{ border-right:0 }
+.stat .v{
+  font-family: var(--ff-mono);
+  font-size: 24pt; font-weight: 400;
+  color: var(--or);
+  line-height: 1;
+  display: flex; align-items: baseline; gap: 4px;
+}
+.stat .v .u{ font-size: 10pt; color: var(--or-deep); }
+.stat .k{
+  margin-top: 5px;
+  font-size: 9pt; color: var(--gris-3);
+  max-width: 22ch;
+  line-height: 1.35;
+}
+
+.section-h{
+  font-family: var(--ff-mono);
+  font-size: 9pt;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--noir);
+  margin: 8mm 0 3mm;
+}
+.section-h::before{
+  content: "§ "; color: var(--or); margin-right: 4px;
+}
+
+.two-col{
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10mm;
+}
+.three-col{
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 8mm;
+}
+
+.pillar{
+  border-left: 2px solid var(--or);
+  padding: 0 0 0 4mm;
+}
+.pillar .h{
+  font-family: var(--ff-display);
+  font-size: 12pt;
+  font-weight: 500;
+  margin-bottom: 3px;
+}
+.pillar .s{
+  font-size: 9pt;
+  color: var(--gris-3);
+  line-height: 1.4;
+}
+
+.method-grid{
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--gris-line);
+}
+.method{
+  padding: 3.5mm 4mm 3.5mm 0;
+  border-right: 1px solid var(--gris-line);
+  border-bottom: 1px solid var(--gris-line);
+}
+.method:nth-child(2n){ border-right: 0; padding-right: 0; padding-left: 4mm; }
+.method .tag{
+  display: inline-block;
+  font-family: var(--ff-mono); font-size: 7.5pt;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.method .h{
+  font-family: var(--ff-display); font-size: 12pt; font-weight: 500;
+  margin-bottom: 3px;
+}
+.method .s{ font-size: 9pt; color: var(--gris-3); line-height: 1.4; }
+
+/* ─────────────────────────────────────────────────────────────────
+   SOMMAIRE
+   ───────────────────────────────────────────────────────────────── */
+.toc{
+  margin-top: 6mm;
+}
+.toc-day{
+  margin-bottom: 5mm;
+}
+.toc-day .label{
+  display:flex; align-items: center; gap: 12px;
+  font-family: var(--ff-mono); font-size: 9pt;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 3mm;
+}
+.toc-day .label::before{
+  content:""; width: 8px; height: 8px; border-radius: 50%;
+  background: var(--accent);
+}
+.toc-row{
+  display: grid; grid-template-columns: 16mm 1fr 28mm 22mm;
+  gap: 8mm;
+  align-items: baseline;
+  padding: 2.4mm 0;
+  border-top: 1px solid var(--gris-line);
+}
+.toc-row:last-child{ border-bottom: 1px solid var(--gris-line); }
+.toc-row .n{
+  font-family: var(--ff-mono); font-size: 9pt;
+  color: var(--gris-3); letter-spacing: 0.1em;
+}
+.toc-row .t{
+  font-family: var(--ff-display); font-size: 12pt; font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.005em;
+}
+.toc-row .d{
+  font-family: var(--ff-mono); font-size: 9pt;
+  color: var(--gris-3); letter-spacing: 0.08em; text-transform: uppercase;
+}
+.toc-row .p{
+  font-family: var(--ff-mono); font-size: 9pt;
+  color: var(--gris-3); letter-spacing: 0.08em; text-align: right;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   MODULE PAGE
+   ───────────────────────────────────────────────────────────────── */
+.module-head{
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 12mm;
+  align-items: end;
+  padding-bottom: 5mm;
+  border-bottom: 1px solid var(--gris-line);
+}
+.module-head .mnum{
+  font-family: var(--ff-display);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--or);
+  font-size: 72pt;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+}
+.module-head .mtitle{
+  font-family: var(--ff-display);
+  font-weight: 500;
+  font-size: 22pt;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+.module-head .mtitle em{ color: var(--or); font-style: italic; }
+.module-head .mtitle .kicker{
+  display: block;
+  font-family: var(--ff-mono); font-size: 9pt;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4mm;
+}
+.module-head .mdur{
+  text-align: right;
+  font-family: var(--ff-mono);
+  font-size: 9pt;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gris-3);
+}
+.module-head .mdur b{
+  display: block;
+  font-family: var(--ff-display);
+  font-style: italic; font-size: 20pt;
+  font-weight: 500;
+  color: var(--noir);
+  letter-spacing: 0;
+}
+
+.module-body{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10mm;
+  margin-top: 6mm;
+}
+
+.block-h{
+  font-family: var(--ff-mono);
+  font-size: 8.5pt;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--noir);
+  margin: 0 0 3mm;
+  padding-bottom: 2mm;
+  border-bottom: 1px solid var(--gris-line);
+}
+.block-h .count{ color: var(--or-deep); margin-left: 6px; }
+
+ul.points{
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 2mm;
+}
+ul.points li{
+  position: relative;
+  padding-left: 6mm;
+  font-size: 10pt; line-height: 1.5;
+}
+ul.points li::before{
+  content: ""; position: absolute;
+  left: 0; top: 8px;
+  width: 4px; height: 4px;
+  background: var(--or); border-radius: 50%;
+}
+ul.points li em{ color: var(--accent); font-style: italic; font-weight: 500; }
+ul.points.tight li{ font-size: 9.5pt; line-height: 1.45; padding-left: 5mm; }
+ul.points.tight li::before{ top: 7px; }
+
+ul.checks{
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 2mm;
+}
+ul.checks li{
+  position: relative;
+  padding-left: 6mm;
+  font-size: 10pt; line-height: 1.45;
+}
+ul.checks li::before{
+  content: "✓"; position: absolute;
+  left: 0; top: 0;
+  color: var(--or-deep);
+  font-weight: 700; font-size: 10pt;
+}
+
+/* Enriched block */
+.enriched{
+  background:
+    repeating-linear-gradient(135deg, rgba(201,168,76,.045) 0 1px, transparent 1px 9px),
+    linear-gradient(180deg, rgba(201,168,76,.06), rgba(201,168,76,0.01));
+  border-left: 2px solid var(--or);
+  padding: 4mm 4mm 4mm 5mm;
+  margin-top: 0;
+  border-radius: 0 2px 2px 0;
+}
+.enriched .pill{
+  display: inline-flex; align-items:center; gap: 6px;
+  font-family: var(--ff-mono); font-size: 7.5pt;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--noir);
+  background: var(--or);
+  padding: 3px 8px 3px 6px;
+  border-radius: 999px;
+  margin-bottom: 2.5mm;
+}
+.enriched .pill::before{
+  content: "★"; font-size: 8pt; color: var(--noir);
+}
+.enriched .src{
+  font-family: var(--ff-mono); font-size: 7.5pt;
+  letter-spacing: 0.1em; color: var(--or-deep);
+  text-transform: uppercase;
+  margin-left: 6px;
+}
+
+.row-split{
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8mm;
+}
+
+.deliverables{
+  margin-top: auto;
+  padding-top: 4mm;
+  border-top: 1px dashed var(--gris-line);
+  display: grid; grid-template-columns: 16mm 1fr;
+  gap: 4mm;
+}
+.deliverables .lbl{
+  font-family: var(--ff-mono); font-size: 8pt;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--accent);
+  padding-top: 2px;
+}
+.deliverables .list{
+  display: flex; flex-wrap: wrap; gap: 3px 6px;
+}
+.deliverables .pill-d{
+  display: inline-flex; align-items:center;
+  font-family: var(--ff-mono); font-size: 7.5pt;
+  letter-spacing: 0.04em;
+  color: var(--noir);
+  background: var(--blanc-pure);
+  border: 1px solid var(--gris-line);
+  padding: 2.5px 7px;
+  border-radius: 999px;
+}
+.deliverables .pill-d.new{ border-color: var(--or); color: var(--or-deep); }
+.deliverables .pill-d.new::before{ content: "★ "; margin-right: 2px; }
+
+/* ─────────────────────────────────────────────────────────────────
+   PAGE FINALE — Livrables / Charte / Annexes
+   ───────────────────────────────────────────────────────────────── */
+.deliv-grid{
+  display: grid; grid-template-columns: 1fr 1fr; gap: 6mm;
+  margin-top: 5mm;
+}
+.deliv-card{
+  border: 1px solid var(--gris-line);
+  padding: 4mm 5mm;
+  border-radius: 2px;
+}
+.deliv-card h4{
+  font-family: var(--ff-display); font-weight: 500;
+  font-size: 12pt;
+  margin: 0 0 2mm;
+}
+.deliv-card .src-tag{
+  font-family: var(--ff-mono); font-size: 7.5pt;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 3mm;
+}
+.deliv-card ul.checks li{ font-size: 9pt; line-height: 1.35; }
+
+.charter{
+  border: 1px solid rgba(201,168,76,.4);
+  background: linear-gradient(180deg, rgba(201,168,76,.05), transparent);
+  padding: 4mm 5mm;
+  border-radius: 2px;
+}
+.charter h4{
+  font-family: var(--ff-display); font-weight: 500;
+  font-size: 12pt;
+  margin: 0 0 3mm;
+}
+.charter ol{ margin: 0; padding-left: 16px; font-size: 9pt; line-height: 1.4; }
+.charter ol li{ margin-bottom: 1.5mm; }
+
+.kpi-table{
+  width: 100%; border-collapse: collapse;
+  font-size: 9pt;
+}
+.kpi-table th, .kpi-table td{
+  text-align: left;
+  padding: 2mm 2mm;
+  border-bottom: 1px solid var(--gris-line);
+}
+.kpi-table th{
+  font-family: var(--ff-mono); font-size: 8pt;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 500;
+}
+.kpi-table td.num{ text-align: right; color: var(--or-deep); }
+
+.colophon{
+  margin-top: auto;
+  padding-top: 8mm;
+  border-top: 1px solid rgba(201,168,76,.25);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10mm;
+}
+.colophon .lbl{ font-family: var(--ff-mono); font-size: 8pt; letter-spacing: 0.16em; text-transform: uppercase; color: var(--or-soft); }
+.colophon .v{ font-size: 10pt; margin-top: 4px; color: rgba(248,246,241,.85); }
+
+.print-cta{
+  position: fixed; right: 24px; bottom: 24px;
+  z-index: 100;
+  background: var(--or); color: var(--noir);
+  font-family: var(--ff-text); font-weight: 500; font-size: 14px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  box-shadow: 0 8px 28px rgba(0,0,0,.3);
+  display: inline-flex; align-items: center; gap: 10px;
+  cursor: pointer;
+}
+.print-cta:hover{ background: var(--or-soft); }
+.print-cta svg{ width: 16px; height: 16px; }
+
+/* ─────────────────────────────────────────────────────────────────
+   PRINT
+   ───────────────────────────────────────────────────────────────── */
+@page{ size: A4 portrait; margin: 0; }
+@media print{
+  html, body{ background: #fff; }
+  .page{
+    margin: 0;
+    box-shadow: none;
+    width: 210mm; height: 297mm;
+    page-break-after: always; break-after: page;
+  }
+  .page:last-child{ page-break-after: auto; break-after: auto; }
+  .print-cta{ display: none !important; }
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   MOBILE / TABLETTE — lecture web fluide
+   Sur petit écran, on libère la page de la contrainte A4 et on
+   reflowe en une colonne lisible. L'impression reste A4 intacte.
+   ───────────────────────────────────────────────────────────────── */
+@media screen and (max-width: 860px){
+  body{ font-size: 15px; line-height: 1.55; background: var(--blanc); }
+
+  .page{
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    margin: 0;
+    padding: 80px 22px 64px;
+    box-shadow: none;
+    overflow: visible;
+    border-bottom: 1px solid var(--gris-line);
+  }
+  .page.dark{ border-bottom-color: rgba(201,168,76,.2); }
+  .page + .page{ border-top: none; }
+
+  /* Page rail / foot — re-flow into place rather than absolute */
+  .page-rail{
+    position: static;
+    left: auto; right: auto; top: auto;
+    padding-bottom: 14px; margin-bottom: 20px;
+    font-size: 10px; letter-spacing: 0.14em;
+  }
+  .page-rail .lg{ font-size: 15px; }
+  .page-foot{
+    position: static;
+    left: auto; right: auto; bottom: auto;
+    padding-top: 18px; margin-top: 32px;
+    font-size: 10px; letter-spacing: 0.12em;
+  }
+  .page-foot .num b{ font-size: 14px; }
+
+  .page-body{
+    padding-top: 0;
+    flex: 0 0 auto;
+  }
+
+  /* Typography reflow */
+  h1.title{ font-size: 32px; }
+  h2.title{ font-size: 26px; }
+  h3.title{ font-size: 19px; }
+  .lede{ font-size: 16px; max-width: none; }
+  .eyebrow{ font-size: 11px; letter-spacing: 0.16em; }
+
+  /* Cover */
+  .cover-grid{
+    padding-top: 12px;
+    gap: 36px;
+  }
+  .cover h1{ font-size: 38px; line-height: 1.05; }
+  .cover .deck{ font-size: 17px; margin-top: 18px; max-width: none; }
+  .cover-tag{
+    position: static;
+    display: inline-block;
+    margin: 0 0 6px;
+    font-size: 10px;
+  }
+  .cover-meta{
+    grid-template-columns: repeat(2, 1fr);
+    padding: 16px 0;
+  }
+  .cover-meta .m{ padding: 10px 12px; border-right: 1px solid rgba(201,168,76,.15); }
+  .cover-meta .m:nth-child(2n){ border-right: 0; }
+  .cover-meta .m:nth-child(-n+2){ border-bottom: 1px solid rgba(201,168,76,.12); }
+  .cover-meta .v{ font-size: 22px; }
+  .cover-edition{
+    position: static;
+    margin-top: 28px;
+    font-size: 10px;
+  }
+
+  /* Stats / grids → 1 column */
+  .stats-row{
+    grid-template-columns: repeat(2, 1fr);
+    margin: 22px 0 0;
+  }
+  .stat{
+    padding: 16px 12px 16px 0;
+    border-right: 1px solid var(--gris-line);
+    border-bottom: 1px solid var(--gris-line);
+  }
+  .stats-row .stat:nth-child(2n){ border-right: 0; padding-right: 0; }
+  .stats-row .stat:nth-last-child(-n+2){ border-bottom: 0; }
+  .stat .v{ font-size: 32px; }
+  .stat .v .u{ font-size: 13px; }
+  .stat .k{ font-size: 13px; max-width: none; }
+
+  .two-col,
+  .three-col,
+  .row-split,
+  .deliv-grid{
+    grid-template-columns: 1fr !important;
+    gap: 22px;
+  }
+  .method-grid{ grid-template-columns: 1fr; }
+  .method{
+    padding: 16px 0 !important;
+    border-right: 0 !important;
+    border-bottom: 1px solid var(--gris-line);
+  }
+  .method:last-child{ border-bottom: 0; }
+  .method .h{ font-size: 17px; margin-bottom: 4px; }
+  .method .s{ font-size: 14px; line-height: 1.5; }
+  .pillar .h{ font-size: 17px; }
+  .pillar .s{ font-size: 14px; line-height: 1.5; }
+
+  .section-h{ font-size: 11px; margin: 28px 0 12px; }
+
+  /* TOC */
+  .toc{ margin-top: 18px; }
+  .toc-day{ margin-bottom: 22px; }
+  .toc-day .label{ font-size: 11px; }
+  .toc-row{
+    grid-template-columns: 36px 1fr;
+    grid-template-areas:
+      "n t"
+      ". meta";
+    gap: 4px 12px;
+    padding: 12px 0;
+  }
+  .toc-row .n{ grid-area: n; font-size: 10px; }
+  .toc-row .t{ grid-area: t; font-size: 16px; line-height: 1.25; }
+  .toc-row .d,
+  .toc-row .p{
+    grid-area: meta;
+    display: inline;
+    font-size: 10px;
+    text-align: left;
+  }
+  .toc-row .d::after{ content: " · "; color: var(--gris-3); margin: 0 4px; }
+
+  /* Module pages */
+  .module-head{
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "n title"
+      ". dur";
+    gap: 8px 18px;
+    padding-bottom: 16px;
+  }
+  .module-head .mnum{ grid-area: n; font-size: 56px; }
+  .module-head .mtitle{ grid-area: title; font-size: 22px; }
+  .module-head .mtitle .kicker{ font-size: 11px; margin-bottom: 8px; }
+  .module-head .mdur{
+    grid-area: dur;
+    text-align: left;
+    margin-top: 4px;
+    display: flex; align-items: baseline; gap: 12px;
+    font-size: 11px;
+  }
+  .module-head .mdur b{ font-size: 22px; display: inline-block; }
+
+  .module-body{
+    grid-template-columns: 1fr;
+    gap: 22px;
+    margin-top: 22px;
+  }
+
+  .block-h{ font-size: 11px; margin: 0 0 10px; padding-bottom: 8px; }
+  ul.points li,
+  ul.checks li{ font-size: 14.5px; line-height: 1.5; padding-left: 22px; }
+  ul.points.tight li{ font-size: 13.5px; line-height: 1.45; padding-left: 20px; }
+  ul.points li::before{ top: 9px; width: 5px; height: 5px; }
+  ul.checks li::before{ top: 0; font-size: 13px; }
+
+  .enriched{ padding: 16px 16px 16px 18px; border-left-width: 3px; }
+  .enriched .pill{ font-size: 9.5px; padding: 4px 10px 4px 8px; }
+  .enriched .src{ font-size: 9.5px; }
+
+  .deliverables{
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 28px;
+    padding-top: 16px;
+  }
+  .deliverables .lbl{ font-size: 10px; }
+  .deliverables .pill-d{ font-size: 10px; padding: 4px 10px; }
+  .deliverables .list{ gap: 6px; }
+
+  /* Annexes */
+  .deliv-card{ padding: 18px 18px; }
+  .deliv-card h4{ font-size: 17px; margin-bottom: 8px; }
+  .charter{ padding: 18px 20px; }
+  .charter h4{ font-size: 16px; }
+  .charter ol{ font-size: 13.5px; line-height: 1.5; }
+  .charter ol li{ margin-bottom: 6px; }
+  .kpi-table{ font-size: 13px; }
+  .kpi-table th, .kpi-table td{ padding: 10px 6px; }
+  .kpi-table th{ font-size: 10px; }
+
+  .colophon{
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding-top: 22px;
+  }
+
+  /* Print CTA — keep visible and tappable on mobile */
+  .print-cta{
+    right: 16px; bottom: 16px;
+    padding: 14px 20px;
+    font-size: 14px;
+  }
+}
+
+/* Encore plus serré sur très petit écran */
+@media screen and (max-width: 420px){
+  .cover-meta{ grid-template-columns: 1fr 1fr; }
+  .cover h1{ font-size: 32px; }
+  .page{ padding: 64px 18px 56px; }
+  .module-head .mnum{ font-size: 48px; }
+  .module-head .mtitle{ font-size: 19px; }
+  .stat .v{ font-size: 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════
+     PAGE 1 — COVER
+     ════════════════════════════════════════════════════════════ -->
+<section class="page cover" data-screen-label="01 · Cover">
+  <div class="page-rail">
+    <span class="lg"><span class="mark"></span>Formaxia</span>
+    <span>Programme officiel · Édition 2026</span>
+  </div>
+  <div class="cover-tag">RS6776 · Officielle</div>
+
+  <div class="cover-grid">
+    <div>
+      <span class="eyebrow" style="color: var(--or-soft);">Formation BTP · 2 jours · 14 heures</span>
+      <h1>
+        L'Intelligence Artificielle <em>appliquée</em> au Bâtiment<br />et à la Gestion de Chantier.
+      </h1>
+      <p class="deck">
+        Le programme officiel Formaxia — édition enrichie 2026, intégrant la méthode RTC,
+        la conformité RGPD chantier, et la maîtrise complète du DCE & Mémoire Technique.
+      </p>
+    </div>
+
+    <div class="cover-meta">
+      <div class="m"><div class="k">Durée</div><div class="v">14 <span class="u">heures</span></div></div>
+      <div class="m"><div class="k">Modules</div><div class="v">10 <span class="u">pratiques</span></div></div>
+      <div class="m"><div class="k">Tarif</div><div class="v">546 <span class="u">€ HT</span></div></div>
+      <div class="m"><div class="k">Reste à charge</div><div class="v">0 <span class="u">€</span></div></div>
+    </div>
+  </div>
+
+  <div class="cover-edition">
+    Édition <b>2.0 · Mai 2026</b> · Programme enrichi · Document interne Formaxia
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     PAGE 2 — VUE D'ENSEMBLE
+     ════════════════════════════════════════════════════════════ -->
+<section class="page" data-screen-label="02 · Vue d'ensemble">
+  <div class="page-rail">
+    <span class="lg"><span class="mark"></span>Formaxia</span>
+    <span>Vue d'ensemble du programme</span>
+  </div>
+  <div class="page-body">
+    <span class="eyebrow">Section 01 · Vue d'ensemble</span>
+    <h1 class="title">14 heures pour transformer votre <em>façon de travailler</em>.</h1>
+    <p class="lede">
+      Un programme conçu pour les pros du terrain — zéro théorie inutile, 100% travaillé sur vos propres
+      cas concrets : vos devis, vos chantiers, vos appels d'offres, votre entreprise.
+    </p>
+
+    <div class="stats-row">
+      <div class="stat"><div class="v">14<span class="u">h</span></div><div class="k">de formation pratique sur deux jours consécutifs ou espacés</div></div>
+      <div class="stat"><div class="v">10</div><div class="k">modules opérationnels, validés par retours terrain</div></div>
+      <div class="stat"><div class="v">30+</div><div class="k">prompts spécialisés DCE, MT, devis, chantier</div></div>
+      <div class="stat"><div class="v">100<span class="u">%</span></div><div class="k">financé par OPCO Constructys — 0€ de reste à charge</div></div>
+    </div>
+
+    <h3 class="section-h">Les 4 piliers pédagogiques</h3>
+    <div class="three-col">
+      <div class="pillar">
+        <div class="h">Praticité</div>
+        <div class="s">Aucune diapositive théorique. Chaque module se conclut par un livrable que vous emportez et réutilisez dès la semaine suivante.</div>
+      </div>
+      <div class="pillar">
+        <div class="h">Vos vrais cas</div>
+        <div class="s">Devis en cours, DCE reçus, chantiers actuels. La formation se règle sur vos dossiers — pas l'inverse.</div>
+      </div>
+      <div class="pillar">
+        <div class="h">Sécurité &amp; RGPD</div>
+        <div class="s">Méthode d'anonymisation avant tout prompt sensible, charte d'usage IA pour votre entreprise, et liste rouge des données interdites.</div>
+      </div>
+    </div>
+
+    <h3 class="section-h">Méthodes pédagogiques mobilisées</h3>
+    <div class="method-grid">
+      <div class="method">
+        <span class="tag">Méthode 01</span>
+        <div class="h">RTC — Rôle · Tâche · Contexte</div>
+        <div class="s">Cadre de prompt structuré, testé sur les contextes BTP. Permet d'obtenir d'un même outil des résultats 3 à 5× plus précis.</div>
+      </div>
+      <div class="method">
+        <span class="tag">Méthode 02</span>
+        <div class="h">Anti-hallucination</div>
+        <div class="s">Protocole de contrôle et d'humanisation des sorties IA — vérification croisée, relecture experte, traçabilité des sources.</div>
+      </div>
+      <div class="method">
+        <span class="tag">Méthode 03</span>
+        <div class="h">Anonymisation pré-prompt</div>
+        <div class="s">Substitution systématique des noms clients, prix, adresses chantier, données salariés avant tout collage dans une IA gratuite.</div>
+      </div>
+      <div class="method">
+        <span class="tag">Méthode 04</span>
+        <div class="h">Workflow Claude Pro · Projects</div>
+        <div class="s">Paramétrage complet de Claude AI Pro avec base documentaire entreprise — MT types, références, procédures QSE.</div>
+      </div>
+    </div>
+  </div>
+  <div class="page-foot">
+    <span>Formaxia · Programme officiel · RS6776</span>
+    <span class="num"><b>02</b> / 16</span>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     PAGE 3 — SOMMAIRE
+     ════════════════════════════════════════════════════════════ -->
+<section class="page" data-screen-label="03 · Sommaire">
+  <div class="page-rail">
+    <span class="lg"><span class="mark"></span>Formaxia</span>
+    <span>Sommaire des 10 modules</span>
+  </div>
+  <div class="page-body">
+    <span class="eyebrow">Section 02 · Sommaire</span>
+    <h1 class="title">Deux jours, dix modules, <em>un workflow opérationnel</em>.</h1>
+
+    <div class="toc">
+      <div class="toc-day">
+        <div class="label">Jour 01 · 7 heures · Maîtriser les outils &amp; sécuriser l'usage</div>
+        <div class="toc-row"><span class="n">M.01</span><span class="t">Comprendre l'IA sans se perdre</span><span class="d">45 min</span><span class="p">p. 04</span></div>
+        <div class="toc-row"><span class="n">M.02</span><span class="t">Les outils qui changent tout — Claude Pro inclus</span><span class="d">1 h</span><span class="p">p. 05</span></div>
+        <div class="toc-row"><span class="n">M.03</span><span class="t">Vos devis en 5 minutes chrono</span><span class="d">1 h 30</span><span class="p">p. 06</span></div>
+        <div class="toc-row"><span class="n">M.04</span><span class="t">Fini la paperasse administrative — RGPD inclus</span><span class="d">1 h 30</span><span class="p">p. 07</span></div>
+        <div class="toc-row"><span class="n">M.05</span><span class="t">Gérez votre chantier comme un pro — DOE inclus</span><span class="d">1 h 15</span><span class="p">p. 08</span></div>
+      </div>
+
+      <div class="toc-day">
+        <div class="label">Jour 02 · 7 heures · Conquérir &amp; gagner des marchés</div>
+        <div class="toc-row"><span class="n">M.06</span><span class="t">Trouvez plus de clients avec l'IA</span><span class="d">1 h 30</span><span class="p">p. 09</span></div>
+        <div class="toc-row"><span class="n">M.07</span><span class="t">Analyser un DCE en 3 niveaux de lecture</span><span class="d">1 h</span><span class="p">p. 10</span></div>
+        <div class="toc-row"><span class="n">M.08</span><span class="t">Rapports de chantier &amp; plans de MT</span><span class="d">1 h</span><span class="p">p. 11</span></div>
+        <div class="toc-row"><span class="n">M.09</span><span class="t">Rédiger un Mémoire Technique complet</span><span class="d">1 h 30</span><span class="p">p. 12</span></div>
+        <div class="toc-row"><span class="n">M.10</span><span class="t">Votre workflow IA personnalisé &amp; certification</span><span class="d">1 h</span><span class="p">p. 13</span></div>
+      </div>
+    </div>
+
+    <h3 class="section-h" style="margin-top: 5mm;">Pages annexes</h3>
+    <div class="toc-row"><span class="n">A.01</span><span class="t">Livrables consolidés — guide, templates, prompts</span><span class="d">—</span><span class="p">p. 14</span></div>
+    <div class="toc-row"><span class="n">A.02</span><span class="t">Charte d'usage IA en entreprise BTP &amp; RGPD</span><span class="d">—</span><span class="p">p. 15</span></div>
+    <div class="toc-row"><span class="n">A.03</span><span class="t">Éligibilité, financement, certification RS6776</span><span class="d">—</span><span class="p">p. 16</span></div>
+  </div>
+  <div class="page-foot">
+    <span>Formaxia · Programme officiel · RS6776</span>
+    <span class="num"><b>03</b> / 16</span>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     MODULE 01
+     ════════════════════════════════════════════════════════════ -->
+<section class="page" data-screen-label="04 · Module 01">
+  <div class="page-rail">
+    <span class="lg"><span class="mark"></span>Formaxia</span>
+    <span>Jour 01 · Module 01 / 10</span>
+  </div>
+  <div class="page-body">
+    <div class="module-head">
+      <div class="mnum">01</div>
+      <div>
+        <span class="kicker">Jour 01 · Fondations</span>
+        <h2 class="mtitle">Comprendre l'IA sans se <em>perdre</em>.</h2>
+      </div>
+      <div class="mdur">Durée<b>45 min</b></div>
+    </div>
+
+    <div class="module-body">
+      <div>
+        <h4 class="block-h">Objectifs <span class="count">04</span></h4>
+        <ul class="points">
+          <li>Distinguer ce que l'IA fait <em>vraiment</em> bien — et ce qu'elle ne fait pas.</li>
+          <li>Identifier les bons réflexes face à un outil génératif.</li>
+          <li>Choisir le bon modèle pour le bon usage chantier.</li>
+          <li>Repérer les 5 erreurs de prompt qui plombent les résultats BTP.</li>
+        </ul>
+
+        <h4 class="block-h" style="margin-top:6mm">Contenu détaillé</h4>
+        <ul class="points tight">
+          <li>Tour d'horizon non-technique : IA générative, modèles, contexte, hallucinations.</li>
+          <li>Les 4 grandes familles d'usage — rédaction, analyse, structuration, vision.</li>
+          <li>Cadre éthique &amp; limites — décision finale toujours humaine.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="block-h">★ Enrichissements 2026</h4>
+        <div class="enriched">
+          <span class="pill">Nouveau<span class="src">Réf. 01</span></span>
+          <ul class="points tight" style="margin-bottom:3mm">
+            <li>Introduction au <em>comparatif</em> ChatGPT vs Claude vs Gemini vs Perplexity, vu côté BTP.</li>
+            <li>Les <em>5 erreurs de prompt</em> spécifiques chantier — prompts trop courts, contexte manquant, vocabulaire flou, confusion DTU/normes, manque de format de sortie.</li>
+          </ul>
+          <span class="pill">Nouveau<span class="src">Réf. 02</span></span>
+          <ul class="points tight">
+            <li>Premier aperçu du <em>workflow Claude Pro Projects</em> — la base documentaire entreprise comme accélérateur.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="deliverables">
+      <div class="lbl">Livrables<br />du module</div>
+      <div class="list">
+        <span class="pill-d">Mémo "IA : ce qu'elle fait / ne fait pas"</span>
+        <span class="pill-d new">Fiche · 5 erreurs de prompt BTP</span>
+        <span class="pill-d new">Comparateur outils — version courte</span>
+      </div>
+    </div>
+  </div>
+  <div class="page-foot">
+    <span>Module 01 · Comprendre l'IA</span>
+    <span class="num"><b>04</b> / 16</span>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     MODULE 02
+     ════════════════════════════════════════════════════════════ -->
+<section class="page" data-screen-label="05 · Module 02">
+  <div class="page-rail">
+    <span class="lg"><span class="mark"></span>Formaxia</span>
+    <span>Jour 01 · Module 02 / 10</span>
+  </div>
+  <div class="page-body">
+    <div class="module-head">
+      <div class="mnum">02</div>
+      <div>
+        <span class="kicker">Jour 01 · Outillage</span>
+        <h2 class="mtitle">Les outils qui <em>changent tout</em>.</h2>
+      </div>
+      <div class="mdur">Durée<b>1 h</b></div>
+    </div>
+
+    <div class="module-body">
+      <div>
+        <h4 class="block-h">Objectifs <span class="count">04</span></h4>
+        <ul class="points">
+          <li>Configurer ChatGPT, Claude, Copilot &amp; Perplexity en 10 minutes.</li>
+          <li>Choisir l'outil adapté à chaque tâche BTP.</li>
+          <li>Mettre en place un environnement de travail sécurisé.</li>
+          <li>Démarrer Claude Pro Projects avec sa base documentaire entreprise.</li>
+        </ul>
+
+        <h4 class="block-h" style="margin-top:6mm">Contenu détaillé</h4>
+        <ul class="points tight">
+          <li>Installation et premiers prompts sur les 4 outils, en parallèle.</li>
+          <li>Quelle version gratuite peut être utilisée dès demain, et pour quoi.</li>
+          <li>Quand passer payant — le seuil de bascule pour une PME BTP.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="block-h">★ Enrichissements 2026</h4>
+        <div class="enriched">
+          <span class="pill">Nouveau<span class="src">Réf. 01</span></span>
+          <ul class="points tight" style="margin-bottom:3mm">
+            <li><em>Comparatif détaillé</em> par métier BTP — gros œuvre, second œuvre, électricité, plomberie, TP, négoce.</li>
+            <li>Forces &amp; faiblesses outil par outil — précision technique, gestion fichiers, web search, vision.</li>
+          </ul>
+          <span class="pill">Nouveau<span class="src">Réf. 02</span></span>
+          <ul class="points tight">
+            <li><em>Paramétrage complet Claude AI Pro</em> — création de Projects, instructions personnalisées, System Prompt entreprise.</li>
+            <li><em>Upload de la base documentaire</em> — Mémoires Techniques types, références chantier, procédures QSE, fiches métier.</li>
+            <li>Bonnes pratiques de versioning : un Project par phase commerciale, un par chantier en cours.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="deliverables">
+      <div class="lbl">Livrables<br />du module</div>
+      <div class="list">
+        <span class="pill-d">Comptes IA configurés (4 outils)</span>
+        <span class="pill-d new">Matrice comparative outils × métiers BTP</span>
+        <span class="pill-d new">Project Claude Pro paramétré</span>
+        <span class="pill-d new">System Prompt entreprise</span>
+      </div>
+    </div>
+  </div>
+  <div class="page-foot">
+    <span>Module 02 · Les outils qui changent tout</span>
+    <span class="num"><b>05</b> / 16</span>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     MODULE 03
+     ════════════════════════════════════════════════════════════ -->
+<section class="page" data-screen-label="06 · Module 03">
+  <div class="page-rail">
+    <span class="lg"><span class="mark"></span>Formaxia</span>
+    <span>Jour 01 · Module 03 / 10</span>
+  </div>
+  <div class="page-body">
+    <div class="module-head">
+      <div class="mnum">03</div>
+      <div>
+        <span class="kicker">Jour 01 · Production</span>
+        <h2 class="mtitle">Vos devis en <em>5 minutes</em> chrono.</h2>
+      </div>
+      <div class="mdur">Durée<b>1 h 30</b></div>
+    </div>
+
+    <div class="module-body">
+      <div>
+        <h4 class="block-h">Objectifs <span class="count">05</span></h4>
+        <ul class="points">
+          <li>Générer un devis complet, calibré, professionnel en 5 à 10 min.</li>
+          <li>Maîtriser la méthode RTC (Rôle · Tâche · Contexte).</li>
+          <li>Vérifier qu'aucun poste n'est oublié grâce à la checklist IA.</li>
+          <li>Mettre à jour les prix matières automatiquement.</li>
+          <li>Calculer marge brute &amp; nette, tester 3 scénarios de prix.</li>
+        </ul>
+
+        <h4 class="block-h" style="margin-top:6mm">Contenu détaillé</h4>
+        <ul class="points tight">
+          <li>Templates de devis prêts à l'emploi — gros œuvre, second œuvre, TP.</li>
+          <li>Reformulation devis client — du jargon technique à la langue claire.</li>
+          <li>Atelier : vous arrivez avec 1 devis à faire, vous repartez avec 3 devis envoyés.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="block-h">★ Enrichissements 2026</h4>
+        <div class="enriched">
+          <span class="pill">Nouveau<span class="src">Réf. 01</span></span>
+          <ul class="points tight">
+            <li><em>Méthode RTC</em> appliquée au BTP — gabarit-cadre pour rédiger n'importe quel prompt devis.</li>
+            <li><em>Checklist IA</em> "aucun poste oublié" — 22 points de contrôle par typologie de devis.</li>
+            <li><em>Mise à jour des prix matières</em> assistée IA — acier, isolants, bitume, cuivre.</li>
+            <li><em>Calcul marge brute &amp; nette</em> automatisé — feuille de calcul fournie.</li>
+            <li><em>Test 3 scénarios</em> — prix basse / médiane / haute, en 1 prompt.</li>
+            <li>Les <em>5 erreurs de prompt</em> spécifiques au devis BTP — application directe.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="deliverables">
+      <div class="lbl">Livrables<br />du module</div>
+      <div class="list">
+        <span class="pill-d">Pack de templates devis</span>
+        <span class="pill-d new">Gabarit RTC · spécial devis</span>
+        <span class="pill-d new">Checklist 22 points — aucun poste oublié</span>
+        <span class="pill-d new">Outil prix matières + marges</span>
+        <span class="pill-d new">3 prompts scénarios de prix</span>
+      </div>
+    </div>
+  </div>
+  <div class="page-foot">
+    <span>Module 03 · Vos devis en 5 minutes</span>
+    <span class="num"><b>06</b> / 16</span>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     MODULE 04
+     ════════════════════════════════════════════════════════════ -->
+<section class="page" data-screen-label="07 · Module 04">
+  <div class="page-rail">
+    <span class="lg"><span class="mark"></span>Formaxia</span>
+    <span>Jour 01 · Module 04 / 10</span>
+  </div>
+  <div class="page-body">
+    <div class="module-head">
+      <div class="mnum">04</div>
+      <div>
+        <span class="kicker">Jour 01 · Administratif &amp; RGPD</span>
+        <h2 class="mtitle">Fini la <em>paperasse</em> administrative.</h2>
+      </div>
+      <div class="mdur">Durée<b>1 h 30</b></div>
+    </div>
+
+    <div class="module-body">
+      <div>
+        <h4 class="block-h">Objectifs <span class="count">05</span></h4>
+        <ul class="points">
+          <li>Rédiger emails, comptes-rendus, factures en quelques secondes.</li>
+          <li>Transformer un message vocal en compte rendu structuré.</li>
+          <li>Produire une lettre de levée de réserves prête à signer.</li>
+          <li>Sécuriser l'usage IA — savoir ce qu'on ne colle <em>jamais</em>.</li>
+          <li>Déployer une charte d'usage IA simple dans son entreprise.</li>
+        </ul>
+
+        <h4 class="block-h" style="margin-top:6mm">Contenu détaillé</h4>
+        <ul class="points tight">
+          <li>Modèles d'email : relance impayés, prise de RDV, réponse réclamation.</li>
+          <li>Compte-rendu réunion chantier — du vocal au document signable.</li>
+          <li>Factures : reformulation des prestations, mentions légales auto.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="block-h">★ Enrichissements 2026</h4>
+        <div class="enriched">
+          <span class="pill">Nouveau<span class="src">Réf. 01</span></span>
+          <ul class="points tight" style="margin-bottom:3mm">
+            <li><em>Vocal → Compte rendu structuré</em> — du WhatsApp audio au CR formaté en 90s.</li>
+            <li><em>Courrier levée de réserves automatique</em> — template + variables.</li>
+            <li><em>RGPD chantier — liste rouge</em> : ce qu'il ne faut <em>jamais</em> coller dans une IA gratuite — noms clients, prix, adresses chantier, données salariés, SIRET, IBAN.</li>
+            <li><em>Technique d'anonymisation</em> en 3 étapes avant tout prompt sensible.</li>
+            <li><em>Charte d'usage IA</em> en 1 page à diffuser dans l'entreprise.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="deliverables">
+      <div class="lbl">Livrables<br />du module</div>
+      <div class="list">
+        <span class="pill-d">15 modèles d'emails BTP</span>
+        <span class="pill-d new">Convertisseur vocal → CR</span>
+        <span class="pill-d new">Lettre levée de réserves type</span>
+        <span class="pill-d new">Liste rouge RGPD chantier</span>
+        <span class="pill-d new">Protocole anonymisation</span>
+        <span class="pill-d new">Charte d'usage IA · 1 page</span>
+      </div>
+    </div>
+  </div>
+  <div class="page-foot">
+    <span>Module 04 · Fini la paperasse</span>
+    <span class="num"><b>07</b> / 16</span>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     MODULE 05
+     ════════════════════════════════════════════════════════════ -->
+<section class="page" data-screen-label="08 · Module 05">
+  <div class="page-rail">
+    <span class="lg"><span class="mark"></span>Formaxia</span>
+    <span>Jour 01 · Module 05 / 10</span>
+  </div>
+  <div class="page-body">
+    <div class="module-head">
+      <div class="mnum">05</div>
+      <div>
+        <span class="kicker">Jour 01 · Gestion de chantier</span>
+        <h2 class="mtitle">Gérez votre chantier <em>comme un pro</em>.</h2>
+      </div>
+      <div class="mdur">Durée<b>1 h 15</b></div>
+    </div>
+
+    <div class="module-body">
+      <div>
+        <h4 class="block-h">Objectifs <span class="count">04</span></h4>
+        <ul class="points">
+          <li>Planifier équipes et tâches sans tableur infernal.</li>
+          <li>Anticiper et absorber les imprévus chantier.</li>
+          <li>Structurer un DOE conforme aux exigences du marché.</li>
+          <li>Générer fiches techniques produits &amp; notices d'entretien.</li>
+        </ul>
+
+        <h4 class="block-h" style="margin-top:6mm">Contenu détaillé</h4>
+        <ul class="points tight">
+          <li>Planning chantier semaine par semaine — recalage automatique en cas d'aléa.</li>
+          <li>Coordination équipe : ordres de mission, briefings rapides, suivi tâches.</li>
+          <li>Suivi des sous-traitants et co-traitants — relances, pointages.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="block-h">★ Enrichissements 2026</h4>
+        <div class="enriched">
+          <span class="pill">Nouveau<span class="src">Réf. 01</span></span>
+          <ul class="points tight">
+            <li><em>Structurer un DOE complet</em> conforme aux exigences marché public &amp; privé.</li>
+            <li><em>Fiches techniques produits</em> générées automatiquement à partir des données fournisseurs.</li>
+            <li><em>Plans de récolement</em> — structuration et nommage normés.</li>
+            <li><em>Notices d'entretien</em> client final — vulgarisation à partir des fiches constructeur.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="deliverables">
+      <div class="lbl">Livrables<br />du module</div>
+      <div class="list">
+        <span class="pill-d">Modèle planning chantier IA</span>
+        <span class="pill-d">Pack ordres de mission &amp; briefings</span>
+        <span class="pill-d new">Squelette DOE conforme</span>
+        <span class="pill-d new">Générateur fiches techniques produits</span>
+        <span class="pill-d new">Template notices d'entretien client</span>
+      </div>
+    </div>
+  </div>
+  <div class="page-foot">
+    <span>Module 05 · Gestion de chantier</span>
+    <span class="num"><b>08</b> / 16</span>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     MODULE 06
+     ════════════════════════════════════════════════════════════ -->
+<section class="page" data-screen-label="09 · Module 06">
+  <div class="page-rail">
+    <span class="lg"><span class="mark"></span>Formaxia</span>
+    <span>Jour 02 · Module 06 / 10</span>
+  </div>
+  <div class="page-body">
+    <div class="module-head">
+      <div class="mnum">06</div>
+      <div>
+        <span class="kicker">Jour 02 · Acquisition clients</span>
+        <h2 class="mtitle">Trouvez plus de clients <em>avec l'IA</em>.</h2>
+      </div>
+      <div class="mdur">Durée<b>1 h 30</b></div>
+    </div>
+
+    <div class="module-body">
+      <div>
+        <h4 class="block-h">Objectifs <span class="count">05</span></h4>
+        <ul class="points">
+          <li>Rédiger des emails commerciaux qui obtiennent une réponse.</li>
+          <li>Répondre aux avis Google avec professionnalisme et constance.</li>
+          <li>Présenter ses services dans un langage qui parle au client final.</li>
+          <li>Construire un calendrier éditorial réseau social tenable.</li>
+          <li>Mesurer l'impact réel — vues, contacts, demandes de devis.</li>
+        </ul>
+
+        <h4 class="block-h" style="margin-top:6mm">Contenu détaillé</h4>
+        <ul class="points tight">
+          <li>Le tunnel commercial BTP — prospection, devis, signature, recommandation.</li>
+          <li>Page Google Business, site vitrine, fiche métier — copy et photos IA.</li>
+          <li>Réponses aux appels d'offres privés &amp; demandes de devis en ligne.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="block-h">★ Enrichissements 2026</h4>
+        <div class="enriched">
+          <span class="pill">Nouveau<span class="src">Réf. 01</span></span>
+          <ul class="points tight">
+            <li><em>Carrousels réseaux sociaux</em> — gabarit "5 erreurs à éviter quand on…" décliné par métier.</li>
+            <li><em>Calendrier éditorial 4 piliers</em> : expertise, coulisses, témoignages, valeurs.</li>
+            <li><em>Mesure d'engagement</em> et de demandes de devis générées — tableau de bord simple.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="deliverables">
+      <div class="lbl">Livrables<br />du module</div>
+      <div class="list">
+        <span class="pill-d">10 modèles email commerciaux</span>
+        <span class="pill-d">Pack réponses avis Google</span>
+        <span class="pill-d new">5 gabarits carrousel "5 erreurs"</span>
+        <span class="pill-d new">Calendrier éditorial · 4 piliers</span>
+        <span class="pill-d new">Tableau de bord KPI réseaux</span>
+      </div>
+    </div>
+  </div>
+  <div class="page-foot">
+    <span>Module 06 · Acquisition clients</span>
+    <span class="num"><b>09</b> / 16</span>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     MODULE 07
+     ════════════════════════════════════════════════════════════ -->
+<section class="page" data-screen-label="10 · Module 07">
+  <div class="page-rail">
+    <span class="lg"><span class="mark"></span>Formaxia</span>
+    <span>Jour 02 · Module 07 / 10</span>
+  </div>
+  <div class="page-body">
+    <div class="module-head">
+      <div class="mnum">07</div>
+      <div>
+        <span class="kicker">Jour 02 · Analyse documentaire</span>
+        <h2 class="mtitle">Analyser un DCE <em>en 3 niveaux</em> de lecture.</h2>
+      </div>
+      <div class="mdur">Durée<b>1 h</b></div>
+    </div>
+
+    <div class="module-body">
+      <div>
+        <h4 class="block-h">Objectifs <span class="count">05</span></h4>
+        <ul class="points">
+          <li>Lire un DCE en moins d'une heure au lieu d'une journée.</li>
+          <li>Extraire automatiquement 15 informations critiques d'un DCE.</li>
+          <li>Décortiquer un CCAP pour identifier les risques financiers.</li>
+          <li>Synthétiser un CCTP — normes, matériaux, moyens requis.</li>
+          <li>Prendre une décision <em>Go / No Go</em> argumentée en 30 minutes.</li>
+        </ul>
+
+        <h4 class="block-h" style="margin-top:6mm">Contenu détaillé</h4>
+        <ul class="points tight">
+          <li>Importer un DCE complet dans Claude Pro — bonnes pratiques d'upload.</li>
+          <li>Analyse de plans, CCTP, DPGF, BPU, RC, AE — l'IA lit, vous décidez.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="block-h">★ Enrichissements 2026</h4>
+        <div class="enriched">
+          <span class="pill">Nouveau<span class="src">Réf. 02</span></span>
+          <ul class="points tight">
+            <li><em>3 niveaux de lecture d'un DCE</em> — survol stratégique, lecture experte, scan opérationnel.</li>
+            <li><em>15 informations critiques</em> à extraire automatiquement — montant, délai, pondérations, garanties, pénalités, variantes autorisées, etc.</li>
+            <li><em>Décortiquer le CCAP</em> — repérer les clauses financières à risque (révision prix, retenue, avances).</li>
+            <li><em>Synthétiser le CCTP</em> — extraction normes &amp; matériaux clés en 1 page.</li>
+            <li><em>Fiche synthèse + verdict Go/No Go</em> argumenté.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="deliverables">
+      <div class="lbl">Livrables<br />du module</div>
+      <div class="list">
+        <span class="pill-d new">Gabarit "3 niveaux de lecture DCE"</span>
+        <span class="pill-d new">Template fiche 15 infos critiques</span>
+        <span class="pill-d new">Grille analyse CCAP — risques</span>
+        <span class="pill-d new">Template synthèse CCTP</span>
+        <span class="pill-d new">Modèle décision Go / No Go</span>
+      </div>
+    </div>
+  </div>
+  <div class="page-foot">
+    <span>Module 07 · Analyser un DCE</span>
+    <span class="num"><b>10</b> / 16</span>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     MODULE 08
+     ════════════════════════════════════════════════════════════ -->
+<section class="page" data-screen-label="11 · Module 08">
+  <div class="page-rail">
+    <span class="lg"><span class="mark"></span>Formaxia</span>
+    <span>Jour 02 · Module 08 / 10</span>
+  </div>
+  <div class="page-body">
+    <div class="module-head">
+      <div class="mnum">08</div>
+      <div>
+        <span class="kicker">Jour 02 · Rapports &amp; plans de MT</span>
+        <h2 class="mtitle">Rapports automatiques &amp; <em>plans de MT</em>.</h2>
+      </div>
+      <div class="mdur">Durée<b>1 h</b></div>
+    </div>
+
+    <div class="module-body">
+      <div>
+        <h4 class="block-h">Objectifs <span class="count">04</span></h4>
+        <ul class="points">
+          <li>Générer un rapport d'avancement de chantier en 3 minutes.</li>
+          <li>Partager auto en 1 clic — client, MOE, sous-traitants.</li>
+          <li>Construire un plan de Mémoire Technique adapté aux critères du DCE.</li>
+          <li>Comparer 3 plans MT alternatifs et choisir le plus convaincant.</li>
+        </ul>
+
+        <h4 class="block-h" style="margin-top:6mm">Contenu détaillé</h4>
+        <ul class="points tight">
+          <li>Du carnet papier au rapport PDF formaté — par dictée vocale ou photos.</li>
+          <li>Templates rapport hebdo, rapport mensuel, rapport de fin de chantier.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="block-h">★ Enrichissements 2026</h4>
+        <div class="enriched">
+          <span class="pill">Nouveau<span class="src">Réf. 02</span></span>
+          <ul class="points tight">
+            <li><em>Construire un plan MT</em> calé sur les critères &amp; pondérations exactes du DCE.</li>
+            <li><em>Comparer 3 plans alternatifs</em> — table de scoring + matrice de décision.</li>
+            <li>Mapping plan MT × pondérations — pour ne jamais sortir hors-sujet.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="deliverables">
+      <div class="lbl">Livrables<br />du module</div>
+      <div class="list">
+        <span class="pill-d">3 templates de rapport chantier</span>
+        <span class="pill-d new">Gabarit plan MT adapté DCE</span>
+        <span class="pill-d new">Outil comparatif 3 plans MT</span>
+      </div>
+    </div>
+  </div>
+  <div class="page-foot">
+    <span>Module 08 · Rapports &amp; plans MT</span>
+    <span class="num"><b>11</b> / 16</span>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     MODULE 09
+     ════════════════════════════════════════════════════════════ -->
+<section class="page" data-screen-label="12 · Module 09">
+  <div class="page-rail">
+    <span class="lg"><span class="mark"></span>Formaxia</span>
+    <span>Jour 02 · Module 09 / 10</span>
+  </div>
+  <div class="page-body">
+    <div class="module-head">
+      <div class="mnum">09</div>
+      <div>
+        <span class="kicker">Jour 02 · Mémoire Technique</span>
+        <h2 class="mtitle">Rédiger un <em>Mémoire Technique</em> complet.</h2>
+      </div>
+      <div class="mdur">Durée<b>1 h 30</b></div>
+    </div>
+
+    <div class="module-body">
+      <div>
+        <h4 class="block-h">Objectifs <span class="count">06</span></h4>
+        <ul class="points">
+          <li>Atelier : on travaille sur <em>vos</em> dossiers réels.</li>
+          <li>Rédiger les 5 sections clés d'un Mémoire Technique gagnant.</li>
+          <li>Mobiliser les 30 prompts spécialisés DCE &amp; MT.</li>
+          <li>Remplir le template Word MT complet de Formaxia.</li>
+          <li>Contrôler &amp; humaniser les sorties IA — anti-hallucination.</li>
+          <li>Repartir avec un MT prêt à déposer ou ses 3 premières sections.</li>
+        </ul>
+
+        <h4 class="block-h" style="margin-top:6mm">Contenu détaillé</h4>
+        <ul class="points tight">
+          <li>Cas pratique sur dossier réel apporté par le stagiaire.</li>
+          <li>Itération de prompt — du brouillon au paragraphe convaincant.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="block-h">★ Enrichissements 2026</h4>
+        <div class="enriched">
+          <span class="pill">Nouveau<span class="src">Réf. 02</span></span>
+          <ul class="points tight">
+            <li><em>Les 5 sections clés du MT</em> — présentation entreprise, méthodologie d'exécution, moyens, engagements QSE, sécurité.</li>
+            <li><em>30 prompts spécialisés</em> DCE + Mémoire Technique, classés par section.</li>
+            <li><em>Template Word MT complet</em> — planning Gantt, organigramme, tableaux de moyens humains et matériels.</li>
+            <li><em>Contrôle anti-hallucination</em> — vérifier chiffres, normes, références citées par l'IA.</li>
+            <li><em>Humanisation</em> de la sortie — relecture experte, ajustement tonalité entreprise.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="deliverables">
+      <div class="lbl">Livrables<br />du module</div>
+      <div class="list">
+        <span class="pill-d new">Pack 30 prompts DCE + MT</span>
+        <span class="pill-d new">Template Word MT complet</span>
+        <span class="pill-d new">Grille anti-hallucination</span>
+        <span class="pill-d new">Sections rédigées sur votre dossier</span>
+      </div>
+    </div>
+  </div>
+  <div class="page-foot">
+    <span>Module 09 · Mémoire Technique</span>
+    <span class="num"><b>12</b> / 16</span>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     MODULE 10
+     ════════════════════════════════════════════════════════════ -->
+<section class="page" data-screen-label="13 · Module 10">
+  <div class="page-rail">
+    <span class="lg"><span class="mark"></span>Formaxia</span>
+    <span>Jour 02 · Module 10 / 10</span>
+  </div>
+  <div class="page-body">
+    <div class="module-head">
+      <div class="mnum">10</div>
+      <div>
+        <span class="kicker">Jour 02 · Workflow &amp; certification</span>
+        <h2 class="mtitle">Votre <em>workflow IA</em> personnalisé.</h2>
+      </div>
+      <div class="mdur">Durée<b>1 h</b></div>
+    </div>
+
+    <div class="module-body">
+      <div>
+        <h4 class="block-h">Objectifs <span class="count">05</span></h4>
+        <ul class="points">
+          <li>Construire un plan d'action sur mesure post-formation.</li>
+          <li>Consolider tous les outils en un workflow quotidien.</li>
+          <li>Identifier les 3 routines à automatiser dès lundi matin.</li>
+          <li>Prévoir l'extension à l'équipe — charte, formation interne.</li>
+          <li>Passer la certification <em>RS6776</em> officielle.</li>
+        </ul>
+
+        <h4 class="block-h" style="margin-top:6mm">Contenu détaillé</h4>
+        <ul class="points tight">
+          <li>Plan d'action 7 / 30 / 90 jours — gains attendus mesurables.</li>
+          <li>Configuration finale Claude Pro Projects, raccourcis, signets.</li>
+          <li>Préparation à la certification RS6776 — épreuve, modalités, planning.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="block-h">★ Enrichissements 2026</h4>
+        <div class="enriched">
+          <span class="pill">Nouveau<span class="src">Réf. 01 + 02</span></span>
+          <ul class="points tight">
+            <li><em>Workflow type</em> consolidant : prompt RTC + base Claude Pro + charte RGPD + 30 prompts MT.</li>
+            <li><em>Rituel hebdomadaire</em> recommandé : 30 min de tuning des prompts entreprise.</li>
+            <li>Plan d'extension équipe — montée en compétence en 4 semaines.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="deliverables">
+      <div class="lbl">Livrables<br />du module</div>
+      <div class="list">
+        <span class="pill-d">Plan d'action 7 / 30 / 90 jours</span>
+        <span class="pill-d">Configuration finale Claude Pro</span>
+        <span class="pill-d">Certificat de formation Formaxia</span>
+        <span class="pill-d new">Workflow IA consolidé · 1 page</span>
+        <span class="pill-d">Préparation RS6776</span>
+      </div>
+    </div>
+  </div>
+  <div class="page-foot">
+    <span>Module 10 · Workflow personnalisé</span>
+    <span class="num"><b>13</b> / 16</span>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     PAGE 14 — LIVRABLES CONSOLIDÉS
+     ════════════════════════════════════════════════════════════ -->
+<section class="page" data-screen-label="14 · Livrables consolidés">
+  <div class="page-rail">
+    <span class="lg"><span class="mark"></span>Formaxia</span>
+    <span>Annexe 01 · Livrables consolidés</span>
+  </div>
+  <div class="page-body">
+    <span class="eyebrow">Annexe 01 · Ce que vous emportez</span>
+    <h2 class="title">Tout ce que vous repartez avec — <em>concrètement</em>.</h2>
+
+    <div class="deliv-grid">
+      <div class="deliv-card">
+        <div class="src-tag">Documents — 5</div>
+        <h4>Guide &amp; supports</h4>
+        <ul class="checks">
+          <li>Guide pratique IA BTP — 50 pages, version 2026 enrichie</li>
+          <li>Pack 30 prompts spécialisés DCE + Mémoire Technique</li>
+          <li>Comparateur outils ChatGPT / Claude / Gemini / Perplexity × métiers</li>
+          <li>Charte d'usage IA pour l'entreprise — 1 page diffusable</li>
+          <li>Liste rouge RGPD chantier — données à ne jamais coller</li>
+        </ul>
+      </div>
+
+      <div class="deliv-card">
+        <div class="src-tag">Templates — 8</div>
+        <h4>Modèles prêts à l'emploi</h4>
+        <ul class="checks">
+          <li>Pack templates de devis (gros œuvre, second œuvre, TP)</li>
+          <li>Template Word Mémoire Technique complet (Gantt, organigramme)</li>
+          <li>Squelette DOE conforme exigences marché</li>
+          <li>Fiches techniques produits &amp; notices d'entretien</li>
+          <li>15 modèles d'emails BTP + 10 emails commerciaux</li>
+          <li>Pack réponses avis Google + 5 gabarits carrousel</li>
+          <li>Lettre type "levée de réserves"</li>
+          <li>3 templates rapport chantier (hebdo, mensuel, fin)</li>
+        </ul>
+      </div>
+
+      <div class="deliv-card">
+        <div class="src-tag">Outils — 6</div>
+        <h4>Outils &amp; gabarits</h4>
+        <ul class="checks">
+          <li>Project Claude Pro paramétré + System Prompt entreprise</li>
+          <li>Checklist 22 points "aucun poste oublié"</li>
+          <li>Outil prix matières + calcul marges brutes &amp; nettes</li>
+          <li>3 prompts scénarios de prix (basse / médiane / haute)</li>
+          <li>Grille analyse CCAP risques + template synthèse CCTP</li>
+          <li>Modèle décision Go / No Go + matrice 3 plans MT</li>
+        </ul>
+      </div>
+
+      <div class="deliv-card">
+        <div class="src-tag">Certifications &amp; suivi</div>
+        <h4>Reconnaissance &amp; support</h4>
+        <ul class="checks">
+          <li>Certificat de formation Formaxia officiel</li>
+          <li>Préparation à la certification <strong>RS6776</strong></li>
+          <li>Accès aux ressources en ligne — 1 an</li>
+          <li>Support post-formation par WhatsApp Business</li>
+          <li>Mises à jour gratuites du guide pendant 12 mois</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="page-foot">
+    <span>Annexe 01 · Livrables consolidés</span>
+    <span class="num"><b>14</b> / 16</span>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     PAGE 15 — CHARTE IA + RGPD
+     ════════════════════════════════════════════════════════════ -->
+<section class="page" data-screen-label="15 · Charte IA & RGPD">
+  <div class="page-rail">
+    <span class="lg"><span class="mark"></span>Formaxia</span>
+    <span>Annexe 02 · Charte d'usage IA &amp; RGPD</span>
+  </div>
+  <div class="page-body">
+    <span class="eyebrow">Annexe 02 · Sécuriser l'usage IA</span>
+    <h2 class="title">Une charte simple — pour <em>protéger</em> votre entreprise.</h2>
+    <p class="lede">Aperçu de la charte fournie pendant la formation, prête à être adaptée à votre nom commercial et diffusée à vos équipes.</p>
+
+    <div class="two-col" style="margin-top: 6mm;">
+      <div class="charter">
+        <h4>Charte d'usage IA — extrait</h4>
+        <ol>
+          <li>Tout collaborateur peut utiliser l'IA pour rédiger, structurer ou analyser un document professionnel.</li>
+          <li>Aucune donnée client nominative (nom, prénom, adresse, téléphone, mail) n'est collée dans une IA <em>gratuite</em>.</li>
+          <li>Aucun prix de devis, marge, salaire, ou information financière n'est partagé en clair avec une IA.</li>
+          <li>Les documents marqués <em>« confidentiel »</em>, CCAP signés et MT remis ne sont traités que dans Claude Pro Projects (compte entreprise).</li>
+          <li>La sortie IA est <em>toujours</em> relue par un humain avant envoi extérieur.</li>
+          <li>En cas de doute, voir la liste rouge RGPD chantier (annexe), ou demander au référent IA.</li>
+        </ol>
+      </div>
+
+      <div>
+        <h4 class="block-h">Liste rouge — données à ne jamais coller</h4>
+        <ul class="checks">
+          <li>Noms, prénoms, coordonnées clients &amp; salariés</li>
+          <li>Adresses précises de chantiers privés</li>
+          <li>Prix négociés, marges, remises, BPU complets</li>
+          <li>SIRET, RIB / IBAN, numéros TVA, mots de passe</li>
+          <li>Données médicales ou disciplinaires salariés</li>
+          <li>Mémoires techniques de concurrents reçus en sous-traitance</li>
+        </ul>
+
+        <h4 class="block-h" style="margin-top: 6mm">Protocole d'anonymisation · 3 étapes</h4>
+        <ul class="points tight">
+          <li>1. <em>Substituer</em> noms et adresses par des variables — <span class="mono">{CLIENT_A}</span>, <span class="mono">{CHANTIER_01}</span>.</li>
+          <li>2. <em>Masquer</em> les montants — remplacer par fourchettes ou ordres de grandeur.</li>
+          <li>3. <em>Vérifier</em> qu'aucune donnée identifiante ne reste avant de coller dans l'IA.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="section-h">Indicateurs &amp; KPIs post-formation</h3>
+    <table class="kpi-table">
+      <thead>
+        <tr><th>Indicateur</th><th>Avant</th><th>Après · 1 mois</th><th>Cible · 3 mois</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Temps moyen pour rédiger un devis</td><td class="num">~ 3 h</td><td class="num">~ 25 min</td><td class="num">~ 10 min</td></tr>
+        <tr><td>Temps pour lire un DCE complet</td><td class="num">1 journée</td><td class="num">2 h</td><td class="num">45 min</td></tr>
+        <tr><td>Mémoires techniques produits / mois</td><td class="num">1 – 2</td><td class="num">3 – 4</td><td class="num">5 +</td></tr>
+        <tr><td>Heures admin gagnées / semaine</td><td class="num">—</td><td class="num">+ 6 h</td><td class="num">+ 10 h</td></tr>
+        <tr><td>Soirées de paperasse</td><td class="num">2 – 3</td><td class="num">1</td><td class="num">0</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="page-foot">
+    <span>Annexe 02 · Charte &amp; KPIs</span>
+    <span class="num"><b>15</b> / 16</span>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     PAGE 16 — FINANCEMENT & CERTIFICATION (DARK)
+     ════════════════════════════════════════════════════════════ -->
+<section class="page dark" data-screen-label="16 · Financement & certification">
+  <div class="page-rail">
+    <span class="lg"><span class="mark"></span>Formaxia</span>
+    <span>Annexe 03 · Éligibilité, financement &amp; certification</span>
+  </div>
+  <div class="page-body">
+    <span class="eyebrow" style="color: var(--or-soft);">Annexe 03 · Officiel</span>
+    <h2 class="title" style="color: var(--blanc)">Votre formation ne vous coûte <em>pas un centime</em>.</h2>
+    <p class="lede">Constructys finance l'intégralité des 546 € HT par participant pour les entreprises BTP de moins de 50 salariés — salarié ou non. Les frais de déplacement sont remboursés en plus.</p>
+
+    <div class="three-col" style="margin-top: 8mm;">
+      <div class="pillar" style="border-color: var(--or)">
+        <div class="h" style="color: var(--blanc)">Qui est éligible</div>
+        <ul class="checks" style="margin-top: 2mm; color: rgba(248,246,241,.85)">
+          <li>Toute entreprise BTP de moins de 50 salariés</li>
+          <li>Artisans indépendants</li>
+          <li>Bâtiment, TP, négoce matériaux</li>
+          <li>Aucun salarié requis</li>
+        </ul>
+      </div>
+      <div class="pillar" style="border-color: var(--or)">
+        <div class="h" style="color: var(--blanc)">Le parcours · 5 étapes</div>
+        <ol style="padding-left: 16px; color: rgba(248,246,241,.85); font-size: 9.5pt; line-height: 1.6;">
+          <li>Formulaire de pré-inscription</li>
+          <li>Rappel sous 24 h ouvrées</li>
+          <li>Montage dossier Constructys</li>
+          <li>Validation OPCO — sous 15 jours</li>
+          <li>Vous suivez la formation</li>
+        </ol>
+      </div>
+      <div class="pillar" style="border-color: var(--or)">
+        <div class="h" style="color: var(--blanc)">Certification RS6776</div>
+        <div class="s" style="color: rgba(248,246,241,.85)">Certification officielle reconnue par l'État, inscrite au Répertoire Spécifique de France Compétences, valide les compétences en IA générative.</div>
+      </div>
+    </div>
+
+    <h3 class="section-h" style="color: var(--or); border-color: rgba(201,168,76,.3); margin-top: 12mm;">Détail financier</h3>
+    <table class="kpi-table" style="color: rgba(248,246,241,.9);">
+      <thead>
+        <tr style="color: var(--or-soft);">
+          <th style="color: var(--or-soft); border-bottom-color: rgba(201,168,76,.3)">Poste</th>
+          <th style="color: var(--or-soft); border-bottom-color: rgba(201,168,76,.3); text-align: right;">Montant</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="border-bottom-color: rgba(201,168,76,.15)">Tarif formation par participant</td><td class="num" style="border-bottom-color: rgba(201,168,76,.15); color: var(--or);">546,00 € HT</td></tr>
+        <tr><td style="border-bottom-color: rgba(201,168,76,.15)">Prise en charge Constructys</td><td class="num" style="border-bottom-color: rgba(201,168,76,.15); color: var(--or);">– 546,00 €</td></tr>
+        <tr><td style="border-bottom-color: rgba(201,168,76,.15)">Frais de déplacement (intra)</td><td class="num" style="border-bottom-color: rgba(201,168,76,.15); color: var(--or);">Remboursés</td></tr>
+        <tr><td style="border-bottom: 0; padding-top: 5mm; font-weight: 500; color: var(--blanc)">Reste à charge entreprise</td><td class="num" style="border-bottom: 0; padding-top: 5mm; color: var(--or); font-size: 14pt;">0,00 €</td></tr>
+      </tbody>
+    </table>
+
+    <div class="colophon">
+      <div>
+        <div class="lbl">Édition</div>
+        <div class="v">Programme officiel Formaxia · Édition 2.0 — Mai 2026</div>
+        <div class="lbl" style="margin-top: 4mm">Certifications</div>
+        <div class="v">Qualiopi · Constructys agréé · RS6776 officiel</div>
+      </div>
+      <div>
+        <div class="lbl">Contact</div>
+        <div class="v"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1a7975746e7b796e5a7c7568777b62737b347c68">[email&#160;protected]</a> · Avignon, France<br />Lun → Ven · 9h–18h · Réponse sous 24h</div>
+        <div class="lbl" style="margin-top: 4mm">Éditeur</div>
+        <div class="v">Johane Achouri · Fondateur Formaxia · Formateur RS6776</div>
+      </div>
+    </div>
+  </div>
+  <div class="page-foot">
+    <span>Annexe 03 · Officiel · Constructys agréé · RS6776</span>
+    <span class="num"><b>16</b> / 16</span>
+  </div>
+</section>
+
+<!-- Floating print CTA -->
+<button class="print-cta" onclick="window.print()" aria-label="Imprimer en PDF">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="6 9 6 2 18 2 18 9"/>
+    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+    <rect x="6" y="14" width="12" height="8"/>
+  </svg>
+  Imprimer en PDF
+</button>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>
