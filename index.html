@@ -884,6 +884,148 @@ section{ position: relative; }
 }
 
 /* ─────────────────────────────────────────────────────────────────
+   ACCESSIBILITÉ HANDICAP
+   ───────────────────────────────────────────────────────────────── */
+.accessibilite{
+  background: var(--blanc);
+  border-top: 1px solid rgba(201,168,76,.18);
+}
+.acc-grid{
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+.acc-points{
+  margin-top: 40px;
+  display: grid;
+  gap: 28px;
+}
+.acc-point{
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 18px;
+  align-items: start;
+}
+.acc-num{
+  font-family: var(--ff-display);
+  font-style: italic;
+  font-size: 28px;
+  color: var(--or);
+  line-height: 1;
+  padding-top: 2px;
+  letter-spacing: -0.02em;
+}
+.acc-h{
+  font-family: var(--ff-display);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--noir);
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+.acc-d{
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--gris-2);
+}
+.acc-d strong{ color: var(--noir); font-weight: 500; }
+
+.acc-contact{
+  position: sticky;
+  top: 100px;
+}
+.acc-card{
+  background: var(--noir);
+  color: var(--blanc);
+  padding: 36px 32px 28px;
+  border-radius: 14px;
+  border: 1px solid rgba(201,168,76,.25);
+  box-shadow: 0 24px 60px rgba(0,0,0,.18);
+}
+.acc-card-tag{
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--or);
+  margin-bottom: 14px;
+}
+.acc-card-name{
+  font-family: var(--ff-display);
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--blanc);
+  letter-spacing: -0.01em;
+}
+.acc-card-role{
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(201,168,76,.7);
+  margin-top: 4px;
+  margin-bottom: 24px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid rgba(201,168,76,.2);
+}
+.acc-card-row{
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(201,168,76,.1);
+  gap: 16px;
+}
+.acc-card-row:last-of-type{ border-bottom: 0; }
+.acc-card-row-k{
+  font-family: var(--ff-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(201,168,76,.6);
+  flex-shrink: 0;
+}
+.acc-card-row-v{
+  font-size: 14px;
+  color: var(--blanc);
+  text-decoration: none;
+  text-align: right;
+  transition: color .2s;
+}
+.acc-card-row-v:hover{ color: var(--or); }
+.acc-card-foot{
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(201,168,76,.2);
+  font-family: var(--ff-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(201,168,76,.55);
+  line-height: 1.5;
+}
+
+@media (max-width: 960px){
+  .acc-grid{
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .acc-contact{ position: static; }
+  .acc-card{ padding: 28px 24px 22px; }
+  .acc-card-name{ font-size: 22px; }
+}
+@media (max-width: 560px){
+  .acc-point{ grid-template-columns: 38px 1fr; gap: 14px; }
+  .acc-num{ font-size: 24px; }
+  .acc-h{ font-size: 16px; }
+  .acc-d{ font-size: 14.5px; }
+  .acc-card{ padding: 24px 20px 20px; }
+  .acc-card-row{ flex-direction: column; align-items: flex-start; gap: 4px; }
+  .acc-card-row-v{ text-align: left; font-size: 14.5px; }
+}
+
+/* ─────────────────────────────────────────────────────────────────
    TÉMOIGNAGES
    ───────────────────────────────────────────────────────────────── */
 .testimonials{
@@ -1500,6 +1642,7 @@ section{ position: relative; }
     <a href="/financement/">Financement</a>
     <a href="/programme/">Programme</a>
     <a href="#resultats">Résultats</a>
+    <a href="#accessibilite">Accessibilité</a>
     <a href="#about">À Propos</a>
   </nav>
   <div class="cta-wrap" style="display:flex; align-items:center; gap:12px;">
@@ -1921,6 +2064,81 @@ section{ position: relative; }
 </section>
 
 <!-- ════════════════════════════════════════════════════════════
+     ACCESSIBILITÉ HANDICAP
+     ════════════════════════════════════════════════════════════ -->
+<section class="accessibilite section-pad" id="accessibilite" data-screen-label="Accessibilité">
+  <div class="wrap">
+    <div class="acc-grid">
+      <div class="acc-text reveal">
+        <span class="eyebrow">07 · Accessibilité &amp; inclusion</span>
+        <h2 class="h-display" style="margin-top:18px">
+          La formation est ouverte à <em>tous les profils</em>.
+        </h2>
+        <p class="lede" style="margin-top:24px">
+          Vous êtes en situation de handicap, ou un de vos collaborateurs l'est ? On adapte la formation à votre besoin réel — pas l'inverse.
+        </p>
+
+        <div class="acc-points">
+          <div class="acc-point">
+            <span class="acc-num">01</span>
+            <div>
+              <div class="acc-h">Référent handicap dédié</div>
+              <div class="acc-d">Johane Achouri est votre interlocuteur unique. Un appel, une situation, une solution sur-mesure.</div>
+            </div>
+          </div>
+          <div class="acc-point">
+            <span class="acc-num">02</span>
+            <div>
+              <div class="acc-h">Adaptations possibles</div>
+              <div class="acc-d">Supports en gros caractères, audio, sous-titres. Durée modulable. Lieu accessible PMR. Pauses adaptées.</div>
+            </div>
+          </div>
+          <div class="acc-point">
+            <span class="acc-num">03</span>
+            <div>
+              <div class="acc-h">Réseau partenaire</div>
+              <div class="acc-d">Liens directs avec l'<strong>Agefiph</strong>, <strong>Cap Emploi</strong>, et la <strong>MDPH</strong> pour mobiliser les financements et accompagnements adaptés.</div>
+            </div>
+          </div>
+          <div class="acc-point">
+            <span class="acc-num">04</span>
+            <div>
+              <div class="acc-h">Étude au cas par cas</div>
+              <div class="acc-d">Aucune situation n'est traitée par défaut. Chaque besoin est étudié en amont pour proposer une solution réellement accessible.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="acc-contact reveal" style="transition-delay:.1s">
+        <div class="acc-card">
+          <div class="acc-card-tag">Contact référent</div>
+          <div class="acc-card-name">Johane Achouri</div>
+          <div class="acc-card-role">Référent handicap · Fondateur Formaxia</div>
+
+          <div class="acc-card-row">
+            <div class="acc-card-row-k">Téléphone</div>
+            <a href="tel:+33769010202" class="acc-card-row-v">+33 7 69 01 02 02</a>
+          </div>
+          <div class="acc-card-row">
+            <div class="acc-card-row-k">Email</div>
+            <a href="mailto:contact@formaxia.fr?subject=Accessibilité%20handicap" class="acc-card-row-v">contact@formaxia.fr</a>
+          </div>
+          <div class="acc-card-row">
+            <div class="acc-card-row-k">WhatsApp</div>
+            <a href="https://wa.me/33769010202?text=Bonjour%2C%20je%20souhaite%20discuter%20de%20l%27accessibilit%C3%A9%20handicap%20de%20la%20formation." class="acc-card-row-v" target="_blank" rel="noopener">Échanger maintenant</a>
+          </div>
+
+          <div class="acc-card-foot">
+            Contactez-nous en amont — toute demande est étudiée sous 24 h ouvrées.
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
      FAQ
      ════════════════════════════════════════════════════════════ -->
 <section class="faq section-pad" id="faq" data-screen-label="FAQ">
@@ -2003,6 +2221,17 @@ section{ position: relative; }
             <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
           </summary>
           <div class="faq-a"><div><p>Nous — vous n'avez rien à faire. On monte le dossier complet, on l'envoie, on le suit, on relance. Vous récupérez juste votre numéro d'OPCO.</p></div></div>
+        </details>
+
+        <details class="faq-item" name="faq">
+          <summary class="faq-q">
+            <div>
+              <span class="qn">Question 07</span>
+              <span class="qt">Est-il possible d'adapter la formation pour les personnes en situation de handicap ?</span>
+            </div>
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </summary>
+          <div class="faq-a"><div><p>Oui — la formation est entièrement adaptable. Johane Achouri est <strong>référent handicap</strong> et étudie chaque cas individuellement : aménagement des supports (gros caractères, audio, sous-titres), durée modulable, lieu accessible PMR, accompagnement personnalisé. Contactez-nous en amont au <strong>07 69 01 02 02</strong> ou par email — on construit ensemble la solution adaptée, en lien avec l'Agefiph ou Cap Emploi si besoin.</p></div></div>
         </details>
       </div>
     </div>
@@ -2147,6 +2376,7 @@ section{ position: relative; }
           <li><a href="/financement/">Financement</a></li>
           <li><a href="/programme/">Programme</a></li>
           <li><a href="#resultats">Résultats publics</a></li>
+          <li><a href="#accessibilite">Accessibilité handicap</a></li>
           <li><a href="#about">À Propos</a></li>
         </ul>
       </div>
@@ -2168,6 +2398,10 @@ section{ position: relative; }
           <li><span style="color: rgba(248,246,241,.7);">2026 · Édition enrichie</span></li>
         </ul>
       </div>
+    </div>
+
+    <div class="footer-handicap" style="border-top: 1px solid rgba(201,168,76,.18); padding: 20px 0; margin-top: 16px; font-family: var(--ff-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(248,246,241,.55);">
+      <strong style="color: var(--or); font-weight: 500;">♿ Accessibilité handicap</strong> — Référent : Johane Achouri · <a href="tel:+33769010202" style="color: rgba(248,246,241,.85); text-decoration: none;">07 69 01 02 02</a> · <a href="mailto:contact@formaxia.fr?subject=Accessibilité%20handicap" style="color: rgba(248,246,241,.85); text-decoration: none;">contact@formaxia.fr</a> — Adaptations étudiées au cas par cas en lien avec l'Agefiph &amp; Cap Emploi.
     </div>
 
     <div class="footer-bottom">
