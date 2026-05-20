@@ -1521,79 +1521,92 @@ section{ position: relative; }
 .footer-bottom a:hover{ color: var(--or) }
 .footer-bottom .legal-links{ display: flex; gap: 24px; flex-wrap: wrap; }
 
-/* Bloc Accessibilité handicap dans le footer */
+/* Bloc Accessibilité PSH dans le footer */
 .footer-handicap{
-  border-top: 1px solid rgba(201,168,76,.18);
-  margin-top: 24px;
-  padding: 22px 0 4px;
+  position: relative;
+  margin-top: 28px;
+  padding: 24px 24px 22px;
+  background: linear-gradient(135deg, rgba(201,168,76,.06), rgba(201,168,76,.015));
+  border: 1px solid rgba(201,168,76,.2);
+  border-radius: 12px;
+  border-left: 3px solid var(--or);
 }
 .fh-head{
-  display: flex; align-items: center; gap: 10px;
+  display: flex; align-items: center; gap: 12px;
   margin-bottom: 14px;
 }
 .fh-icon{
-  font-size: 18px;
-  color: var(--or);
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  width: 34px; height: 34px;
+  font-size: 20px;
+  color: var(--noir);
+  background: var(--or);
+  border-radius: 50%;
   line-height: 1;
+  flex-shrink: 0;
 }
 .fh-title{
   font-family: var(--ff-display);
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 500;
   color: var(--blanc);
   letter-spacing: -0.005em;
 }
-.fh-body{
-  display: flex; flex-wrap: wrap;
-  gap: 8px 28px;
-  align-items: baseline;
+.fh-text{
+  margin: 0 0 14px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: rgba(248,246,241,.82);
 }
-.fh-row{
-  display: inline-flex; align-items: baseline; gap: 8px;
+.fh-text strong{
+  color: var(--blanc);
+  font-weight: 500;
 }
-.fh-k{
+.fh-info{
+  display: flex; align-items: center; gap: 14px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(201,168,76,.15);
+  flex-wrap: wrap;
+}
+.fh-info-k{
   font-family: var(--ff-mono);
-  font-size: 10px;
-  letter-spacing: 0.16em;
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(201,168,76,.6);
+  color: rgba(201,168,76,.65);
+  flex-shrink: 0;
 }
-.fh-v{
+.fh-info-link{
+  display: inline-flex; align-items: center; gap: 8px;
   font-size: 13.5px;
-  color: rgba(248,246,241,.88);
+  color: var(--or-soft);
+  text-decoration: none;
+  transition: color .2s, gap .2s;
 }
-.fh-link{ text-decoration: none; transition: color .2s; }
-.fh-link:hover{ color: var(--or); }
-.fh-note{
-  width: 100%;
-  margin: 4px 0 0;
-  font-family: var(--ff-mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  color: rgba(248,246,241,.4);
+.fh-info-link svg{ width: 12px; height: 12px; flex-shrink: 0; }
+.fh-info-link:hover{
+  color: var(--or);
+  gap: 10px;
 }
 
 @media (max-width: 640px){
-  .footer-handicap{ padding: 20px 0 4px; margin-top: 20px; }
-  .fh-head{ margin-bottom: 12px; }
-  .fh-title{ font-size: 15px; }
-  .fh-body{
+  .footer-handicap{
+    margin-top: 22px;
+    padding: 22px 18px 20px;
+    border-radius: 10px;
+  }
+  .fh-head{ margin-bottom: 12px; gap: 10px; }
+  .fh-icon{ width: 30px; height: 30px; font-size: 17px; }
+  .fh-title{ font-size: 15.5px; }
+  .fh-text{ font-size: 13.5px; line-height: 1.6; }
+  .fh-info{
     flex-direction: column;
-    gap: 8px;
     align-items: flex-start;
+    gap: 6px;
+    padding-top: 14px;
   }
-  .fh-row{
-    width: 100%;
-    justify-content: space-between;
-    padding: 6px 0;
-    border-bottom: 1px solid rgba(201,168,76,.08);
-  }
-  .fh-row:last-of-type{ border-bottom: 0; }
-  .fh-v{ font-size: 13px; }
-  .fh-note{
-    margin-top: 10px;
-    line-height: 1.5;
-  }
+  .fh-info-link{ font-size: 13px; }
 }
 
 /* ─────────────────────────────────────────────────────────────────
@@ -2478,22 +2491,17 @@ section{ position: relative; }
     <div class="footer-handicap">
       <div class="fh-head">
         <span class="fh-icon" aria-hidden="true">♿</span>
-        <span class="fh-title">Accessibilité handicap</span>
+        <span class="fh-title">Accessibilité des PSH</span>
       </div>
-      <div class="fh-body">
-        <div class="fh-row">
-          <span class="fh-k">Référent</span>
-          <span class="fh-v">Johane Achouri</span>
-        </div>
-        <div class="fh-row">
-          <span class="fh-k">Téléphone</span>
-          <a class="fh-v fh-link" href="tel:+33769010202">07 69 01 02 02</a>
-        </div>
-        <div class="fh-row">
-          <span class="fh-k">Email</span>
-          <a class="fh-v fh-link" href="mailto:contact@formaxia.fr?subject=Accessibilité%20handicap">contact@formaxia.fr</a>
-        </div>
-        <p class="fh-note">Adaptations étudiées au cas par cas — Agefiph &amp; Cap Emploi.</p>
+      <p class="fh-text">
+        <strong>Formaxia</strong> étudiera l'adaptation des moyens de la prestation pour les <strong>personnes en situation de handicap</strong>.
+      </p>
+      <div class="fh-info">
+        <span class="fh-info-k">Informations</span>
+        <a href="https://www.agefiph.fr/aides-handicap/ressource-handicap-formation-rhf" target="_blank" rel="noopener" class="fh-info-link">
+          Ressource handicap formation (RHF) — Agefiph
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+        </a>
       </div>
     </div>
 
