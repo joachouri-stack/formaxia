@@ -39,7 +39,18 @@ window.TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "density": "regular",
   "heroImage": "assets/hero.jpg",
   "sessionImage": "",
-  "portraitImage": "assets/johane_achouri.jpg"
+  "portraitImage": "assets/johane_achouri.jpg",
+
+  /* ─── INDICATEURS QUALIOPI ───
+     Mets "—" si pas encore de données. Sinon, par ex. "98%".
+     Modifie resultatsUpdated avec le mois courant. */
+  "resultats": {
+    "satisfaction":   "—",
+    "reussite":       "—",
+    "recommandation": "—",
+    "abandon":        "—"
+  },
+  "resultatsUpdated": "Mai 2026"
 }/*EDITMODE-END*/;
 </script>
 
@@ -1868,30 +1879,30 @@ section{ position: relative; }
 
     <div class="resultats-grid">
 
-      <article class="result-card reveal">
+      <article class="result-card reveal" data-result="satisfaction">
         <div class="rc-icon">★</div>
-        <div class="rc-value">—</div>
+        <div class="rc-value" data-rc-val>—</div>
         <div class="rc-label">Taux de satisfaction</div>
         <div class="rc-note">Première session en cours · données disponibles dès juillet 2026</div>
       </article>
 
-      <article class="result-card reveal" style="transition-delay:.05s">
+      <article class="result-card reveal" style="transition-delay:.05s" data-result="reussite">
         <div class="rc-icon">✓</div>
-        <div class="rc-value">—</div>
+        <div class="rc-value" data-rc-val>—</div>
         <div class="rc-label">Taux de réussite à la certification RS6776</div>
         <div class="rc-note">Calculé sur les stagiaires ayant terminé la formation</div>
       </article>
 
-      <article class="result-card reveal" style="transition-delay:.1s">
+      <article class="result-card reveal" style="transition-delay:.1s" data-result="recommandation">
         <div class="rc-icon">↻</div>
-        <div class="rc-value">—</div>
+        <div class="rc-value" data-rc-val>—</div>
         <div class="rc-label">Taux de recommandation</div>
         <div class="rc-note">"Recommanderiez-vous cette formation à un confrère ?"</div>
       </article>
 
-      <article class="result-card reveal" style="transition-delay:.15s">
+      <article class="result-card reveal" style="transition-delay:.15s" data-result="abandon">
         <div class="rc-icon">⌀</div>
-        <div class="rc-value">—</div>
+        <div class="rc-value" data-rc-val>—</div>
         <div class="rc-label">Taux d'abandon</div>
         <div class="rc-note">Stagiaires n'ayant pas finalisé les 14 heures de formation</div>
       </article>
@@ -1903,7 +1914,7 @@ section{ position: relative; }
         Méthode de calcul · Indicateurs collectés sur questionnaire de fin de formation, anonymisés et agrégés.
       </p>
       <p class="dim" style="font-family: var(--ff-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gris-3); margin-top: 8px;">
-        Dernière mise à jour · <b style="color: var(--or-deep);">Mai 2026</b>
+        Dernière mise à jour · <b style="color: var(--or-deep);" data-resultats-updated>Mai 2026</b>
       </p>
     </div>
   </div>
@@ -2412,6 +2423,22 @@ window.applyImage = applyImage;
   applyImage('heroPh', d.heroImage);
   applyImage('sessionPh', d.sessionImage);
   applyImage('portraitPh', d.portraitImage);
+
+  /* Indicateurs Qualiopi — applique les valeurs du config aux cards */
+  if (d.resultats){
+    document.querySelectorAll('[data-result]').forEach(card => {
+      const key = card.getAttribute('data-result');
+      const value = d.resultats[key];
+      if (value){
+        const valEl = card.querySelector('[data-rc-val]');
+        if (valEl) valEl.textContent = value;
+      }
+    });
+  }
+  if (d.resultatsUpdated){
+    const u = document.querySelector('[data-resultats-updated]');
+    if (u) u.textContent = d.resultatsUpdated;
+  }
 })();
 </script>
 
