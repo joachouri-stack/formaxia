@@ -1922,6 +1922,35 @@ window.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
 
 /* ─────────────────────────────────────────────────────────────────
+   Smooth scroll + URL propre (sans #xxx dans la barre)
+   ───────────────────────────────────────────────────────────────── */
+function stripHash(){
+  if (window.location.hash){
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+  }
+}
+
+// 1. Click sur une ancre interne → scroll fluide + URL propre
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', (e) => {
+    const href = link.getAttribute('href');
+    if (!href || href === '#') return;
+    const id = href.slice(1);
+    const target = document.getElementById(id);
+    if (target){
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      stripHash();
+    }
+  });
+});
+
+// 2. Arrivée sur la page avec hash (ex. /#contact depuis /programme/) → nettoie après scroll
+if (window.location.hash){
+  window.addEventListener('load', () => setTimeout(stripHash, 50));
+}
+
+/* ─────────────────────────────────────────────────────────────────
    Fiches cliquables — Solution (Usage 01–03) → #programme
                        Modules (M01–M10)     → #contact (pré-remplit le message)
    ───────────────────────────────────────────────────────────────── */
