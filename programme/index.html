@@ -1154,31 +1154,76 @@ ul.checks li::before{
   .lede{ font-size: 16px; max-width: none; }
   .eyebrow{ font-size: 11px; letter-spacing: 0.16em; }
 
-  /* Cover */
+  /* Cover — version mobile aérée et premium */
+  .cover{ padding: 90px 22px 48px !important; }
+  .cover .page-rail{ display: none; }
   .cover-grid{
-    padding-top: 12px;
-    gap: 36px;
+    padding-top: 0;
+    gap: 32px;
+    grid-template-rows: auto auto;
   }
-  .cover h1{ font-size: 38px; line-height: 1.05; }
-  .cover .deck{ font-size: 17px; margin-top: 18px; max-width: none; }
   .cover-tag{
     position: static;
     display: inline-block;
-    margin: 0 0 6px;
-    font-size: 10px;
+    margin: 0 0 24px;
+    font-size: 11px;
+    padding: 8px 14px;
+    background: rgba(201,168,76,.1);
+    border-color: rgba(201,168,76,.4);
+  }
+  .cover-text .eyebrow{
+    display: inline-block;
+    font-size: 10.5px;
+    letter-spacing: 0.22em;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(201,168,76,.2);
+  }
+  .cover h1{
+    font-size: 36px;
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+  .cover h1 em{ display: inline; }
+  .cover .deck{
+    font-size: 16px;
+    line-height: 1.45;
+    margin-top: 22px;
+    max-width: none;
+    color: rgba(248,246,241,.78);
+    font-style: normal;
+    font-family: var(--ff-text);
   }
   .cover-meta{
     grid-template-columns: repeat(2, 1fr);
-    padding: 16px 0;
+    padding: 0;
+    gap: 1px;
+    background: rgba(201,168,76,.2);
+    border: 1px solid rgba(201,168,76,.25);
+    border-radius: 10px;
+    overflow: hidden;
   }
-  .cover-meta .m{ padding: 10px 12px; border-right: 1px solid rgba(201,168,76,.15); }
-  .cover-meta .m:nth-child(2n){ border-right: 0; }
-  .cover-meta .m:nth-child(-n+2){ border-bottom: 1px solid rgba(201,168,76,.12); }
-  .cover-meta .v{ font-size: 22px; }
+  .cover-meta .m{
+    padding: 18px 16px;
+    background: rgba(20,20,28,.6);
+    border: 0 !important;
+  }
+  .cover-meta .k{ font-size: 9.5px; letter-spacing: 0.18em; }
+  .cover-meta .v{
+    font-size: 24px;
+    font-weight: 500;
+    margin-top: 8px;
+  }
+  .cover-meta .v .u{ font-size: 10px; opacity: 0.85; }
   .cover-edition{
     position: static;
-    margin-top: 28px;
+    margin-top: 36px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(201,168,76,.12);
     font-size: 10px;
+    letter-spacing: 0.18em;
+    color: rgba(248,246,241,.4);
   }
 
   /* Stats / grids → 1 column */
@@ -1332,16 +1377,18 @@ ul.checks li::before{
   body{ font-size: 14.5px; }
   .page{ padding: 70px 16px 56px; }
 
-  /* Cover */
+  /* Cover — ajustements pour iPhone */
+  .cover{ padding: 84px 18px 40px !important; }
+  .cover-tag{ font-size: 10px; padding: 7px 12px; margin-bottom: 22px; }
   .cover h1{ font-size: 30px; line-height: 1.08; }
-  .cover .deck{ font-size: 15px; }
-  .cover-meta{
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-  }
-  .cover-meta .m{ padding: 12px 10px; }
-  .cover-meta .v{ font-size: 20px; }
+  .cover .deck{ font-size: 15px; line-height: 1.5; }
+  .cover-text .eyebrow{ font-size: 10px; letter-spacing: 0.2em; margin-bottom: 14px; padding-bottom: 12px; }
+  .cover-meta{ gap: 1px; }
+  .cover-meta .m{ padding: 14px 12px; }
+  .cover-meta .v{ font-size: 22px; margin-top: 6px; }
   .cover-meta .v .u{ font-size: 10px; }
+  .cover-meta .k{ font-size: 9px; }
+  .cover-edition{ font-size: 9px; margin-top: 28px; }
 
   /* Module head — réduire mnum pour ne pas écraser le titre */
   .module-head{
@@ -1468,17 +1515,16 @@ ul.checks li::before{
     <span class="lg"><span class="mark"></span>Formaxia</span>
     <span>Programme officiel · Édition 2026</span>
   </div>
-  <div class="cover-tag">RS6776 · Officielle</div>
+  <div class="cover-tag">★ Certification RS6776 · Officielle</div>
 
   <div class="cover-grid">
-    <div>
+    <div class="cover-text">
       <span class="eyebrow" style="color: var(--or-soft);">Formation BTP · 2 jours · 14 heures</span>
       <h1>
-        L'Intelligence Artificielle <em>appliquée</em> au Bâtiment<br />et à la Gestion de Chantier.
+        L'Intelligence Artificielle <em>appliquée</em> au Bâtiment et à la Gestion de Chantier.
       </h1>
       <p class="deck">
-        Le programme officiel Formaxia — édition enrichie 2026, intégrant la méthode RTC,
-        la conformité RGPD chantier, et la maîtrise complète du DCE & Mémoire Technique.
+        Maîtrisez l'IA, le DCE et le Mémoire Technique en deux jours — édition officielle Formaxia 2026.
       </p>
     </div>
 
@@ -1491,7 +1537,7 @@ ul.checks li::before{
   </div>
 
   <div class="cover-edition">
-    Édition <b>2.0 · Mai 2026</b> · Programme enrichi · Document interne Formaxia
+    Édition <b>2.0 · Mai 2026</b>
   </div>
 </section>
 
