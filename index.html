@@ -450,6 +450,26 @@ section{ position: relative; }
 }
 @keyframes live-pulse{ 0%,100%{opacity:1} 50%{opacity:.5} }
 
+/* Mobile — empile les deux pills proprement, cache le séparateur */
+@media (max-width: 720px){
+  .hero-tag-row{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+  }
+  .hero-tag-row .sep{ display: none; }
+  .hero-tag-row .pill{
+    padding: 6px 12px;
+    white-space: nowrap;
+  }
+}
+@media (max-width: 360px){
+  .hero-tag-row{ font-size: 10px; letter-spacing: 0.14em; }
+  .hero-tag-row .pill{ white-space: normal; }
+}
+
 /* Hero floating spec card */
 .spec-card{
   position:absolute; left: -28px; bottom: -28px;
