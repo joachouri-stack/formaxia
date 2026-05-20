@@ -1521,6 +1521,81 @@ section{ position: relative; }
 .footer-bottom a:hover{ color: var(--or) }
 .footer-bottom .legal-links{ display: flex; gap: 24px; flex-wrap: wrap; }
 
+/* Bloc Accessibilité handicap dans le footer */
+.footer-handicap{
+  border-top: 1px solid rgba(201,168,76,.18);
+  margin-top: 24px;
+  padding: 22px 0 4px;
+}
+.fh-head{
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 14px;
+}
+.fh-icon{
+  font-size: 18px;
+  color: var(--or);
+  line-height: 1;
+}
+.fh-title{
+  font-family: var(--ff-display);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--blanc);
+  letter-spacing: -0.005em;
+}
+.fh-body{
+  display: flex; flex-wrap: wrap;
+  gap: 8px 28px;
+  align-items: baseline;
+}
+.fh-row{
+  display: inline-flex; align-items: baseline; gap: 8px;
+}
+.fh-k{
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(201,168,76,.6);
+}
+.fh-v{
+  font-size: 13.5px;
+  color: rgba(248,246,241,.88);
+}
+.fh-link{ text-decoration: none; transition: color .2s; }
+.fh-link:hover{ color: var(--or); }
+.fh-note{
+  width: 100%;
+  margin: 4px 0 0;
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: rgba(248,246,241,.4);
+}
+
+@media (max-width: 640px){
+  .footer-handicap{ padding: 20px 0 4px; margin-top: 20px; }
+  .fh-head{ margin-bottom: 12px; }
+  .fh-title{ font-size: 15px; }
+  .fh-body{
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .fh-row{
+    width: 100%;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(201,168,76,.08);
+  }
+  .fh-row:last-of-type{ border-bottom: 0; }
+  .fh-v{ font-size: 13px; }
+  .fh-note{
+    margin-top: 10px;
+    line-height: 1.5;
+  }
+}
+
 /* ─────────────────────────────────────────────────────────────────
    PROGRESS BAR + BACK-TO-TOP
    ───────────────────────────────────────────────────────────────── */
@@ -2400,8 +2475,26 @@ section{ position: relative; }
       </div>
     </div>
 
-    <div class="footer-handicap" style="border-top: 1px solid rgba(201,168,76,.18); padding: 20px 0; margin-top: 16px; font-family: var(--ff-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(248,246,241,.55);">
-      <strong style="color: var(--or); font-weight: 500;">♿ Accessibilité handicap</strong> — Référent : Johane Achouri · <a href="tel:+33769010202" style="color: rgba(248,246,241,.85); text-decoration: none;">07 69 01 02 02</a> · <a href="mailto:contact@formaxia.fr?subject=Accessibilité%20handicap" style="color: rgba(248,246,241,.85); text-decoration: none;">contact@formaxia.fr</a> — Adaptations étudiées au cas par cas en lien avec l'Agefiph &amp; Cap Emploi.
+    <div class="footer-handicap">
+      <div class="fh-head">
+        <span class="fh-icon" aria-hidden="true">♿</span>
+        <span class="fh-title">Accessibilité handicap</span>
+      </div>
+      <div class="fh-body">
+        <div class="fh-row">
+          <span class="fh-k">Référent</span>
+          <span class="fh-v">Johane Achouri</span>
+        </div>
+        <div class="fh-row">
+          <span class="fh-k">Téléphone</span>
+          <a class="fh-v fh-link" href="tel:+33769010202">07 69 01 02 02</a>
+        </div>
+        <div class="fh-row">
+          <span class="fh-k">Email</span>
+          <a class="fh-v fh-link" href="mailto:contact@formaxia.fr?subject=Accessibilité%20handicap">contact@formaxia.fr</a>
+        </div>
+        <p class="fh-note">Adaptations étudiées au cas par cas — Agefiph &amp; Cap Emploi.</p>
+      </div>
     </div>
 
     <div class="footer-bottom">
