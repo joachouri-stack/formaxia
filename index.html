@@ -287,16 +287,30 @@ section{ position: relative; }
   overflow: hidden;
 }
 
-/* Mobile — espacement resserré entre nav et 1ère pill (image reste sous le titre) */
+/* Mobile — H1 en premier, pills déplacées en bas du bloc texte */
 @media (max-width: 1080px){
-  .hero{ padding: 96px 0 56px; }
-  .hero-grid{ gap: 36px !important; }
+  .hero{ padding: 80px 0 56px; }
+  .hero-grid{ gap: 32px !important; }
+  .hero-grid > div:first-child{
+    display: flex;
+    flex-direction: column;
+  }
+  .hero-grid > div:first-child > .hero-tag-row{ order: 5; margin-top: 8px; }
+  .hero-grid > div:first-child > h1{ order: 1; margin-top: 0; }
+  .hero-grid > div:first-child > .sub{ order: 2; }
+  .hero-grid > div:first-child > .ctas{ order: 3; }
+  .hero-grid > div:first-child > .badges{ order: 4; }
+  /* Pills en mode 'tags' discrets en bas du hero mobile */
+  .hero-tag-row{
+    padding-top: 24px;
+    border-top: 1px solid rgba(201,168,76,.18);
+  }
 }
 @media (max-width: 720px){
-  .hero{ padding: 84px 0 48px; }
+  .hero{ padding: 72px 0 48px; }
 }
 @media (max-width: 480px){
-  .hero{ padding: 76px 0 40px; }
+  .hero{ padding: 64px 0 40px; }
 }
 .hero::before{
   /* subtle warm grain + radial light */
