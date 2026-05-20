@@ -829,6 +829,170 @@ ul.checks li::before{
 }
 @media print{ .side-rail{ display: none !important; } }
 
+/* ─────────────────────────────────────────────────────────────────
+   PAGE SYNTHÈSE — tout le programme en une seule vue
+   ───────────────────────────────────────────────────────────────── */
+.synthese .title{
+  margin-bottom: 4mm;
+}
+.syn-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14mm 14mm;
+  margin-top: 12mm;
+}
+.syn-block-wide{
+  grid-column: 1 / -1;
+}
+.syn-block{
+  position: relative;
+  padding-top: 4mm;
+  border-top: 1px solid var(--gris-line);
+}
+.syn-tag{
+  font-family: var(--ff-mono);
+  font-size: 8.5pt;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--or-deep);
+  margin-bottom: 4mm;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.syn-tag::before{
+  content: "";
+  width: 6px; height: 6px;
+  background: var(--or);
+  border-radius: 50%;
+  display: inline-block;
+}
+.syn-block p{
+  font-size: 11pt;
+  line-height: 1.55;
+  color: var(--noir);
+  margin: 0 0 3mm;
+}
+.syn-block p strong{
+  color: var(--noir);
+  font-weight: 600;
+}
+.syn-p-mini{
+  font-size: 10pt !important;
+  color: var(--gris-3) !important;
+  font-style: italic;
+}
+.syn-list{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.syn-list li{
+  position: relative;
+  padding-left: 22px;
+  margin-bottom: 7px;
+  font-size: 10.5pt;
+  line-height: 1.5;
+  color: var(--noir);
+}
+.syn-list li::before{
+  content: "→";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--or);
+  font-weight: 600;
+}
+.syn-days{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10mm;
+  margin-top: 2mm;
+}
+.syn-day{
+  padding: 6mm 6mm 5mm;
+  background: rgba(201,168,76,.06);
+  border: 1px solid rgba(201,168,76,.18);
+  border-radius: 8px;
+}
+.syn-day-h{
+  font-family: var(--ff-mono);
+  font-size: 9pt;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--or-deep);
+  margin-bottom: 4mm;
+  padding-bottom: 3mm;
+  border-bottom: 1px solid rgba(201,168,76,.25);
+}
+.syn-mods{
+  padding-left: 22px;
+  margin: 0;
+  font-size: 10.5pt;
+  line-height: 1.55;
+}
+.syn-mods li{
+  margin-bottom: 4px;
+  color: var(--noir);
+}
+.syn-mods li::marker{
+  color: var(--or);
+  font-family: var(--ff-mono);
+  font-size: 9pt;
+}
+.syn-steps{
+  padding-left: 24px;
+  margin: 2mm 0 0;
+  counter-reset: step;
+  list-style: none;
+}
+.syn-steps li{
+  position: relative;
+  padding: 8px 0 8px 14px;
+  margin-bottom: 4px;
+  font-size: 10.5pt;
+  line-height: 1.55;
+  color: var(--noir);
+  counter-increment: step;
+}
+.syn-steps li::before{
+  content: counter(step, decimal-leading-zero);
+  position: absolute;
+  left: -22px;
+  top: 8px;
+  font-family: var(--ff-mono);
+  font-size: 9pt;
+  color: var(--or);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+/* Responsive synthèse */
+@media screen and (max-width: 860px){
+  .syn-grid{
+    grid-template-columns: 1fr;
+    gap: 10mm;
+    margin-top: 8mm;
+  }
+  .syn-days{
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .syn-day{ padding: 18px 16px 14px; }
+  .syn-block p{ font-size: 15px; line-height: 1.55; }
+  .syn-list li,
+  .syn-mods li,
+  .syn-steps li{ font-size: 14.5px; }
+  .syn-tag{ font-size: 10.5px; }
+}
+@media screen and (max-width: 480px){
+  .syn-block p{ font-size: 14.5px; }
+  .syn-list li{ font-size: 14px; padding-left: 20px; }
+  .syn-mods li{ font-size: 14px; }
+  .syn-steps li{ font-size: 14px; padding-left: 10px; }
+  .syn-day-h{ font-size: 10px; }
+}
+
 .print-cta{
   position: fixed; right: 24px; bottom: 96px;
   z-index: 100;
@@ -1245,30 +1409,22 @@ ul.checks li::before{
 </head>
 <body>
 
-<!-- Side-rail TOC (visible sur desktop ≥ 1280px) -->
+<!-- Side-rail TOC (visible sur desktop ≥ 1340px) -->
 <aside class="side-rail" aria-label="Sommaire latéral">
   <div class="sr-head">Programme · 14h</div>
   <a href="#cover"><span class="sr-num">01</span>Couverture</a>
-  <a href="#sommaire"><span class="sr-num">02</span>Vue d'ensemble</a>
+  <a href="#description"><span class="sr-num">02</span>Description</a>
 
-  <div class="sr-group">Jour 01 · 7h</div>
-  <a href="#module-01"><span class="sr-num">M01</span>Comprendre l'IA</a>
-  <a href="#module-02"><span class="sr-num">M02</span>Les bons outils</a>
-  <a href="#module-03"><span class="sr-num">M03</span>Devis en 5 min</a>
-  <a href="#module-04"><span class="sr-num">M04</span>Paperasse + RGPD</a>
-  <a href="#module-05"><span class="sr-num">M05</span>Chantier pro</a>
+  <div class="sr-group">En détail</div>
+  <a href="#points-forts"><span class="sr-num">01</span>Points forts</a>
+  <a href="#objectifs"><span class="sr-num">02</span>Objectifs</a>
+  <a href="#contenu"><span class="sr-num">03</span>Contenu</a>
+  <a href="#resultats"><span class="sr-num">04</span>Résultats</a>
+  <a href="#certification"><span class="sr-num">05</span>Certification</a>
+  <a href="#modalites"><span class="sr-num">06</span>Modalités</a>
 
-  <div class="sr-group">Jour 02 · 7h</div>
-  <a href="#module-06"><span class="sr-num">M06</span>Acquisition clients</a>
-  <a href="#module-07"><span class="sr-num">M07</span>Analyse DCE</a>
-  <a href="#module-08"><span class="sr-num">M08</span>Rapports + plans MT</a>
-  <a href="#module-09"><span class="sr-num">M09</span>Mémoire Technique</a>
-  <a href="#module-10"><span class="sr-num">M10</span>Workflow + RS6776</a>
-
-  <div class="sr-group">Annexes</div>
-  <a href="#annexe-livrables"><span class="sr-num">A01</span>Livrables consolidés</a>
-  <a href="#annexe-rgpd"><span class="sr-num">A02</span>Charte IA &amp; RGPD</a>
-  <a href="#annexe-financement"><span class="sr-num">A03</span>Financement</a>
+  <div class="sr-group">Réservation</div>
+  <a href="#annexe-financement"><span class="sr-num">07</span>Financement</a>
 </aside>
 
 <!-- Barre de navigation fixe (masquée à l'impression) -->
@@ -1323,808 +1479,121 @@ ul.checks li::before{
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════════════════════
-     PAGE 2 — VUE D'ENSEMBLE
-     ════════════════════════════════════════════════════════════ -->
-<section class="page" data-screen-label="02 · Vue d'ensemble">
-  <div class="page-rail">
-    <span class="lg"><span class="mark"></span>Formaxia</span>
-    <span>Vue d'ensemble du programme</span>
-  </div>
-  <div class="page-body">
-    <span class="eyebrow">Section 01 · Vue d'ensemble</span>
-    <h1 class="title">14 heures pour transformer votre <em>façon de travailler</em>.</h1>
-    <p class="lede">
-      Un programme conçu pour les pros du terrain — zéro théorie inutile, 100% travaillé sur vos propres
-      cas concrets : vos devis, vos chantiers, vos appels d'offres, votre entreprise.
-    </p>
-
-    <div class="stats-row">
-      <div class="stat"><div class="v">14<span class="u">h</span></div><div class="k">de formation pratique sur deux jours consécutifs ou espacés</div></div>
-      <div class="stat"><div class="v">10</div><div class="k">modules opérationnels, validés par retours terrain</div></div>
-      <div class="stat"><div class="v">30+</div><div class="k">prompts spécialisés DCE, MT, devis, chantier</div></div>
-      <div class="stat"><div class="v">100<span class="u">%</span></div><div class="k">financé par OPCO Constructys — 0€ de reste à charge</div></div>
-    </div>
-
-    <h3 class="section-h">Les 4 piliers pédagogiques</h3>
-    <div class="three-col">
-      <div class="pillar">
-        <div class="h">Praticité</div>
-        <div class="s">Aucune diapositive théorique. Chaque module se conclut par un livrable que vous emportez et réutilisez dès la semaine suivante.</div>
-      </div>
-      <div class="pillar">
-        <div class="h">Vos vrais cas</div>
-        <div class="s">Devis en cours, DCE reçus, chantiers actuels. La formation se règle sur vos dossiers — pas l'inverse.</div>
-      </div>
-      <div class="pillar">
-        <div class="h">Sécurité &amp; RGPD</div>
-        <div class="s">Méthode d'anonymisation avant tout prompt sensible, charte d'usage IA pour votre entreprise, et liste rouge des données interdites.</div>
-      </div>
-    </div>
-
-    <h3 class="section-h">Méthodes pédagogiques mobilisées</h3>
-    <div class="method-grid">
-      <div class="method">
-        <span class="tag">Méthode 01</span>
-        <div class="h">RTC — Rôle · Tâche · Contexte</div>
-        <div class="s">Cadre de prompt structuré, testé sur les contextes BTP. Permet d'obtenir d'un même outil des résultats 3 à 5× plus précis.</div>
-      </div>
-      <div class="method">
-        <span class="tag">Méthode 02</span>
-        <div class="h">Anti-hallucination</div>
-        <div class="s">Protocole de contrôle et d'humanisation des sorties IA — vérification croisée, relecture experte, traçabilité des sources.</div>
-      </div>
-      <div class="method">
-        <span class="tag">Méthode 03</span>
-        <div class="h">Anonymisation pré-prompt</div>
-        <div class="s">Substitution systématique des noms clients, prix, adresses chantier, données salariés avant tout collage dans une IA gratuite.</div>
-      </div>
-      <div class="method">
-        <span class="tag">Méthode 04</span>
-        <div class="h">Workflow Claude Pro · Projects</div>
-        <div class="s">Paramétrage complet de Claude AI Pro avec base documentaire entreprise — MT types, références, procédures QSE.</div>
-      </div>
-    </div>
-  </div>
-  <div class="page-foot">
-    <span>Formaxia · Programme officiel · RS6776</span>
-    <span class="num"><b>02</b> / 16</span>
-  </div>
-</section>
 
 <!-- ════════════════════════════════════════════════════════════
-     PAGE 3 — SOMMAIRE
+     PAGE SYNTHÈSE — Tout le programme en une page
      ════════════════════════════════════════════════════════════ -->
-<section class="page" id="sommaire" data-screen-label="03 · Sommaire">
+<section class="page synthese" id="synthese" data-screen-label="02 · Programme synthèse">
   <div class="page-rail">
     <span class="lg"><span class="mark"></span>Formaxia</span>
-    <span>Sommaire des 10 modules</span>
+    <span>Programme · 14 heures · 10 modules</span>
   </div>
   <div class="page-body">
-    <span class="eyebrow">Section 02 · Sommaire</span>
-    <h1 class="title">Deux jours, dix modules, <em>un workflow opérationnel</em>.</h1>
+    <span class="eyebrow">Le programme en bref</span>
+    <h1 class="title" id="description">L'IA pour le BTP — en <em>2 jours</em>.</h1>
+    <p class="lede">Vous voulez tout savoir sans lire 16 pages ? Voilà l'essentiel de la formation, condensé. Pour les détails, on se voit sur le terrain.</p>
 
-    <div class="toc">
-      <div class="toc-day">
-        <div class="label">Jour 01 · 7 heures · Maîtriser les outils &amp; sécuriser l'usage</div>
-        <a class="toc-row" href="#module-01"><span class="n">M.01</span><span class="t">Comprendre l'IA sans se perdre</span><span class="d">45 min</span><span class="p">p. 04</span></a>
-        <a class="toc-row" href="#module-02"><span class="n">M.02</span><span class="t">Les outils qui changent tout — Claude Pro inclus</span><span class="d">1 h</span><span class="p">p. 05</span></a>
-        <a class="toc-row" href="#module-03"><span class="n">M.03</span><span class="t">Vos devis en 5 minutes chrono</span><span class="d">1 h 30</span><span class="p">p. 06</span></a>
-        <a class="toc-row" href="#module-04"><span class="n">M.04</span><span class="t">Fini la paperasse administrative — RGPD inclus</span><span class="d">1 h 30</span><span class="p">p. 07</span></a>
-        <a class="toc-row" href="#module-05"><span class="n">M.05</span><span class="t">Gérez votre chantier comme un pro — DOE inclus</span><span class="d">1 h 15</span><span class="p">p. 08</span></a>
+    <div class="syn-grid">
+
+      <!-- Description -->
+      <div class="syn-block" id="description-block">
+        <div class="syn-tag">01 · Description</div>
+        <p>Une formation pratique pour utiliser <strong>ChatGPT, Claude et Gemini</strong> dans votre quotidien BTP. En 2 jours, vous repartez avec un <strong>workflow IA complet</strong> pour automatiser vos devis, vos rapports, votre administratif et la rédaction de vos Mémoires Techniques.</p>
+        <p class="syn-p-mini">Zéro théorie. On travaille sur <em>vos vrais dossiers</em>.</p>
       </div>
 
-      <div class="toc-day">
-        <div class="label">Jour 02 · 7 heures · Conquérir &amp; gagner des marchés</div>
-        <a class="toc-row" href="#module-06"><span class="n">M.06</span><span class="t">Trouvez plus de clients avec l'IA</span><span class="d">1 h 30</span><span class="p">p. 09</span></a>
-        <a class="toc-row" href="#module-07"><span class="n">M.07</span><span class="t">Analyser un DCE en 3 niveaux de lecture</span><span class="d">1 h</span><span class="p">p. 10</span></a>
-        <a class="toc-row" href="#module-08"><span class="n">M.08</span><span class="t">Rapports de chantier &amp; plans de MT</span><span class="d">1 h</span><span class="p">p. 11</span></a>
-        <a class="toc-row" href="#module-09"><span class="n">M.09</span><span class="t">Rédiger un Mémoire Technique complet</span><span class="d">1 h 30</span><span class="p">p. 12</span></a>
-        <a class="toc-row" href="#module-10"><span class="n">M.10</span><span class="t">Votre workflow IA personnalisé &amp; certification</span><span class="d">1 h</span><span class="p">p. 13</span></a>
-      </div>
-    </div>
-
-    <h3 class="section-h" style="margin-top: 5mm;">Pages annexes</h3>
-    <a class="toc-row" href="#annexe-livrables"><span class="n">A.01</span><span class="t">Livrables consolidés — guide, templates, prompts</span><span class="d">—</span><span class="p">p. 14</span></a>
-    <a class="toc-row" href="#annexe-rgpd"><span class="n">A.02</span><span class="t">Charte d'usage IA en entreprise BTP &amp; RGPD</span><span class="d">—</span><span class="p">p. 15</span></a>
-    <a class="toc-row" href="#annexe-financement"><span class="n">A.03</span><span class="t">Éligibilité, financement, certification RS6776</span><span class="d">—</span><span class="p">p. 16</span></a>
-  </div>
-  <div class="page-foot">
-    <span>Formaxia · Programme officiel · RS6776</span>
-    <span class="num"><b>03</b> / 16</span>
-  </div>
-</section>
-
-<!-- ════════════════════════════════════════════════════════════
-     MODULE 01
-     ════════════════════════════════════════════════════════════ -->
-<section class="page" id="module-01" data-screen-label="04 · Module 01">
-  <div class="page-rail">
-    <span class="lg"><span class="mark"></span>Formaxia</span>
-    <span>Jour 01 · Module 01 / 10</span>
-  </div>
-  <div class="page-body">
-    <div class="module-head">
-      <div class="mnum">01</div>
-      <div>
-        <span class="kicker">Jour 01 · Fondations</span>
-        <h2 class="mtitle">Comprendre l'IA sans se <em>perdre</em>.</h2>
-      </div>
-      <div class="mdur">Durée<b>45 min</b></div>
-    </div>
-
-    <div class="module-body">
-      <div>
-        <h4 class="block-h">Objectifs <span class="count">04</span></h4>
-        <ul class="points">
-          <li>Distinguer ce que l'IA fait <em>vraiment</em> bien — et ce qu'elle ne fait pas.</li>
-          <li>Identifier les bons réflexes face à un outil génératif.</li>
-          <li>Choisir le bon modèle pour le bon usage chantier.</li>
-          <li>Repérer les 5 erreurs de prompt qui plombent les résultats BTP.</li>
-        </ul>
-
-        <h4 class="block-h" style="margin-top:6mm">Contenu détaillé</h4>
-        <ul class="points tight">
-          <li>Tour d'horizon non-technique : IA générative, modèles, contexte, hallucinations.</li>
-          <li>Les 4 grandes familles d'usage — rédaction, analyse, structuration, vision.</li>
-          <li>Cadre éthique &amp; limites — décision finale toujours humaine.</li>
+      <!-- Points forts -->
+      <div class="syn-block" id="points-forts">
+        <div class="syn-tag">02 · Les points forts</div>
+        <ul class="syn-list">
+          <li><strong>100% financée</strong> par Constructys — 0€ pour vous</li>
+          <li><strong>Certification RS6776</strong> reconnue par l'État, incluse</li>
+          <li><strong>Sur vos vrais dossiers</strong> — devis, DCE, chantiers en cours</li>
+          <li><strong>Présentiel ou distanciel</strong> — vous choisissez</li>
+          <li><strong>Support WhatsApp 12 mois</strong> après la formation</li>
+          <li><strong>Mises à jour gratuites</strong> du guide pendant un an</li>
         </ul>
       </div>
 
-      <div>
-        <h4 class="block-h">★ Enrichissements 2026</h4>
-        <div class="enriched">
-          <span class="pill">Nouveau<span class="src">Réf. 01</span></span>
-          <ul class="points tight" style="margin-bottom:3mm">
-            <li>Introduction au <em>comparatif</em> ChatGPT vs Claude vs Gemini vs Perplexity, vu côté BTP.</li>
-            <li>Les <em>5 erreurs de prompt</em> spécifiques chantier — prompts trop courts, contexte manquant, vocabulaire flou, confusion DTU/normes, manque de format de sortie.</li>
-          </ul>
-          <span class="pill">Nouveau<span class="src">Réf. 02</span></span>
-          <ul class="points tight">
-            <li>Premier aperçu du <em>workflow Claude Pro Projects</em> — la base documentaire entreprise comme accélérateur.</li>
-          </ul>
+      <!-- Objectifs -->
+      <div class="syn-block" id="objectifs">
+        <div class="syn-tag">03 · Objectifs</div>
+        <ul class="syn-list">
+          <li>Faire vos <strong>devis en 5 minutes</strong> au lieu de 3 heures</li>
+          <li>Lire un <strong>DCE complet en 2h</strong> au lieu d'une journée</li>
+          <li>Rédiger un <strong>Mémoire Technique gagnant</strong> en moins d'1h</li>
+          <li>Gagner <strong>+10h par semaine</strong> sur l'administratif</li>
+          <li>Maîtriser <strong>ChatGPT Pro, Claude et Gemini</strong></li>
+          <li>Sécuriser vos données — <strong>charte RGPD</strong> entreprise</li>
+        </ul>
+      </div>
+
+      <!-- Contenu -->
+      <div class="syn-block syn-block-wide" id="contenu">
+        <div class="syn-tag">04 · Contenu — 10 modules sur 2 jours</div>
+        <div class="syn-days">
+          <div class="syn-day">
+            <div class="syn-day-h">Jour 01 · 7h · Maîtriser &amp; sécuriser</div>
+            <ol class="syn-mods">
+              <li>Comprendre l'IA sans se perdre</li>
+              <li>Les bons outils — ChatGPT, Claude, Gemini</li>
+              <li>Vos devis en 5 minutes chrono</li>
+              <li>Fini la paperasse — RGPD inclus</li>
+              <li>Gérez votre chantier comme un pro</li>
+            </ol>
+          </div>
+          <div class="syn-day">
+            <div class="syn-day-h">Jour 02 · 7h · Gagner des marchés</div>
+            <ol class="syn-mods" start="6">
+              <li>Trouvez plus de clients avec l'IA</li>
+              <li>Analyser un DCE en 3 niveaux</li>
+              <li>Rapports chantier &amp; plans de MT</li>
+              <li>Rédiger un Mémoire Technique gagnant</li>
+              <li>Votre workflow IA &amp; certification RS6776</li>
+            </ol>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="deliverables">
-      <div class="lbl">Livrables<br />du module</div>
-      <div class="list">
-        <span class="pill-d">Mémo "IA : ce qu'elle fait / ne fait pas"</span>
-        <span class="pill-d new">Fiche · 5 erreurs de prompt BTP</span>
-        <span class="pill-d new">Comparateur outils — version courte</span>
+      <!-- Résultats attendus -->
+      <div class="syn-block" id="resultats">
+        <div class="syn-tag">05 · Résultats attendus</div>
+        <ul class="syn-list">
+          <li><strong>90% de temps gagné</strong> sur la rédaction de devis</li>
+          <li><strong>5× plus de Mémoires Techniques</strong> produits par mois</li>
+          <li><strong>+10h/semaine</strong> récupérées sur l'administratif</li>
+          <li><strong>Plus de soirées paperasse</strong> — vie pro et perso séparées</li>
+          <li><strong>Plus d'appels d'offres décrochés</strong> grâce aux meilleurs MT</li>
+        </ul>
       </div>
+
+      <!-- Certification -->
+      <div class="syn-block" id="certification">
+        <div class="syn-tag">06 · Certification</div>
+        <p><strong>Certification RS6776</strong> reconnue par l'État, inscrite au Répertoire Spécifique de France Compétences.</p>
+        <p class="syn-p-mini">Valide officiellement vos compétences en IA générative appliquée au métier. Délivrée à la fin des 14 heures de formation, sur la base des livrables produits sur vos vrais dossiers.</p>
+      </div>
+
+      <!-- Modalités -->
+      <div class="syn-block syn-block-wide" id="modalites">
+        <div class="syn-tag">07 · Modalités d'inscription</div>
+        <ol class="syn-steps">
+          <li><strong>Vous remplissez le formulaire</strong> — 2 minutes en bas de page</li>
+          <li><strong>On vous rappelle sous 24h ouvrées</strong> — pour comprendre votre activité</li>
+          <li><strong>On monte ensemble votre dossier Constructys</strong> — on s'occupe de tout</li>
+          <li><strong>Validation OPCO sous 15 jours</strong> — vous recevez la confirmation</li>
+          <li><strong>Vous suivez la formation</strong> — date au choix, sessions mensuelles</li>
+        </ol>
+      </div>
+
     </div>
   </div>
   <div class="page-foot">
-    <span>Module 01 · Comprendre l'IA</span>
-    <span class="num"><b>04</b> / 16</span>
+    <span>Programme synthèse</span>
+    <span class="num"><b>02</b> / 03</span>
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════════════════════
-     MODULE 02
-     ════════════════════════════════════════════════════════════ -->
-<section class="page" id="module-02" data-screen-label="05 · Module 02">
-  <div class="page-rail">
-    <span class="lg"><span class="mark"></span>Formaxia</span>
-    <span>Jour 01 · Module 02 / 10</span>
-  </div>
-  <div class="page-body">
-    <div class="module-head">
-      <div class="mnum">02</div>
-      <div>
-        <span class="kicker">Jour 01 · Outillage</span>
-        <h2 class="mtitle">Les outils qui <em>changent tout</em>.</h2>
-      </div>
-      <div class="mdur">Durée<b>1 h</b></div>
-    </div>
-
-    <div class="module-body">
-      <div>
-        <h4 class="block-h">Objectifs <span class="count">04</span></h4>
-        <ul class="points">
-          <li>Configurer ChatGPT, Claude, Copilot &amp; Perplexity en 10 minutes.</li>
-          <li>Choisir l'outil adapté à chaque tâche BTP.</li>
-          <li>Mettre en place un environnement de travail sécurisé.</li>
-          <li>Démarrer Claude Pro Projects avec sa base documentaire entreprise.</li>
-        </ul>
-
-        <h4 class="block-h" style="margin-top:6mm">Contenu détaillé</h4>
-        <ul class="points tight">
-          <li>Installation et premiers prompts sur les 4 outils, en parallèle.</li>
-          <li>Quelle version gratuite peut être utilisée dès demain, et pour quoi.</li>
-          <li>Quand passer payant — le seuil de bascule pour une PME BTP.</li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 class="block-h">★ Enrichissements 2026</h4>
-        <div class="enriched">
-          <span class="pill">Nouveau<span class="src">Réf. 01</span></span>
-          <ul class="points tight" style="margin-bottom:3mm">
-            <li><em>Comparatif détaillé</em> par métier BTP — gros œuvre, second œuvre, électricité, plomberie, TP, négoce.</li>
-            <li>Forces &amp; faiblesses outil par outil — précision technique, gestion fichiers, web search, vision.</li>
-          </ul>
-          <span class="pill">Nouveau<span class="src">Réf. 02</span></span>
-          <ul class="points tight">
-            <li><em>Paramétrage complet Claude AI Pro</em> — création de Projects, instructions personnalisées, System Prompt entreprise.</li>
-            <li><em>Upload de la base documentaire</em> — Mémoires Techniques types, références chantier, procédures QSE, fiches métier.</li>
-            <li>Bonnes pratiques de versioning : un Project par phase commerciale, un par chantier en cours.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="deliverables">
-      <div class="lbl">Livrables<br />du module</div>
-      <div class="list">
-        <span class="pill-d">Comptes IA configurés (4 outils)</span>
-        <span class="pill-d new">Matrice comparative outils × métiers BTP</span>
-        <span class="pill-d new">Project Claude Pro paramétré</span>
-        <span class="pill-d new">System Prompt entreprise</span>
-      </div>
-    </div>
-  </div>
-  <div class="page-foot">
-    <span>Module 02 · Les outils qui changent tout</span>
-    <span class="num"><b>05</b> / 16</span>
-  </div>
-</section>
-
-<!-- ════════════════════════════════════════════════════════════
-     MODULE 03
-     ════════════════════════════════════════════════════════════ -->
-<section class="page" id="module-03" data-screen-label="06 · Module 03">
-  <div class="page-rail">
-    <span class="lg"><span class="mark"></span>Formaxia</span>
-    <span>Jour 01 · Module 03 / 10</span>
-  </div>
-  <div class="page-body">
-    <div class="module-head">
-      <div class="mnum">03</div>
-      <div>
-        <span class="kicker">Jour 01 · Production</span>
-        <h2 class="mtitle">Vos devis en <em>5 minutes</em> chrono.</h2>
-      </div>
-      <div class="mdur">Durée<b>1 h 30</b></div>
-    </div>
-
-    <div class="module-body">
-      <div>
-        <h4 class="block-h">Objectifs <span class="count">05</span></h4>
-        <ul class="points">
-          <li>Générer un devis complet, calibré, professionnel en 5 à 10 min.</li>
-          <li>Maîtriser la méthode RTC (Rôle · Tâche · Contexte).</li>
-          <li>Vérifier qu'aucun poste n'est oublié grâce à la checklist IA.</li>
-          <li>Mettre à jour les prix matières automatiquement.</li>
-          <li>Calculer marge brute &amp; nette, tester 3 scénarios de prix.</li>
-        </ul>
-
-        <h4 class="block-h" style="margin-top:6mm">Contenu détaillé</h4>
-        <ul class="points tight">
-          <li>Templates de devis prêts à l'emploi — gros œuvre, second œuvre, TP.</li>
-          <li>Reformulation devis client — du jargon technique à la langue claire.</li>
-          <li>Atelier : vous arrivez avec 1 devis à faire, vous repartez avec 3 devis envoyés.</li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 class="block-h">★ Enrichissements 2026</h4>
-        <div class="enriched">
-          <span class="pill">Nouveau<span class="src">Réf. 01</span></span>
-          <ul class="points tight">
-            <li><em>Méthode RTC</em> appliquée au BTP — gabarit-cadre pour rédiger n'importe quel prompt devis.</li>
-            <li><em>Checklist IA</em> "aucun poste oublié" — 22 points de contrôle par typologie de devis.</li>
-            <li><em>Mise à jour des prix matières</em> assistée IA — acier, isolants, bitume, cuivre.</li>
-            <li><em>Calcul marge brute &amp; nette</em> automatisé — feuille de calcul fournie.</li>
-            <li><em>Test 3 scénarios</em> — prix basse / médiane / haute, en 1 prompt.</li>
-            <li>Les <em>5 erreurs de prompt</em> spécifiques au devis BTP — application directe.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="deliverables">
-      <div class="lbl">Livrables<br />du module</div>
-      <div class="list">
-        <span class="pill-d">Pack de templates devis</span>
-        <span class="pill-d new">Gabarit RTC · spécial devis</span>
-        <span class="pill-d new">Checklist 22 points — aucun poste oublié</span>
-        <span class="pill-d new">Outil prix matières + marges</span>
-        <span class="pill-d new">3 prompts scénarios de prix</span>
-      </div>
-    </div>
-  </div>
-  <div class="page-foot">
-    <span>Module 03 · Vos devis en 5 minutes</span>
-    <span class="num"><b>06</b> / 16</span>
-  </div>
-</section>
-
-<!-- ════════════════════════════════════════════════════════════
-     MODULE 04
-     ════════════════════════════════════════════════════════════ -->
-<section class="page" id="module-04" data-screen-label="07 · Module 04">
-  <div class="page-rail">
-    <span class="lg"><span class="mark"></span>Formaxia</span>
-    <span>Jour 01 · Module 04 / 10</span>
-  </div>
-  <div class="page-body">
-    <div class="module-head">
-      <div class="mnum">04</div>
-      <div>
-        <span class="kicker">Jour 01 · Administratif &amp; RGPD</span>
-        <h2 class="mtitle">Fini la <em>paperasse</em> administrative.</h2>
-      </div>
-      <div class="mdur">Durée<b>1 h 30</b></div>
-    </div>
-
-    <div class="module-body">
-      <div>
-        <h4 class="block-h">Objectifs <span class="count">05</span></h4>
-        <ul class="points">
-          <li>Rédiger emails, comptes-rendus, factures en quelques secondes.</li>
-          <li>Transformer un message vocal en compte rendu structuré.</li>
-          <li>Produire une lettre de levée de réserves prête à signer.</li>
-          <li>Sécuriser l'usage IA — savoir ce qu'on ne colle <em>jamais</em>.</li>
-          <li>Déployer une charte d'usage IA simple dans son entreprise.</li>
-        </ul>
-
-        <h4 class="block-h" style="margin-top:6mm">Contenu détaillé</h4>
-        <ul class="points tight">
-          <li>Modèles d'email : relance impayés, prise de RDV, réponse réclamation.</li>
-          <li>Compte-rendu réunion chantier — du vocal au document signable.</li>
-          <li>Factures : reformulation des prestations, mentions légales auto.</li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 class="block-h">★ Enrichissements 2026</h4>
-        <div class="enriched">
-          <span class="pill">Nouveau<span class="src">Réf. 01</span></span>
-          <ul class="points tight" style="margin-bottom:3mm">
-            <li><em>Vocal → Compte rendu structuré</em> — du WhatsApp audio au CR formaté en 90s.</li>
-            <li><em>Courrier levée de réserves automatique</em> — template + variables.</li>
-            <li><em>RGPD chantier — liste rouge</em> : ce qu'il ne faut <em>jamais</em> coller dans une IA gratuite — noms clients, prix, adresses chantier, données salariés, SIRET, IBAN.</li>
-            <li><em>Technique d'anonymisation</em> en 3 étapes avant tout prompt sensible.</li>
-            <li><em>Charte d'usage IA</em> en 1 page à diffuser dans l'entreprise.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="deliverables">
-      <div class="lbl">Livrables<br />du module</div>
-      <div class="list">
-        <span class="pill-d">15 modèles d'emails BTP</span>
-        <span class="pill-d new">Convertisseur vocal → CR</span>
-        <span class="pill-d new">Lettre levée de réserves type</span>
-        <span class="pill-d new">Liste rouge RGPD chantier</span>
-        <span class="pill-d new">Protocole anonymisation</span>
-        <span class="pill-d new">Charte d'usage IA · 1 page</span>
-      </div>
-    </div>
-  </div>
-  <div class="page-foot">
-    <span>Module 04 · Fini la paperasse</span>
-    <span class="num"><b>07</b> / 16</span>
-  </div>
-</section>
-
-<!-- ════════════════════════════════════════════════════════════
-     MODULE 05
-     ════════════════════════════════════════════════════════════ -->
-<section class="page" id="module-05" data-screen-label="08 · Module 05">
-  <div class="page-rail">
-    <span class="lg"><span class="mark"></span>Formaxia</span>
-    <span>Jour 01 · Module 05 / 10</span>
-  </div>
-  <div class="page-body">
-    <div class="module-head">
-      <div class="mnum">05</div>
-      <div>
-        <span class="kicker">Jour 01 · Gestion de chantier</span>
-        <h2 class="mtitle">Gérez votre chantier <em>comme un pro</em>.</h2>
-      </div>
-      <div class="mdur">Durée<b>1 h 15</b></div>
-    </div>
-
-    <div class="module-body">
-      <div>
-        <h4 class="block-h">Objectifs <span class="count">04</span></h4>
-        <ul class="points">
-          <li>Planifier équipes et tâches sans tableur infernal.</li>
-          <li>Anticiper et absorber les imprévus chantier.</li>
-          <li>Structurer un DOE conforme aux exigences du marché.</li>
-          <li>Générer fiches techniques produits &amp; notices d'entretien.</li>
-        </ul>
-
-        <h4 class="block-h" style="margin-top:6mm">Contenu détaillé</h4>
-        <ul class="points tight">
-          <li>Planning chantier semaine par semaine — recalage automatique en cas d'aléa.</li>
-          <li>Coordination équipe : ordres de mission, briefings rapides, suivi tâches.</li>
-          <li>Suivi des sous-traitants et co-traitants — relances, pointages.</li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 class="block-h">★ Enrichissements 2026</h4>
-        <div class="enriched">
-          <span class="pill">Nouveau<span class="src">Réf. 01</span></span>
-          <ul class="points tight">
-            <li><em>Structurer un DOE complet</em> conforme aux exigences marché public &amp; privé.</li>
-            <li><em>Fiches techniques produits</em> générées automatiquement à partir des données fournisseurs.</li>
-            <li><em>Plans de récolement</em> — structuration et nommage normés.</li>
-            <li><em>Notices d'entretien</em> client final — vulgarisation à partir des fiches constructeur.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="deliverables">
-      <div class="lbl">Livrables<br />du module</div>
-      <div class="list">
-        <span class="pill-d">Modèle planning chantier IA</span>
-        <span class="pill-d">Pack ordres de mission &amp; briefings</span>
-        <span class="pill-d new">Squelette DOE conforme</span>
-        <span class="pill-d new">Générateur fiches techniques produits</span>
-        <span class="pill-d new">Template notices d'entretien client</span>
-      </div>
-    </div>
-  </div>
-  <div class="page-foot">
-    <span>Module 05 · Gestion de chantier</span>
-    <span class="num"><b>08</b> / 16</span>
-  </div>
-</section>
-
-<!-- CTA intermédiaire — fin Jour 01 -->
-<aside class="cta-break" aria-label="Réserver ma place">
-  <div class="cta-break-inner">
-    <div>
-      <div class="cta-break-eyebrow">Fin du Jour 01 · 5 modules sur 10</div>
-      <div class="cta-break-title">Convaincu·e par la première journée ?</div>
-    </div>
-    <a href="/#contact" class="cta-break-btn">
-      S'inscrire gratuitement
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-    </a>
-  </div>
-</aside>
-
-<!-- ════════════════════════════════════════════════════════════
-     MODULE 06
-     ════════════════════════════════════════════════════════════ -->
-<section class="page" id="module-06" data-screen-label="09 · Module 06">
-  <div class="page-rail">
-    <span class="lg"><span class="mark"></span>Formaxia</span>
-    <span>Jour 02 · Module 06 / 10</span>
-  </div>
-  <div class="page-body">
-    <div class="module-head">
-      <div class="mnum">06</div>
-      <div>
-        <span class="kicker">Jour 02 · Acquisition clients</span>
-        <h2 class="mtitle">Trouvez plus de clients <em>avec l'IA</em>.</h2>
-      </div>
-      <div class="mdur">Durée<b>1 h 30</b></div>
-    </div>
-
-    <div class="module-body">
-      <div>
-        <h4 class="block-h">Objectifs <span class="count">05</span></h4>
-        <ul class="points">
-          <li>Rédiger des emails commerciaux qui obtiennent une réponse.</li>
-          <li>Répondre aux avis Google avec professionnalisme et constance.</li>
-          <li>Présenter ses services dans un langage qui parle au client final.</li>
-          <li>Construire un calendrier éditorial réseau social tenable.</li>
-          <li>Mesurer l'impact réel — vues, contacts, demandes de devis.</li>
-        </ul>
-
-        <h4 class="block-h" style="margin-top:6mm">Contenu détaillé</h4>
-        <ul class="points tight">
-          <li>Le tunnel commercial BTP — prospection, devis, signature, recommandation.</li>
-          <li>Page Google Business, site vitrine, fiche métier — copy et photos IA.</li>
-          <li>Réponses aux appels d'offres privés &amp; demandes de devis en ligne.</li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 class="block-h">★ Enrichissements 2026</h4>
-        <div class="enriched">
-          <span class="pill">Nouveau<span class="src">Réf. 01</span></span>
-          <ul class="points tight">
-            <li><em>Carrousels réseaux sociaux</em> — gabarit "5 erreurs à éviter quand on…" décliné par métier.</li>
-            <li><em>Calendrier éditorial 4 piliers</em> : expertise, coulisses, témoignages, valeurs.</li>
-            <li><em>Mesure d'engagement</em> et de demandes de devis générées — tableau de bord simple.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="deliverables">
-      <div class="lbl">Livrables<br />du module</div>
-      <div class="list">
-        <span class="pill-d">10 modèles email commerciaux</span>
-        <span class="pill-d">Pack réponses avis Google</span>
-        <span class="pill-d new">5 gabarits carrousel "5 erreurs"</span>
-        <span class="pill-d new">Calendrier éditorial · 4 piliers</span>
-        <span class="pill-d new">Tableau de bord KPI réseaux</span>
-      </div>
-    </div>
-  </div>
-  <div class="page-foot">
-    <span>Module 06 · Acquisition clients</span>
-    <span class="num"><b>09</b> / 16</span>
-  </div>
-</section>
-
-<!-- ════════════════════════════════════════════════════════════
-     MODULE 07
-     ════════════════════════════════════════════════════════════ -->
-<section class="page" id="module-07" data-screen-label="10 · Module 07">
-  <div class="page-rail">
-    <span class="lg"><span class="mark"></span>Formaxia</span>
-    <span>Jour 02 · Module 07 / 10</span>
-  </div>
-  <div class="page-body">
-    <div class="module-head">
-      <div class="mnum">07</div>
-      <div>
-        <span class="kicker">Jour 02 · Analyse documentaire</span>
-        <h2 class="mtitle">Analyser un DCE <em>en 3 niveaux</em> de lecture.</h2>
-      </div>
-      <div class="mdur">Durée<b>1 h</b></div>
-    </div>
-
-    <div class="module-body">
-      <div>
-        <h4 class="block-h">Objectifs <span class="count">05</span></h4>
-        <ul class="points">
-          <li>Lire un DCE en moins d'une heure au lieu d'une journée.</li>
-          <li>Extraire automatiquement 15 informations critiques d'un DCE.</li>
-          <li>Décortiquer un CCAP pour identifier les risques financiers.</li>
-          <li>Synthétiser un CCTP — normes, matériaux, moyens requis.</li>
-          <li>Prendre une décision <em>Go / No Go</em> argumentée en 30 minutes.</li>
-        </ul>
-
-        <h4 class="block-h" style="margin-top:6mm">Contenu détaillé</h4>
-        <ul class="points tight">
-          <li>Importer un DCE complet dans Claude Pro — bonnes pratiques d'upload.</li>
-          <li>Analyse de plans, CCTP, DPGF, BPU, RC, AE — l'IA lit, vous décidez.</li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 class="block-h">★ Enrichissements 2026</h4>
-        <div class="enriched">
-          <span class="pill">Nouveau<span class="src">Réf. 02</span></span>
-          <ul class="points tight">
-            <li><em>3 niveaux de lecture d'un DCE</em> — survol stratégique, lecture experte, scan opérationnel.</li>
-            <li><em>15 informations critiques</em> à extraire automatiquement — montant, délai, pondérations, garanties, pénalités, variantes autorisées, etc.</li>
-            <li><em>Décortiquer le CCAP</em> — repérer les clauses financières à risque (révision prix, retenue, avances).</li>
-            <li><em>Synthétiser le CCTP</em> — extraction normes &amp; matériaux clés en 1 page.</li>
-            <li><em>Fiche synthèse + verdict Go/No Go</em> argumenté.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="deliverables">
-      <div class="lbl">Livrables<br />du module</div>
-      <div class="list">
-        <span class="pill-d new">Gabarit "3 niveaux de lecture DCE"</span>
-        <span class="pill-d new">Template fiche 15 infos critiques</span>
-        <span class="pill-d new">Grille analyse CCAP — risques</span>
-        <span class="pill-d new">Template synthèse CCTP</span>
-        <span class="pill-d new">Modèle décision Go / No Go</span>
-      </div>
-    </div>
-  </div>
-  <div class="page-foot">
-    <span>Module 07 · Analyser un DCE</span>
-    <span class="num"><b>10</b> / 16</span>
-  </div>
-</section>
-
-<!-- ════════════════════════════════════════════════════════════
-     MODULE 08
-     ════════════════════════════════════════════════════════════ -->
-<section class="page" id="module-08" data-screen-label="11 · Module 08">
-  <div class="page-rail">
-    <span class="lg"><span class="mark"></span>Formaxia</span>
-    <span>Jour 02 · Module 08 / 10</span>
-  </div>
-  <div class="page-body">
-    <div class="module-head">
-      <div class="mnum">08</div>
-      <div>
-        <span class="kicker">Jour 02 · Rapports &amp; plans de MT</span>
-        <h2 class="mtitle">Rapports automatiques &amp; <em>plans de MT</em>.</h2>
-      </div>
-      <div class="mdur">Durée<b>1 h</b></div>
-    </div>
-
-    <div class="module-body">
-      <div>
-        <h4 class="block-h">Objectifs <span class="count">04</span></h4>
-        <ul class="points">
-          <li>Générer un rapport d'avancement de chantier en 3 minutes.</li>
-          <li>Partager auto en 1 clic — client, MOE, sous-traitants.</li>
-          <li>Construire un plan de Mémoire Technique adapté aux critères du DCE.</li>
-          <li>Comparer 3 plans MT alternatifs et choisir le plus convaincant.</li>
-        </ul>
-
-        <h4 class="block-h" style="margin-top:6mm">Contenu détaillé</h4>
-        <ul class="points tight">
-          <li>Du carnet papier au rapport PDF formaté — par dictée vocale ou photos.</li>
-          <li>Templates rapport hebdo, rapport mensuel, rapport de fin de chantier.</li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 class="block-h">★ Enrichissements 2026</h4>
-        <div class="enriched">
-          <span class="pill">Nouveau<span class="src">Réf. 02</span></span>
-          <ul class="points tight">
-            <li><em>Construire un plan MT</em> calé sur les critères &amp; pondérations exactes du DCE.</li>
-            <li><em>Comparer 3 plans alternatifs</em> — table de scoring + matrice de décision.</li>
-            <li>Mapping plan MT × pondérations — pour ne jamais sortir hors-sujet.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="deliverables">
-      <div class="lbl">Livrables<br />du module</div>
-      <div class="list">
-        <span class="pill-d">3 templates de rapport chantier</span>
-        <span class="pill-d new">Gabarit plan MT adapté DCE</span>
-        <span class="pill-d new">Outil comparatif 3 plans MT</span>
-      </div>
-    </div>
-  </div>
-  <div class="page-foot">
-    <span>Module 08 · Rapports &amp; plans MT</span>
-    <span class="num"><b>11</b> / 16</span>
-  </div>
-</section>
-
-<!-- ════════════════════════════════════════════════════════════
-     MODULE 09
-     ════════════════════════════════════════════════════════════ -->
-<section class="page" id="module-09" data-screen-label="12 · Module 09">
-  <div class="page-rail">
-    <span class="lg"><span class="mark"></span>Formaxia</span>
-    <span>Jour 02 · Module 09 / 10</span>
-  </div>
-  <div class="page-body">
-    <div class="module-head">
-      <div class="mnum">09</div>
-      <div>
-        <span class="kicker">Jour 02 · Mémoire Technique</span>
-        <h2 class="mtitle">Rédiger un <em>Mémoire Technique</em> complet.</h2>
-      </div>
-      <div class="mdur">Durée<b>1 h 30</b></div>
-    </div>
-
-    <div class="module-body">
-      <div>
-        <h4 class="block-h">Objectifs <span class="count">06</span></h4>
-        <ul class="points">
-          <li>Atelier : on travaille sur <em>vos</em> dossiers réels.</li>
-          <li>Rédiger les 5 sections clés d'un Mémoire Technique gagnant.</li>
-          <li>Mobiliser les 30 prompts spécialisés DCE &amp; MT.</li>
-          <li>Remplir le template Word MT complet de Formaxia.</li>
-          <li>Contrôler &amp; humaniser les sorties IA — anti-hallucination.</li>
-          <li>Repartir avec un MT prêt à déposer ou ses 3 premières sections.</li>
-        </ul>
-
-        <h4 class="block-h" style="margin-top:6mm">Contenu détaillé</h4>
-        <ul class="points tight">
-          <li>Cas pratique sur dossier réel apporté par le stagiaire.</li>
-          <li>Itération de prompt — du brouillon au paragraphe convaincant.</li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 class="block-h">★ Enrichissements 2026</h4>
-        <div class="enriched">
-          <span class="pill">Nouveau<span class="src">Réf. 02</span></span>
-          <ul class="points tight">
-            <li><em>Les 5 sections clés du MT</em> — présentation entreprise, méthodologie d'exécution, moyens, engagements QSE, sécurité.</li>
-            <li><em>30 prompts spécialisés</em> DCE + Mémoire Technique, classés par section.</li>
-            <li><em>Template Word MT complet</em> — planning Gantt, organigramme, tableaux de moyens humains et matériels.</li>
-            <li><em>Contrôle anti-hallucination</em> — vérifier chiffres, normes, références citées par l'IA.</li>
-            <li><em>Humanisation</em> de la sortie — relecture experte, ajustement tonalité entreprise.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="deliverables">
-      <div class="lbl">Livrables<br />du module</div>
-      <div class="list">
-        <span class="pill-d new">Pack 30 prompts DCE + MT</span>
-        <span class="pill-d new">Template Word MT complet</span>
-        <span class="pill-d new">Grille anti-hallucination</span>
-        <span class="pill-d new">Sections rédigées sur votre dossier</span>
-      </div>
-    </div>
-  </div>
-  <div class="page-foot">
-    <span>Module 09 · Mémoire Technique</span>
-    <span class="num"><b>12</b> / 16</span>
-  </div>
-</section>
-
-<!-- ════════════════════════════════════════════════════════════
-     MODULE 10
-     ════════════════════════════════════════════════════════════ -->
-<section class="page" id="module-10" data-screen-label="13 · Module 10">
-  <div class="page-rail">
-    <span class="lg"><span class="mark"></span>Formaxia</span>
-    <span>Jour 02 · Module 10 / 10</span>
-  </div>
-  <div class="page-body">
-    <div class="module-head">
-      <div class="mnum">10</div>
-      <div>
-        <span class="kicker">Jour 02 · Workflow &amp; certification</span>
-        <h2 class="mtitle">Votre <em>workflow IA</em> personnalisé.</h2>
-      </div>
-      <div class="mdur">Durée<b>1 h</b></div>
-    </div>
-
-    <div class="module-body">
-      <div>
-        <h4 class="block-h">Objectifs <span class="count">05</span></h4>
-        <ul class="points">
-          <li>Construire un plan d'action sur mesure post-formation.</li>
-          <li>Consolider tous les outils en un workflow quotidien.</li>
-          <li>Identifier les 3 routines à automatiser dès lundi matin.</li>
-          <li>Prévoir l'extension à l'équipe — charte, formation interne.</li>
-          <li>Passer la certification <em>RS6776</em> officielle.</li>
-        </ul>
-
-        <h4 class="block-h" style="margin-top:6mm">Contenu détaillé</h4>
-        <ul class="points tight">
-          <li>Plan d'action 7 / 30 / 90 jours — gains attendus mesurables.</li>
-          <li>Configuration finale Claude Pro Projects, raccourcis, signets.</li>
-          <li>Préparation à la certification RS6776 — épreuve, modalités, planning.</li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 class="block-h">★ Enrichissements 2026</h4>
-        <div class="enriched">
-          <span class="pill">Nouveau<span class="src">Réf. 01 + 02</span></span>
-          <ul class="points tight">
-            <li><em>Workflow type</em> consolidant : prompt RTC + base Claude Pro + charte RGPD + 30 prompts MT.</li>
-            <li><em>Rituel hebdomadaire</em> recommandé : 30 min de tuning des prompts entreprise.</li>
-            <li>Plan d'extension équipe — montée en compétence en 4 semaines.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="deliverables">
-      <div class="lbl">Livrables<br />du module</div>
-      <div class="list">
-        <span class="pill-d">Plan d'action 7 / 30 / 90 jours</span>
-        <span class="pill-d">Configuration finale Claude Pro</span>
-        <span class="pill-d">Certificat de formation Formaxia</span>
-        <span class="pill-d new">Workflow IA consolidé · 1 page</span>
-        <span class="pill-d">Préparation RS6776</span>
-      </div>
-    </div>
-  </div>
-  <div class="page-foot">
-    <span>Module 10 · Workflow personnalisé</span>
-    <span class="num"><b>13</b> / 16</span>
-  </div>
-</section>
 
 <!-- CTA intermédiaire — fin Jour 02 -->
 <aside class="cta-break" aria-label="Réserver ma place">
@@ -2141,147 +1610,9 @@ ul.checks li::before{
 </aside>
 
 <!-- ════════════════════════════════════════════════════════════
-     PAGE 14 — LIVRABLES CONSOLIDÉS
-     ════════════════════════════════════════════════════════════ -->
-<section class="page" id="annexe-livrables" data-screen-label="14 · Livrables consolidés">
-  <div class="page-rail">
-    <span class="lg"><span class="mark"></span>Formaxia</span>
-    <span>Annexe 01 · Livrables consolidés</span>
-  </div>
-  <div class="page-body">
-    <span class="eyebrow">Annexe 01 · Ce que vous emportez</span>
-    <h2 class="title">Tout ce que vous repartez avec — <em>concrètement</em>.</h2>
-
-    <div class="deliv-grid">
-      <div class="deliv-card">
-        <div class="src-tag">Documents — 5</div>
-        <h4>Guide &amp; supports</h4>
-        <ul class="checks">
-          <li>Guide pratique IA BTP — 50 pages, version 2026 enrichie</li>
-          <li>Pack 30 prompts spécialisés DCE + Mémoire Technique</li>
-          <li>Comparateur outils ChatGPT / Claude / Gemini / Perplexity × métiers</li>
-          <li>Charte d'usage IA pour l'entreprise — 1 page diffusable</li>
-          <li>Liste rouge RGPD chantier — données à ne jamais coller</li>
-        </ul>
-      </div>
-
-      <div class="deliv-card">
-        <div class="src-tag">Templates — 8</div>
-        <h4>Modèles prêts à l'emploi</h4>
-        <ul class="checks">
-          <li>Pack templates de devis (gros œuvre, second œuvre, TP)</li>
-          <li>Template Word Mémoire Technique complet (Gantt, organigramme)</li>
-          <li>Squelette DOE conforme exigences marché</li>
-          <li>Fiches techniques produits &amp; notices d'entretien</li>
-          <li>15 modèles d'emails BTP + 10 emails commerciaux</li>
-          <li>Pack réponses avis Google + 5 gabarits carrousel</li>
-          <li>Lettre type "levée de réserves"</li>
-          <li>3 templates rapport chantier (hebdo, mensuel, fin)</li>
-        </ul>
-      </div>
-
-      <div class="deliv-card">
-        <div class="src-tag">Outils — 6</div>
-        <h4>Outils &amp; gabarits</h4>
-        <ul class="checks">
-          <li>Project Claude Pro paramétré + System Prompt entreprise</li>
-          <li>Checklist 22 points "aucun poste oublié"</li>
-          <li>Outil prix matières + calcul marges brutes &amp; nettes</li>
-          <li>3 prompts scénarios de prix (basse / médiane / haute)</li>
-          <li>Grille analyse CCAP risques + template synthèse CCTP</li>
-          <li>Modèle décision Go / No Go + matrice 3 plans MT</li>
-        </ul>
-      </div>
-
-      <div class="deliv-card">
-        <div class="src-tag">Certifications &amp; suivi</div>
-        <h4>Reconnaissance &amp; support</h4>
-        <ul class="checks">
-          <li>Certificat de formation Formaxia officiel</li>
-          <li>Préparation à la certification <strong>RS6776</strong></li>
-          <li>Accès aux ressources en ligne — 1 an</li>
-          <li>Support post-formation par WhatsApp Business</li>
-          <li>Mises à jour gratuites du guide pendant 12 mois</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="page-foot">
-    <span>Annexe 01 · Livrables consolidés</span>
-    <span class="num"><b>14</b> / 16</span>
-  </div>
-</section>
-
-<!-- ════════════════════════════════════════════════════════════
-     PAGE 15 — CHARTE IA + RGPD
-     ════════════════════════════════════════════════════════════ -->
-<section class="page" id="annexe-rgpd" data-screen-label="15 · Charte IA & RGPD">
-  <div class="page-rail">
-    <span class="lg"><span class="mark"></span>Formaxia</span>
-    <span>Annexe 02 · Charte d'usage IA &amp; RGPD</span>
-  </div>
-  <div class="page-body">
-    <span class="eyebrow">Annexe 02 · Sécuriser l'usage IA</span>
-    <h2 class="title">Une charte simple — pour <em>protéger</em> votre entreprise.</h2>
-    <p class="lede">Aperçu de la charte fournie pendant la formation, prête à être adaptée à votre nom commercial et diffusée à vos équipes.</p>
-
-    <div class="two-col" style="margin-top: 6mm;">
-      <div class="charter">
-        <h4>Charte d'usage IA — extrait</h4>
-        <ol>
-          <li>Tout collaborateur peut utiliser l'IA pour rédiger, structurer ou analyser un document professionnel.</li>
-          <li>Aucune donnée client nominative (nom, prénom, adresse, téléphone, mail) n'est collée dans une IA <em>gratuite</em>.</li>
-          <li>Aucun prix de devis, marge, salaire, ou information financière n'est partagé en clair avec une IA.</li>
-          <li>Les documents marqués <em>« confidentiel »</em>, CCAP signés et MT remis ne sont traités que dans Claude Pro Projects (compte entreprise).</li>
-          <li>La sortie IA est <em>toujours</em> relue par un humain avant envoi extérieur.</li>
-          <li>En cas de doute, voir la liste rouge RGPD chantier (annexe), ou demander au référent IA.</li>
-        </ol>
-      </div>
-
-      <div>
-        <h4 class="block-h">Liste rouge — données à ne jamais coller</h4>
-        <ul class="checks">
-          <li>Noms, prénoms, coordonnées clients &amp; salariés</li>
-          <li>Adresses précises de chantiers privés</li>
-          <li>Prix négociés, marges, remises, BPU complets</li>
-          <li>SIRET, RIB / IBAN, numéros TVA, mots de passe</li>
-          <li>Données médicales ou disciplinaires salariés</li>
-          <li>Mémoires techniques de concurrents reçus en sous-traitance</li>
-        </ul>
-
-        <h4 class="block-h" style="margin-top: 6mm">Protocole d'anonymisation · 3 étapes</h4>
-        <ul class="points tight">
-          <li>1. <em>Substituer</em> noms et adresses par des variables — <span class="mono">{CLIENT_A}</span>, <span class="mono">{CHANTIER_01}</span>.</li>
-          <li>2. <em>Masquer</em> les montants — remplacer par fourchettes ou ordres de grandeur.</li>
-          <li>3. <em>Vérifier</em> qu'aucune donnée identifiante ne reste avant de coller dans l'IA.</li>
-        </ul>
-      </div>
-    </div>
-
-    <h3 class="section-h">Indicateurs &amp; KPIs post-formation</h3>
-    <table class="kpi-table">
-      <thead>
-        <tr><th>Indicateur</th><th>Avant</th><th>Après · 1 mois</th><th>Cible · 3 mois</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Temps moyen pour rédiger un devis</td><td class="num">~ 3 h</td><td class="num">~ 25 min</td><td class="num">~ 10 min</td></tr>
-        <tr><td>Temps pour lire un DCE complet</td><td class="num">1 journée</td><td class="num">2 h</td><td class="num">45 min</td></tr>
-        <tr><td>Mémoires techniques produits / mois</td><td class="num">1 – 2</td><td class="num">3 – 4</td><td class="num">5 +</td></tr>
-        <tr><td>Heures admin gagnées / semaine</td><td class="num">—</td><td class="num">+ 6 h</td><td class="num">+ 10 h</td></tr>
-        <tr><td>Soirées de paperasse</td><td class="num">2 – 3</td><td class="num">1</td><td class="num">0</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="page-foot">
-    <span>Annexe 02 · Charte &amp; KPIs</span>
-    <span class="num"><b>15</b> / 16</span>
-  </div>
-</section>
-
-<!-- ════════════════════════════════════════════════════════════
      PAGE 16 — FINANCEMENT & CERTIFICATION (DARK)
      ════════════════════════════════════════════════════════════ -->
-<section class="page dark" id="annexe-financement" data-screen-label="16 · Financement & certification">
+<section class="page dark" id="annexe-financement" data-screen-label="03 · Financement & certification">
   <div class="page-rail">
     <span class="lg"><span class="mark"></span>Formaxia</span>
     <span>Annexe 03 · Éligibilité, financement &amp; certification</span>
@@ -2350,7 +1681,7 @@ ul.checks li::before{
   </div>
   <div class="page-foot">
     <span>Annexe 03 · Officiel · Constructys agréé · RS6776</span>
-    <span class="num"><b>16</b> / 16</span>
+    <span class="num"><b>03</b> / 03</span>
   </div>
 </section>
 
