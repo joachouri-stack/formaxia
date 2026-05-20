@@ -663,8 +663,7 @@ section{ position: relative; }
 }
 .prog-day:hover{
   border-color: var(--or);
-  transform: translateY(-4px) scale(1.02) !important;
-  box-shadow: 0 1px 3px rgba(10,10,15,.04), 0 26px 56px rgba(10,10,15,.12);
+  box-shadow: 0 1px 3px rgba(10,10,15,.04), 0 18px 44px rgba(10,10,15,.08);
 }
 .prog-day .day-tag{
   background: linear-gradient(180deg, var(--noir) 0%, #14141c 100%);
@@ -715,10 +714,16 @@ section{ position: relative; }
   border-top: 1px solid var(--gris-line);
 }
 .prog-day-list li{
-  padding: 14px 0;
+  padding: 14px 10px;
   border-bottom: 1px solid var(--gris-line);
   font-size: 14.5px; color: var(--gris);
   display: flex; align-items: center; gap: 12px;
+  border-radius: 6px;
+  transform-origin: left center;
+  transition: transform .25s cubic-bezier(.2,.7,.3,1),
+              color .25s ease,
+              background .25s ease,
+              padding-left .25s ease;
 }
 .prog-day-list li::before{
   content: "";
@@ -726,6 +731,21 @@ section{ position: relative; }
   border-radius: 50%;
   background: var(--or);
   flex: 0 0 auto;
+  transition: transform .25s cubic-bezier(.2,.7,.3,1),
+              background .25s ease,
+              box-shadow .25s ease;
+}
+.prog-day-list li:hover{
+  transform: scale(1.04) !important;
+  color: var(--noir);
+  background: rgba(201,168,76,.07);
+  padding-left: 16px;
+  font-weight: 500;
+}
+.prog-day-list li:hover::before{
+  transform: scale(1.6);
+  background: var(--or-deep);
+  box-shadow: 0 0 0 4px rgba(201,168,76,.18);
 }
 
 .modules{ display:grid; grid-template-columns: repeat(5, 1fr); gap: 0; border-top: 1px solid var(--gris-line); }
