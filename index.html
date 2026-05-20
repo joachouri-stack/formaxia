@@ -797,6 +797,82 @@ section{ position: relative; }
 }
 
 /* ─────────────────────────────────────────────────────────────────
+   RÉSULTATS PUBLICS (Qualiopi)
+   ───────────────────────────────────────────────────────────────── */
+.resultats{
+  background: var(--noir);
+  color: var(--blanc);
+  position: relative;
+}
+.resultats .eyebrow{ color: var(--or-soft); }
+.resultats .h-display{ color: var(--blanc); }
+.resultats .h-display em{ color: var(--or); font-style: italic; }
+.resultats .lede{ color: rgba(248,246,241,.7); }
+.resultats-grid{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.result-card{
+  position: relative;
+  padding: 36px 28px 32px;
+  background: rgba(201,168,76,.04);
+  border: 1px solid rgba(201,168,76,.18);
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: border-color .3s, background .3s, transform .3s;
+}
+.result-card:hover{
+  border-color: rgba(201,168,76,.45);
+  background: rgba(201,168,76,.07);
+  transform: translateY(-4px);
+}
+.rc-icon{
+  font-family: var(--ff-display);
+  font-size: 28px;
+  color: var(--or);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.rc-value{
+  font-family: var(--ff-display);
+  font-size: 56px;
+  font-weight: 500;
+  color: var(--blanc);
+  line-height: 1;
+  letter-spacing: -0.025em;
+}
+.rc-label{
+  font-family: var(--ff-display);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--blanc);
+  line-height: 1.25;
+}
+.rc-note{
+  font-family: var(--ff-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(201,168,76,.6);
+  line-height: 1.4;
+  margin-top: 4px;
+}
+@media (max-width: 960px){
+  .resultats-grid{ grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .result-card{ padding: 28px 22px 24px; }
+  .rc-value{ font-size: 44px; }
+}
+@media (max-width: 560px){
+  .resultats-grid{ grid-template-columns: 1fr; }
+  .result-card{ padding: 26px 22px; }
+  .rc-value{ font-size: 40px; }
+  .rc-label{ font-size: 15px; }
+}
+
+/* ─────────────────────────────────────────────────────────────────
    TÉMOIGNAGES
    ───────────────────────────────────────────────────────────────── */
 .testimonials{
@@ -1412,6 +1488,7 @@ section{ position: relative; }
     <a href="/">Accueil</a>
     <a href="/financement/">Financement</a>
     <a href="/programme/">Programme</a>
+    <a href="#resultats">Résultats</a>
     <a href="#about">À Propos</a>
   </nav>
   <div class="cta-wrap" style="display:flex; align-items:center; gap:12px;">
@@ -1775,6 +1852,64 @@ section{ position: relative; }
 </section>
 
 <!-- ════════════════════════════════════════════════════════════
+     RÉSULTATS PUBLICS (obligation Qualiopi)
+     ════════════════════════════════════════════════════════════ -->
+<section class="resultats section-pad" id="resultats" data-screen-label="Résultats publics">
+  <div class="wrap">
+    <div class="resultats-head reveal" style="text-align:center; max-width: 760px; margin: 0 auto 64px;">
+      <span class="eyebrow">06 · Indicateurs de qualité</span>
+      <h2 class="h-display" style="margin-top:18px">
+        Nos <em>résultats publics</em>.
+      </h2>
+      <p class="lede" style="margin-top:24px; max-width: 600px; margin-left:auto; margin-right:auto;">
+        Conformément à la certification Qualiopi, nous publions nos indicateurs de performance en toute transparence. Mis à jour à chaque session.
+      </p>
+    </div>
+
+    <div class="resultats-grid">
+
+      <article class="result-card reveal">
+        <div class="rc-icon">★</div>
+        <div class="rc-value">—</div>
+        <div class="rc-label">Taux de satisfaction</div>
+        <div class="rc-note">Première session en cours · données disponibles dès juillet 2026</div>
+      </article>
+
+      <article class="result-card reveal" style="transition-delay:.05s">
+        <div class="rc-icon">✓</div>
+        <div class="rc-value">—</div>
+        <div class="rc-label">Taux de réussite à la certification RS6776</div>
+        <div class="rc-note">Calculé sur les stagiaires ayant terminé la formation</div>
+      </article>
+
+      <article class="result-card reveal" style="transition-delay:.1s">
+        <div class="rc-icon">↻</div>
+        <div class="rc-value">—</div>
+        <div class="rc-label">Taux de recommandation</div>
+        <div class="rc-note">"Recommanderiez-vous cette formation à un confrère ?"</div>
+      </article>
+
+      <article class="result-card reveal" style="transition-delay:.15s">
+        <div class="rc-icon">⌀</div>
+        <div class="rc-value">—</div>
+        <div class="rc-label">Taux d'abandon</div>
+        <div class="rc-note">Stagiaires n'ayant pas finalisé les 14 heures de formation</div>
+      </article>
+
+    </div>
+
+    <div class="resultats-foot reveal" style="text-align:center; margin-top: 48px;">
+      <p class="dim" style="font-family: var(--ff-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gris-3);">
+        Méthode de calcul · Indicateurs collectés sur questionnaire de fin de formation, anonymisés et agrégés.
+      </p>
+      <p class="dim" style="font-family: var(--ff-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gris-3); margin-top: 8px;">
+        Dernière mise à jour · <b style="color: var(--or-deep);">Mai 2026</b>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
      FAQ
      ════════════════════════════════════════════════════════════ -->
 <section class="faq section-pad" id="faq" data-screen-label="FAQ">
@@ -2000,6 +2135,7 @@ section{ position: relative; }
           <li><a href="/">Accueil</a></li>
           <li><a href="/financement/">Financement</a></li>
           <li><a href="/programme/">Programme</a></li>
+          <li><a href="#resultats">Résultats publics</a></li>
           <li><a href="#about">À Propos</a></li>
         </ul>
       </div>
