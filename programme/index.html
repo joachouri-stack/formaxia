@@ -1135,13 +1135,111 @@ ul.checks li::before{
 }
 
 /* Encore plus serré sur très petit écran */
-@media screen and (max-width: 420px){
-  .cover-meta{ grid-template-columns: 1fr 1fr; }
-  .cover h1{ font-size: 32px; }
-  .page{ padding: 64px 18px 56px; }
-  .module-head .mnum{ font-size: 48px; }
-  .module-head .mtitle{ font-size: 19px; }
-  .stat .v{ font-size: 28px; }
+/* Tablette portrait (≤ 768px) — quelques ajustements supplémentaires */
+@media screen and (max-width: 768px){
+  /* Empêche tout dépassement horizontal */
+  html, body{ overflow-x: hidden; }
+
+  /* Site-nav plus compact */
+  .site-nav{ padding: 12px 16px; }
+  .site-nav .brand{ font-size: 14px; gap: 8px; }
+  .site-nav-actions .cta{ padding: 8px 14px; font-size: 13px; }
+  .site-nav-actions .cta svg{ width: 11px; height: 11px; }
+}
+
+/* Petit mobile (≤ 480px) — iPhone standard et plus petit */
+@media screen and (max-width: 480px){
+  body{ font-size: 14.5px; }
+  .page{ padding: 70px 16px 56px; }
+
+  /* Cover */
+  .cover h1{ font-size: 30px; line-height: 1.08; }
+  .cover .deck{ font-size: 15px; }
+  .cover-meta{
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .cover-meta .m{ padding: 12px 10px; }
+  .cover-meta .v{ font-size: 20px; }
+  .cover-meta .v .u{ font-size: 10px; }
+
+  /* Module head — réduire mnum pour ne pas écraser le titre */
+  .module-head{
+    gap: 6px 14px;
+  }
+  .module-head .mnum{ font-size: 44px; line-height: 1; }
+  .module-head .mtitle{ font-size: 18px; line-height: 1.18; }
+  .module-head .mtitle em{ font-style: italic; }
+  .module-head .kicker{ font-size: 10px; margin-bottom: 6px; }
+  .module-head .mdur{ font-size: 10px; gap: 8px; }
+  .module-head .mdur b{ font-size: 17px; }
+
+  /* Block headings */
+  h1.title{ font-size: 26px; line-height: 1.15; }
+  h2.title{ font-size: 22px; }
+  h3.title{ font-size: 17px; }
+  .title em{ font-style: italic; }
+
+  /* Lists */
+  ul.points li, ul.checks li{ font-size: 14px; }
+  ul.points.tight li{ font-size: 13px; }
+
+  /* TOC — tap targets plus grands */
+  a.toc-row{
+    padding: 14px 8px !important;
+    min-height: 50px;
+  }
+  .toc-row .t{ font-size: 15px; }
+
+  /* CTAs intermédiaires */
+  .cta-break{ padding: 24px 16px; }
+  .cta-break-title{ font-size: 17px; }
+  .cta-break-strong .cta-break-title{ font-size: 19px; }
+  .cta-break-btn{ padding: 12px 18px; font-size: 13.5px; }
+  .cta-break-eyebrow{ font-size: 10px; }
+
+  /* Stats row → 1 colonne sur très petit écran */
+  .stats-row{ grid-template-columns: 1fr; }
+  .stats-row .stat{
+    padding: 14px 0;
+    border-right: 0 !important;
+    border-bottom: 1px solid var(--gris-line) !important;
+  }
+  .stats-row .stat:last-child{ border-bottom: 0 !important; }
+  .stat .v{ font-size: 26px; }
+
+  /* KPI table — scroll horizontal si trop large */
+  .kpi-table{
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+    font-size: 12px;
+  }
+  .kpi-table th, .kpi-table td{ padding: 8px 10px; }
+
+  /* Print CTA encore plus petit */
+  .print-cta{
+    padding: 8px 12px;
+    font-size: 12px;
+    bottom: 80px;
+  }
+  .print-cta svg{ width: 13px; height: 13px; }
+}
+
+/* Très petit écran (≤ 360px) — Galaxy fold, iPhone SE 1ère gen */
+@media screen and (max-width: 360px){
+  .page{ padding: 64px 12px 48px; }
+  .cover h1{ font-size: 26px; }
+  .cover-meta{ grid-template-columns: 1fr; }
+  .cover-meta .m{
+    border-right: 0 !important;
+    border-bottom: 1px solid rgba(201,168,76,.15);
+  }
+  .cover-meta .m:last-child{ border-bottom: 0; }
+  .module-head .mnum{ font-size: 36px; }
+  .module-head .mtitle{ font-size: 16px; }
+  .cta-break-title{ font-size: 15px; }
 }
 </style>
 </head>
