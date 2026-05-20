@@ -6,7 +6,7 @@
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
 <link rel="apple-touch-icon" href="/assets/favicon.svg" />
 <meta name="theme-color" content="#0a0a0f" />
-<title>Programme Formaxia · L'IA appliquée au Bâtiment et à la Gestion de Chantier</title>
+<title>Programme Formaxia · 10 modules IA pour le BTP</title>
 <meta name="description" content="Programme détaillé — 2 jours · 10 modules · 14 heures. Édition enrichie 2026. Formation IA pour artisans et PME du BTP, financée par OPCO Constructys." />
 
 <link rel="canonical" href="https://formaxia.fr/programme/" />
@@ -393,8 +393,19 @@ h3.title{
   align-items: baseline;
   padding: 2.4mm 0;
   border-top: 1px solid var(--gris-line);
+  text-decoration: none;
+  color: inherit;
+  transition: background .2s ease, padding .2s ease, color .2s ease;
+  border-radius: 4px;
 }
 .toc-row:last-child{ border-bottom: 1px solid var(--gris-line); }
+a.toc-row:hover{
+  background: rgba(201,168,76,.08);
+  padding-left: 6px;
+  padding-right: 6px;
+}
+a.toc-row:hover .t{ color: var(--or-deep); }
+a.toc-row:hover .n{ color: var(--or); }
 .toc-row .n{
   font-family: var(--ff-mono); font-size: 9pt;
   color: var(--gris-3); letter-spacing: 0.1em;
@@ -722,7 +733,7 @@ ul.checks li::before{
 
 /* WHATSAPP BUTTON */
 .wa-btn{
-  position: fixed; right: 22px; bottom: 96px;
+  position: fixed; right: 22px; bottom: 22px;
   z-index: 50;
   width: 60px; height: 60px;
   background: #25D366;
@@ -740,22 +751,76 @@ ul.checks li::before{
   50%      { box-shadow: 0 6px 24px rgba(37,211,102,.4), 0 2px 8px rgba(0,0,0,.15), 0 0 0 14px rgba(37,211,102,0); }
 }
 @media screen and (max-width: 640px){
-  .wa-btn{ right: 16px; bottom: 84px; width: 56px; height: 56px; }
+  .wa-btn{ right: 16px; bottom: 16px; width: 56px; height: 56px; }
   .wa-btn svg{ width: 28px; height: 28px; }
 }
 @media print{ .wa-btn{ display: none !important; } }
 
 .print-cta{
-  position: fixed; right: 24px; bottom: 24px;
+  position: fixed; right: 24px; bottom: 96px;
   z-index: 100;
-  background: var(--or); color: var(--noir);
-  font-family: var(--ff-text); font-weight: 500; font-size: 14px;
-  padding: 12px 18px;
+  background: var(--noir); color: var(--or);
+  border: 1px solid rgba(201,168,76,.5);
+  font-family: var(--ff-text); font-weight: 500; font-size: 13px;
+  padding: 10px 16px;
   border-radius: 999px;
-  box-shadow: 0 8px 28px rgba(0,0,0,.3);
-  display: inline-flex; align-items: center; gap: 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.25);
+  display: inline-flex; align-items: center; gap: 8px;
   cursor: pointer;
+  transition: background .2s, color .2s, transform .2s;
 }
+.print-cta:hover{ background: var(--or); color: var(--noir); transform: translateY(-2px); }
+
+/* CTA intermédiaire entre modules */
+.cta-break{
+  background: linear-gradient(180deg, #14141c, #0a0a0f);
+  padding: 36px 24px;
+  border-top: 1px solid rgba(201,168,76,.2);
+  border-bottom: 1px solid rgba(201,168,76,.2);
+}
+.cta-break-inner{
+  max-width: 760px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 24px; flex-wrap: wrap;
+}
+.cta-break-eyebrow{
+  font-family: var(--ff-mono); font-size: 11px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--or-soft);
+  margin-bottom: 6px;
+}
+.cta-break-title{
+  font-family: var(--ff-display); font-size: 22px; font-weight: 500;
+  color: var(--blanc);
+  line-height: 1.25;
+}
+.cta-break-btn{
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 24px;
+  background: var(--or); color: var(--noir);
+  text-decoration: none; font-weight: 500; font-size: 14.5px;
+  border-radius: 999px;
+  transition: background .2s, transform .2s, box-shadow .2s;
+  white-space: nowrap;
+}
+.cta-break-btn:hover{
+  background: var(--or-soft);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 12px 28px rgba(201,168,76,.3);
+}
+.cta-break-btn svg{ width: 14px; height: 14px; }
+.cta-break-strong .cta-break-title{ font-size: 26px; }
+.cta-break-strong{
+  background: linear-gradient(180deg, rgba(201,168,76,.08), rgba(201,168,76,.02));
+  padding: 12px 24px;
+  border-radius: 12px;
+}
+@media (max-width: 640px){
+  .cta-break-inner{ flex-direction: column; align-items: stretch; text-align: center; }
+  .cta-break-title{ font-size: 19px; }
+  .cta-break-btn{ justify-content: center; }
+}
+@media print{ .cta-break{ display: none !important; } }
 .print-cta:hover{ background: var(--or-soft); }
 .print-cta svg{ width: 16px; height: 16px; }
 
@@ -976,11 +1041,11 @@ ul.checks li::before{
     padding-top: 22px;
   }
 
-  /* Print CTA — keep visible and tappable on mobile */
+  /* Print CTA — au-dessus du bouton WhatsApp sur mobile */
   .print-cta{
-    right: 16px; bottom: 16px;
-    padding: 14px 20px;
-    font-size: 14px;
+    right: 16px; bottom: 84px;
+    padding: 10px 14px;
+    font-size: 12.5px;
   }
 }
 
@@ -1017,7 +1082,7 @@ ul.checks li::before{
 <!-- ════════════════════════════════════════════════════════════
      PAGE 1 — COVER
      ════════════════════════════════════════════════════════════ -->
-<section class="page cover" data-screen-label="01 · Cover">
+<section class="page cover" id="cover" data-screen-label="01 · Cover">
   <div class="page-rail">
     <span class="lg"><span class="mark"></span>Formaxia</span>
     <span>Programme officiel · Édition 2026</span>
@@ -1121,7 +1186,7 @@ ul.checks li::before{
 <!-- ════════════════════════════════════════════════════════════
      PAGE 3 — SOMMAIRE
      ════════════════════════════════════════════════════════════ -->
-<section class="page" data-screen-label="03 · Sommaire">
+<section class="page" id="sommaire" data-screen-label="03 · Sommaire">
   <div class="page-rail">
     <span class="lg"><span class="mark"></span>Formaxia</span>
     <span>Sommaire des 10 modules</span>
@@ -1133,27 +1198,27 @@ ul.checks li::before{
     <div class="toc">
       <div class="toc-day">
         <div class="label">Jour 01 · 7 heures · Maîtriser les outils &amp; sécuriser l'usage</div>
-        <div class="toc-row"><span class="n">M.01</span><span class="t">Comprendre l'IA sans se perdre</span><span class="d">45 min</span><span class="p">p. 04</span></div>
-        <div class="toc-row"><span class="n">M.02</span><span class="t">Les outils qui changent tout — Claude Pro inclus</span><span class="d">1 h</span><span class="p">p. 05</span></div>
-        <div class="toc-row"><span class="n">M.03</span><span class="t">Vos devis en 5 minutes chrono</span><span class="d">1 h 30</span><span class="p">p. 06</span></div>
-        <div class="toc-row"><span class="n">M.04</span><span class="t">Fini la paperasse administrative — RGPD inclus</span><span class="d">1 h 30</span><span class="p">p. 07</span></div>
-        <div class="toc-row"><span class="n">M.05</span><span class="t">Gérez votre chantier comme un pro — DOE inclus</span><span class="d">1 h 15</span><span class="p">p. 08</span></div>
+        <a class="toc-row" href="#module-01"><span class="n">M.01</span><span class="t">Comprendre l'IA sans se perdre</span><span class="d">45 min</span><span class="p">p. 04</span></a>
+        <a class="toc-row" href="#module-02"><span class="n">M.02</span><span class="t">Les outils qui changent tout — Claude Pro inclus</span><span class="d">1 h</span><span class="p">p. 05</span></a>
+        <a class="toc-row" href="#module-03"><span class="n">M.03</span><span class="t">Vos devis en 5 minutes chrono</span><span class="d">1 h 30</span><span class="p">p. 06</span></a>
+        <a class="toc-row" href="#module-04"><span class="n">M.04</span><span class="t">Fini la paperasse administrative — RGPD inclus</span><span class="d">1 h 30</span><span class="p">p. 07</span></a>
+        <a class="toc-row" href="#module-05"><span class="n">M.05</span><span class="t">Gérez votre chantier comme un pro — DOE inclus</span><span class="d">1 h 15</span><span class="p">p. 08</span></a>
       </div>
 
       <div class="toc-day">
         <div class="label">Jour 02 · 7 heures · Conquérir &amp; gagner des marchés</div>
-        <div class="toc-row"><span class="n">M.06</span><span class="t">Trouvez plus de clients avec l'IA</span><span class="d">1 h 30</span><span class="p">p. 09</span></div>
-        <div class="toc-row"><span class="n">M.07</span><span class="t">Analyser un DCE en 3 niveaux de lecture</span><span class="d">1 h</span><span class="p">p. 10</span></div>
-        <div class="toc-row"><span class="n">M.08</span><span class="t">Rapports de chantier &amp; plans de MT</span><span class="d">1 h</span><span class="p">p. 11</span></div>
-        <div class="toc-row"><span class="n">M.09</span><span class="t">Rédiger un Mémoire Technique complet</span><span class="d">1 h 30</span><span class="p">p. 12</span></div>
-        <div class="toc-row"><span class="n">M.10</span><span class="t">Votre workflow IA personnalisé &amp; certification</span><span class="d">1 h</span><span class="p">p. 13</span></div>
+        <a class="toc-row" href="#module-06"><span class="n">M.06</span><span class="t">Trouvez plus de clients avec l'IA</span><span class="d">1 h 30</span><span class="p">p. 09</span></a>
+        <a class="toc-row" href="#module-07"><span class="n">M.07</span><span class="t">Analyser un DCE en 3 niveaux de lecture</span><span class="d">1 h</span><span class="p">p. 10</span></a>
+        <a class="toc-row" href="#module-08"><span class="n">M.08</span><span class="t">Rapports de chantier &amp; plans de MT</span><span class="d">1 h</span><span class="p">p. 11</span></a>
+        <a class="toc-row" href="#module-09"><span class="n">M.09</span><span class="t">Rédiger un Mémoire Technique complet</span><span class="d">1 h 30</span><span class="p">p. 12</span></a>
+        <a class="toc-row" href="#module-10"><span class="n">M.10</span><span class="t">Votre workflow IA personnalisé &amp; certification</span><span class="d">1 h</span><span class="p">p. 13</span></a>
       </div>
     </div>
 
     <h3 class="section-h" style="margin-top: 5mm;">Pages annexes</h3>
-    <div class="toc-row"><span class="n">A.01</span><span class="t">Livrables consolidés — guide, templates, prompts</span><span class="d">—</span><span class="p">p. 14</span></div>
-    <div class="toc-row"><span class="n">A.02</span><span class="t">Charte d'usage IA en entreprise BTP &amp; RGPD</span><span class="d">—</span><span class="p">p. 15</span></div>
-    <div class="toc-row"><span class="n">A.03</span><span class="t">Éligibilité, financement, certification RS6776</span><span class="d">—</span><span class="p">p. 16</span></div>
+    <a class="toc-row" href="#annexe-livrables"><span class="n">A.01</span><span class="t">Livrables consolidés — guide, templates, prompts</span><span class="d">—</span><span class="p">p. 14</span></a>
+    <a class="toc-row" href="#annexe-rgpd"><span class="n">A.02</span><span class="t">Charte d'usage IA en entreprise BTP &amp; RGPD</span><span class="d">—</span><span class="p">p. 15</span></a>
+    <a class="toc-row" href="#annexe-financement"><span class="n">A.03</span><span class="t">Éligibilité, financement, certification RS6776</span><span class="d">—</span><span class="p">p. 16</span></a>
   </div>
   <div class="page-foot">
     <span>Formaxia · Programme officiel · RS6776</span>
@@ -1164,7 +1229,7 @@ ul.checks li::before{
 <!-- ════════════════════════════════════════════════════════════
      MODULE 01
      ════════════════════════════════════════════════════════════ -->
-<section class="page" data-screen-label="04 · Module 01">
+<section class="page" id="module-01" data-screen-label="04 · Module 01">
   <div class="page-rail">
     <span class="lg"><span class="mark"></span>Formaxia</span>
     <span>Jour 01 · Module 01 / 10</span>
@@ -1231,7 +1296,7 @@ ul.checks li::before{
 <!-- ════════════════════════════════════════════════════════════
      MODULE 02
      ════════════════════════════════════════════════════════════ -->
-<section class="page" data-screen-label="05 · Module 02">
+<section class="page" id="module-02" data-screen-label="05 · Module 02">
   <div class="page-rail">
     <span class="lg"><span class="mark"></span>Formaxia</span>
     <span>Jour 01 · Module 02 / 10</span>
@@ -1301,7 +1366,7 @@ ul.checks li::before{
 <!-- ════════════════════════════════════════════════════════════
      MODULE 03
      ════════════════════════════════════════════════════════════ -->
-<section class="page" data-screen-label="06 · Module 03">
+<section class="page" id="module-03" data-screen-label="06 · Module 03">
   <div class="page-rail">
     <span class="lg"><span class="mark"></span>Formaxia</span>
     <span>Jour 01 · Module 03 / 10</span>
@@ -1371,7 +1436,7 @@ ul.checks li::before{
 <!-- ════════════════════════════════════════════════════════════
      MODULE 04
      ════════════════════════════════════════════════════════════ -->
-<section class="page" data-screen-label="07 · Module 04">
+<section class="page" id="module-04" data-screen-label="07 · Module 04">
   <div class="page-rail">
     <span class="lg"><span class="mark"></span>Formaxia</span>
     <span>Jour 01 · Module 04 / 10</span>
@@ -1441,7 +1506,7 @@ ul.checks li::before{
 <!-- ════════════════════════════════════════════════════════════
      MODULE 05
      ════════════════════════════════════════════════════════════ -->
-<section class="page" data-screen-label="08 · Module 05">
+<section class="page" id="module-05" data-screen-label="08 · Module 05">
   <div class="page-rail">
     <span class="lg"><span class="mark"></span>Formaxia</span>
     <span>Jour 01 · Module 05 / 10</span>
@@ -1505,10 +1570,24 @@ ul.checks li::before{
   </div>
 </section>
 
+<!-- CTA intermédiaire — fin Jour 01 -->
+<aside class="cta-break" aria-label="Réserver ma place">
+  <div class="cta-break-inner">
+    <div>
+      <div class="cta-break-eyebrow">Fin du Jour 01 · 5 modules sur 10</div>
+      <div class="cta-break-title">Convaincu·e par la première journée ?</div>
+    </div>
+    <a href="/#contact" class="cta-break-btn">
+      S'inscrire gratuitement
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+</aside>
+
 <!-- ════════════════════════════════════════════════════════════
      MODULE 06
      ════════════════════════════════════════════════════════════ -->
-<section class="page" data-screen-label="09 · Module 06">
+<section class="page" id="module-06" data-screen-label="09 · Module 06">
   <div class="page-rail">
     <span class="lg"><span class="mark"></span>Formaxia</span>
     <span>Jour 02 · Module 06 / 10</span>
@@ -1575,7 +1654,7 @@ ul.checks li::before{
 <!-- ════════════════════════════════════════════════════════════
      MODULE 07
      ════════════════════════════════════════════════════════════ -->
-<section class="page" data-screen-label="10 · Module 07">
+<section class="page" id="module-07" data-screen-label="10 · Module 07">
   <div class="page-rail">
     <span class="lg"><span class="mark"></span>Formaxia</span>
     <span>Jour 02 · Module 07 / 10</span>
@@ -1643,7 +1722,7 @@ ul.checks li::before{
 <!-- ════════════════════════════════════════════════════════════
      MODULE 08
      ════════════════════════════════════════════════════════════ -->
-<section class="page" data-screen-label="11 · Module 08">
+<section class="page" id="module-08" data-screen-label="11 · Module 08">
   <div class="page-rail">
     <span class="lg"><span class="mark"></span>Formaxia</span>
     <span>Jour 02 · Module 08 / 10</span>
@@ -1706,7 +1785,7 @@ ul.checks li::before{
 <!-- ════════════════════════════════════════════════════════════
      MODULE 09
      ════════════════════════════════════════════════════════════ -->
-<section class="page" data-screen-label="12 · Module 09">
+<section class="page" id="module-09" data-screen-label="12 · Module 09">
   <div class="page-rail">
     <span class="lg"><span class="mark"></span>Formaxia</span>
     <span>Jour 02 · Module 09 / 10</span>
@@ -1774,7 +1853,7 @@ ul.checks li::before{
 <!-- ════════════════════════════════════════════════════════════
      MODULE 10
      ════════════════════════════════════════════════════════════ -->
-<section class="page" data-screen-label="13 · Module 10">
+<section class="page" id="module-10" data-screen-label="13 · Module 10">
   <div class="page-rail">
     <span class="lg"><span class="mark"></span>Formaxia</span>
     <span>Jour 02 · Module 10 / 10</span>
@@ -1838,10 +1917,24 @@ ul.checks li::before{
   </div>
 </section>
 
+<!-- CTA intermédiaire — fin Jour 02 -->
+<aside class="cta-break" aria-label="Réserver ma place">
+  <div class="cta-break-inner cta-break-strong">
+    <div>
+      <div class="cta-break-eyebrow">Vous avez tout vu · 10 modules · 14 heures</div>
+      <div class="cta-break-title">Prêt·e à activer votre financement Constructys ?</div>
+    </div>
+    <a href="/#contact" class="cta-break-btn">
+      Recevoir mon dossier Constructys
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+</aside>
+
 <!-- ════════════════════════════════════════════════════════════
      PAGE 14 — LIVRABLES CONSOLIDÉS
      ════════════════════════════════════════════════════════════ -->
-<section class="page" data-screen-label="14 · Livrables consolidés">
+<section class="page" id="annexe-livrables" data-screen-label="14 · Livrables consolidés">
   <div class="page-rail">
     <span class="lg"><span class="mark"></span>Formaxia</span>
     <span>Annexe 01 · Livrables consolidés</span>
@@ -1913,7 +2006,7 @@ ul.checks li::before{
 <!-- ════════════════════════════════════════════════════════════
      PAGE 15 — CHARTE IA + RGPD
      ════════════════════════════════════════════════════════════ -->
-<section class="page" data-screen-label="15 · Charte IA & RGPD">
+<section class="page" id="annexe-rgpd" data-screen-label="15 · Charte IA & RGPD">
   <div class="page-rail">
     <span class="lg"><span class="mark"></span>Formaxia</span>
     <span>Annexe 02 · Charte d'usage IA &amp; RGPD</span>
@@ -1979,7 +2072,7 @@ ul.checks li::before{
 <!-- ════════════════════════════════════════════════════════════
      PAGE 16 — FINANCEMENT & CERTIFICATION (DARK)
      ════════════════════════════════════════════════════════════ -->
-<section class="page dark" data-screen-label="16 · Financement & certification">
+<section class="page dark" id="annexe-financement" data-screen-label="16 · Financement & certification">
   <div class="page-rail">
     <span class="lg"><span class="mark"></span>Formaxia</span>
     <span>Annexe 03 · Éligibilité, financement &amp; certification</span>
@@ -2073,5 +2166,34 @@ ul.checks li::before{
   Imprimer en PDF
 </button>
 
+<script>
+/* Smooth scroll pour les ancres internes du sommaire + URL propre */
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', (e) => {
+    const href = link.getAttribute('href');
+    if (!href || href === '#') return;
+    const id = href.slice(1);
+    const target = document.getElementById(id);
+    if (target){
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      history.replaceState(null, '', window.location.pathname);
+    }
+  });
+});
+/* Strip hash si on arrive depuis un partage type /programme/#module-03 */
+if (window.location.hash){
+  const id = window.location.hash.slice(1);
+  const t = document.getElementById(id);
+  if (t){
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        t.scrollIntoView({ behavior: 'auto', block: 'start' });
+        history.replaceState(null, '', window.location.pathname);
+      }, 100);
+    });
+  }
+}
+</script>
 </body>
 </html>
