@@ -425,6 +425,19 @@ section{ position: relative; }
   color: var(--or-soft);
 }
 .hero-tag-row .sep{ height:1px; flex:1; background: rgba(201,168,76,.25); max-width: 80px; }
+.hero-tag-row .pill-live{
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(201,168,76,.08);
+  border-color: rgba(201,168,76,.55);
+  color: var(--or);
+}
+.hero-tag-row .pill-live .live-dot{
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--or);
+  box-shadow: 0 0 0 3px rgba(201,168,76,.18);
+  animation: live-pulse 2s ease-in-out infinite;
+}
+@keyframes live-pulse{ 0%,100%{opacity:1} 50%{opacity:.5} }
 
 /* Hero floating spec card */
 .spec-card{
@@ -905,6 +918,62 @@ section{ position: relative; }
 .fin-detail .seal .t{ font-weight: 500; font-size: 14px; }
 .fin-detail .seal .s{ font-size: 13px; color: rgba(248,246,241,.6); }
 
+.fin-detail .next-session{
+  margin-top: 20px;
+  padding: 22px 24px;
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(201,168,76,.25);
+  border-radius: var(--rad-card);
+  position: relative;
+  overflow: hidden;
+}
+.fin-detail .next-session::before{
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--or-soft), transparent);
+  opacity: .6;
+}
+.next-session .ns-head{
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--ff-mono); font-size: 11px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--or-soft);
+}
+.next-session .ns-dot{
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--or);
+  box-shadow: 0 0 0 4px rgba(201,168,76,.2);
+  animation: live-pulse 2s ease-in-out infinite;
+}
+.next-session .ns-time{
+  font-family: var(--ff-display);
+  font-size: clamp(22px, 2.4vw, 28px);
+  font-weight: 500;
+  color: var(--blanc);
+  margin: 10px 0 6px;
+  line-height: 1.2;
+}
+.next-session .ns-time em{ color: var(--or); font-style: italic; }
+.next-session .ns-sub{
+  font-size: 13px;
+  color: rgba(248,246,241,.65);
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+.next-session .ns-formats{
+  display: flex; flex-wrap: wrap; gap: 10px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(201,168,76,.15);
+}
+.next-session .ns-format{
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12.5px;
+  color: rgba(248,246,241,.85);
+}
+.next-session .ns-format .dot{
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--or);
+}
+
 /* ─────────────────────────────────────────────────────────────────
    FORMATION (la formation)
    ───────────────────────────────────────────────────────────────── */
@@ -1312,6 +1381,7 @@ section{ position: relative; }
         <div class="hero-tag-row reveal">
           <span class="pill">Formation IA · Édition BTP 2026</span>
           <span class="sep" aria-hidden="true"></span>
+          <span class="pill pill-live"><span class="live-dot"></span>Nouvelle session chaque mois</span>
         </div>
         <h1 class="h-display reveal" style="transition-delay:.08s">
           Gagnez <em>10 heures</em> par semaine sur votre administratif.
@@ -1500,6 +1570,22 @@ section{ position: relative; }
           <div>
             <div class="t">Constructys finance 100%</div>
             <div class="s">Toute entreprise BTP, TP ou négoce — moins de 50 salariés, salarié ou non.</div>
+          </div>
+        </div>
+
+        <div class="next-session">
+          <div class="ns-head">
+            <span class="ns-dot"></span>
+            <span class="ns-label">Prochaine session</span>
+          </div>
+          <div class="ns-time">Sous <em>4 à 6 semaines</em></div>
+          <div class="ns-sub">
+            <span>après votre inscription · le temps de monter votre dossier Constructys</span>
+          </div>
+          <div class="ns-formats">
+            <span class="ns-format"><span class="dot"></span>Avignon · 5 à 15 pers.</span>
+            <span class="ns-format"><span class="dot"></span>Intra-entreprise · sur mesure</span>
+            <span class="ns-format"><span class="dot"></span>Distanciel · visio</span>
           </div>
         </div>
 
@@ -1806,13 +1892,23 @@ section{ position: relative; }
           <div class="field"><label for="email">Email professionnel</label><input id="email" type="email" required /></div>
           <div class="field"><label for="tel">Téléphone</label><input id="tel" type="tel" required /></div>
         </div>
-        <div class="field"><label for="format">Format souhaité</label>
-          <select id="format">
-            <option>Présentiel — Avignon</option>
-            <option>Présentiel — Intra-entreprise</option>
-            <option>Distanciel — Visio</option>
-            <option>À déterminer ensemble</option>
-          </select>
+        <div class="row">
+          <div class="field"><label for="format">Format souhaité</label>
+            <select id="format">
+              <option>Présentiel — Avignon</option>
+              <option>Présentiel — Intra-entreprise</option>
+              <option>Distanciel — Visio</option>
+              <option>À déterminer ensemble</option>
+            </select>
+          </div>
+          <div class="field"><label for="periode">Période souhaitée</label>
+            <select id="periode">
+              <option>Le plus tôt possible (sous 4-6 sem.)</option>
+              <option>Dans 1 à 2 mois</option>
+              <option>Dans 2 à 3 mois</option>
+              <option>Plus tard / Pas de préférence</option>
+            </select>
+          </div>
         </div>
         <div class="field"><label for="msg">Message (optionnel)</label><textarea id="msg" placeholder="Vos questions, votre contexte, vos contraintes…"></textarea></div>
 
@@ -2008,6 +2104,7 @@ document.querySelectorAll('.modules .module').forEach(card => {
       `Email : ${v('email')}`,
       `Téléphone : ${v('tel')}`,
       `Format souhaité : ${v('format')}`,
+      `Période souhaitée : ${v('periode')}`,
       '',
       'Message :',
       v('msg') || '(aucun message)',
