@@ -287,31 +287,10 @@ section{ position: relative; }
   overflow: hidden;
 }
 
-/* Pills mobile : masquées par défaut (desktop), visibles en mobile */
-.hero-tag-row--mobile{ display: none; }
-
-/* Mobile — H1 en premier, pills déplacées SOUS l'image hero */
+/* Mobile — espacement du hero resserré */
 @media (max-width: 1080px){
   .hero{ padding: 80px 0 56px; }
   .hero-grid{ gap: 32px !important; }
-
-  /* Masque les pills originales (en haut du bloc texte) */
-  .hero-grid > div:first-child > .hero-tag-row{ display: none; }
-
-  /* Réordonne le texte du hero : H1 en premier */
-  .hero-grid > div:first-child{ display: flex; flex-direction: column; }
-  .hero-grid > div:first-child > h1{ order: 1; margin-top: 0; }
-  .hero-grid > div:first-child > .sub{ order: 2; }
-  .hero-grid > div:first-child > .ctas{ order: 3; }
-  .hero-grid > div:first-child > .badges{ order: 4; }
-
-  /* Affiche les pills mobile sous l'image hero */
-  .hero-tag-row--mobile{
-    display: flex;
-    margin-top: 20px;
-    padding-top: 22px;
-    border-top: 1px solid rgba(201,168,76,.18);
-  }
 }
 @media (max-width: 720px){
   .hero{ padding: 72px 0 48px; }
@@ -455,53 +434,7 @@ section{ position: relative; }
   animation: pulse 2s ease-in-out infinite;
 }
 @keyframes pulse{ 0%,100%{opacity:1} 50%{opacity:.45} }
-
-.hero-tag-row{
-  font-family: var(--ff-mono); font-size: 12px;
-  letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--or);
-  display:flex; align-items:center; gap: 18px;
-}
-.hero-tag-row .pill{
-  padding: 5px 12px;
-  border:1px solid rgba(201,168,76,.4);
-  border-radius: 999px;
-  color: var(--or-soft);
-}
-.hero-tag-row .sep{ height:1px; flex:1; background: rgba(201,168,76,.25); max-width: 80px; }
-.hero-tag-row .pill-live{
-  display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(201,168,76,.08);
-  border-color: rgba(201,168,76,.55);
-  color: var(--or);
-}
-.hero-tag-row .pill-live .live-dot{
-  width: 7px; height: 7px; border-radius: 50%;
-  background: var(--or);
-  box-shadow: 0 0 0 3px rgba(201,168,76,.18);
-  animation: live-pulse 2s ease-in-out infinite;
-}
 @keyframes live-pulse{ 0%,100%{opacity:1} 50%{opacity:.5} }
-
-/* Mobile — empile les deux pills proprement, cache le séparateur */
-@media (max-width: 720px){
-  .hero-tag-row{
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    font-size: 10.5px;
-    letter-spacing: 0.16em;
-  }
-  .hero-tag-row .sep{ display: none; }
-  .hero-tag-row .pill{
-    padding: 6px 12px;
-    white-space: nowrap;
-  }
-}
-@media (max-width: 360px){
-  .hero-tag-row{ font-size: 10px; letter-spacing: 0.14em; }
-  .hero-tag-row .pill{ white-space: normal; }
-}
 
 /* Hero floating spec card */
 .spec-card{
