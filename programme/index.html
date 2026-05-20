@@ -835,6 +835,64 @@ ul.checks li::before{
 .synthese .title{
   margin-bottom: 4mm;
 }
+
+/* Bandeau de promesse sous la lede */
+.syn-banner{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin: 10mm 0 4mm;
+  padding: 7mm 0;
+  border-top: 1px solid rgba(201,168,76,.25);
+  border-bottom: 1px solid rgba(201,168,76,.25);
+  background: linear-gradient(90deg, rgba(201,168,76,.04), rgba(201,168,76,.01) 50%, rgba(201,168,76,.04));
+}
+.syn-banner-item{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 6mm;
+  border-right: 1px solid rgba(201,168,76,.15);
+}
+.syn-banner-item:last-child{ border-right: 0; }
+.syn-banner-item .bn-icon{
+  font-size: 26px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.syn-banner-item .bn-k{
+  font-family: var(--ff-display);
+  font-size: 17pt;
+  font-weight: 500;
+  color: var(--noir);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+.syn-banner-item .bn-v{
+  font-family: var(--ff-mono);
+  font-size: 8.5pt;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gris-3);
+  margin-top: 3px;
+}
+@media screen and (max-width: 860px){
+  .syn-banner{
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin: 24px 0 8px;
+    padding: 4px 0;
+  }
+  .syn-banner-item{
+    padding: 16px 6px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(201,168,76,.12);
+  }
+  .syn-banner-item:last-child{ border-bottom: 0; }
+  .syn-banner-item .bn-k{ font-size: 17px; }
+  .syn-banner-item .bn-v{ font-size: 10.5px; }
+  .syn-banner-item .bn-icon{ font-size: 22px; }
+}
 .syn-grid{
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -846,26 +904,39 @@ ul.checks li::before{
 }
 .syn-block{
   position: relative;
-  padding-top: 4mm;
-  border-top: 1px solid var(--gris-line);
+  padding: 8mm 0 4mm;
+  border-top: 1px solid rgba(201,168,76,.2);
+}
+.syn-block::before{
+  content: "";
+  position: absolute;
+  top: -1px; left: 0;
+  width: 44px; height: 2px;
+  background: var(--or);
 }
 .syn-tag{
-  font-family: var(--ff-mono);
-  font-size: 8.5pt;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--or-deep);
-  margin-bottom: 4mm;
   display: flex;
-  align-items: center;
-  gap: 8px;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 7mm;
 }
-.syn-tag::before{
-  content: "";
-  width: 6px; height: 6px;
-  background: var(--or);
-  border-radius: 50%;
-  display: inline-block;
+.syn-num{
+  font-family: var(--ff-display);
+  font-style: italic;
+  font-size: 32pt;
+  font-weight: 400;
+  color: var(--or);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  flex-shrink: 0;
+}
+.syn-name{
+  font-family: var(--ff-display);
+  font-size: 22pt;
+  font-weight: 500;
+  color: var(--noir);
+  letter-spacing: -0.015em;
+  line-height: 1.15;
 }
 .syn-block p{
   font-size: 11pt;
@@ -905,13 +976,21 @@ ul.checks li::before{
 }
 .syn-sub-h{
   font-family: var(--ff-display);
-  font-size: 14pt;
+  font-size: 16pt;
   font-weight: 500;
-  margin: 8mm 0 4mm;
-  padding-top: 5mm;
-  border-top: 1px solid var(--gris-line);
+  margin: 10mm 0 5mm;
+  padding-top: 6mm;
+  border-top: 1px solid rgba(201,168,76,.2);
   color: var(--noir);
   letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.syn-sub-h::before{
+  content: "→";
+  color: var(--or);
+  font-style: italic;
 }
 #contenu p{
   margin-bottom: 5mm;
@@ -999,10 +1078,19 @@ ul.checks li::before{
   .syn-list li,
   .syn-mods li,
   .syn-steps li{ font-size: 14.5px; }
-  .syn-tag{ font-size: 10.5px; }
+  .syn-tag{ gap: 12px; margin-bottom: 18px; }
+  .syn-num{ font-size: 38px; }
+  .syn-name{ font-size: 24px; line-height: 1.12; }
+  .syn-block{ padding: 22px 0 6px; }
+  .syn-block::before{ width: 36px; }
 }
 @media screen and (max-width: 480px){
   .syn-block p{ font-size: 14.5px; }
+  .syn-tag{ gap: 10px; margin-bottom: 16px; align-items: baseline; }
+  .syn-num{ font-size: 34px; }
+  .syn-name{ font-size: 21px; line-height: 1.1; }
+  .syn-block{ padding: 20px 0 4px; }
+  .syn-block::before{ width: 32px; height: 2px; }
   .syn-list li{ font-size: 14px; padding-left: 20px; }
   .syn-mods li{ font-size: 14px; }
   .syn-steps li{ font-size: 14px; padding-left: 10px; }
@@ -1552,21 +1640,46 @@ ul.checks li::before{
   </div>
   <div class="page-body">
     <span class="eyebrow">Le programme en bref</span>
-    <h1 class="title" id="description">L'IA pour le BTP — en <em>2 jours</em>.</h1>
-    <p class="lede">Vous voulez tout savoir sans lire 16 pages ? Voilà l'essentiel de la formation, condensé. Pour les détails, on se voit sur le terrain.</p>
+    <h1 class="title" id="description">Tout ce que vous allez apprendre — en <em>2 jours</em>.</h1>
+    <p class="lede">Pas de jargon. Pas de blabla. Voici le programme officiel Formaxia 2026, expliqué clairement pour les pros du BTP qui n'ont pas le temps de lire 50 pages.</p>
+
+    <!-- Bandeau "promesse" sous la lede -->
+    <div class="syn-banner">
+      <div class="syn-banner-item">
+        <div class="bn-icon">⏱</div>
+        <div>
+          <div class="bn-k">14 heures</div>
+          <div class="bn-v">de pratique pure sur 2 jours</div>
+        </div>
+      </div>
+      <div class="syn-banner-item">
+        <div class="bn-icon">💼</div>
+        <div>
+          <div class="bn-k">0 € pour vous</div>
+          <div class="bn-v">100% financé Constructys</div>
+        </div>
+      </div>
+      <div class="syn-banner-item">
+        <div class="bn-icon">🏆</div>
+        <div>
+          <div class="bn-k">Certifié RS6776</div>
+          <div class="bn-v">reconnu par l'État</div>
+        </div>
+      </div>
+    </div>
 
     <div class="syn-grid">
 
       <!-- Description -->
       <div class="syn-block" id="description-block">
-        <div class="syn-tag">01 · Description</div>
+        <div class="syn-tag"><span class="syn-num">01</span><span class="syn-name">Description</span></div>
         <p>Une formation pratique pour utiliser <strong>ChatGPT, Claude et Gemini</strong> dans votre quotidien BTP. En 2 jours, vous repartez avec un <strong>workflow IA complet</strong> pour automatiser vos devis, vos rapports, votre administratif et la rédaction de vos Mémoires Techniques.</p>
         <p class="syn-p-mini">Zéro théorie. On travaille sur <em>vos vrais dossiers</em>.</p>
       </div>
 
       <!-- Points forts -->
       <div class="syn-block" id="points-forts">
-        <div class="syn-tag">02 · Les points forts</div>
+        <div class="syn-tag"><span class="syn-num">02</span><span class="syn-name">Les points forts</span></div>
         <ul class="syn-list">
           <li><strong>100% financée</strong> par Constructys — 0€ pour vous</li>
           <li><strong>Certification RS6776</strong> reconnue par l'État, incluse</li>
@@ -1579,7 +1692,7 @@ ul.checks li::before{
 
       <!-- Objectifs -->
       <div class="syn-block" id="objectifs">
-        <div class="syn-tag">03 · Objectifs</div>
+        <div class="syn-tag"><span class="syn-num">03</span><span class="syn-name">Objectifs</span></div>
         <ul class="syn-list">
           <li>Faire vos <strong>devis en 5 minutes</strong> au lieu de 3 heures</li>
           <li>Lire un <strong>DCE complet en 2h</strong> au lieu d'une journée</li>
@@ -1592,7 +1705,7 @@ ul.checks li::before{
 
       <!-- Contenu -->
       <div class="syn-block syn-block-wide" id="contenu">
-        <div class="syn-tag">04 · Contenu</div>
+        <div class="syn-tag"><span class="syn-num">04</span><span class="syn-name">Contenu de la formation</span></div>
 
         <p>Identifier et choisir les outils d'intelligence artificielle pertinents — ChatGPT Pro, Claude, Gemini, Perplexity — afin de répondre aux besoins concrets du métier BTP et d'automatiser les tâches chronophages du quotidien.</p>
 
@@ -1637,7 +1750,7 @@ ul.checks li::before{
 
       <!-- Résultats attendus -->
       <div class="syn-block" id="resultats">
-        <div class="syn-tag">05 · Résultats attendus</div>
+        <div class="syn-tag"><span class="syn-num">05</span><span class="syn-name">Résultats attendus</span></div>
         <ul class="syn-list">
           <li><strong>90% de temps gagné</strong> sur la rédaction de devis</li>
           <li><strong>5× plus de Mémoires Techniques</strong> produits par mois</li>
@@ -1649,14 +1762,14 @@ ul.checks li::before{
 
       <!-- Certification -->
       <div class="syn-block" id="certification">
-        <div class="syn-tag">06 · Certification</div>
+        <div class="syn-tag"><span class="syn-num">06</span><span class="syn-name">Certification</span></div>
         <p><strong>Certification RS6776</strong> reconnue par l'État, inscrite au Répertoire Spécifique de France Compétences.</p>
         <p class="syn-p-mini">Valide officiellement vos compétences en IA générative appliquée au métier. Délivrée à la fin des 14 heures de formation, sur la base des livrables produits sur vos vrais dossiers.</p>
       </div>
 
       <!-- Modalités -->
       <div class="syn-block syn-block-wide" id="modalites">
-        <div class="syn-tag">07 · Modalités d'inscription</div>
+        <div class="syn-tag"><span class="syn-num">07</span><span class="syn-name">Modalités d'inscription</span></div>
         <ol class="syn-steps">
           <li><strong>Vous remplissez le formulaire</strong> — 2 minutes en bas de page</li>
           <li><strong>On vous rappelle sous 24h ouvrées</strong> — pour comprendre votre activité</li>
