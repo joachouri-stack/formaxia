@@ -612,6 +612,12 @@ section{ position: relative; }
 .placeholder.has-image{ background-color: transparent; }
 #portraitPh.has-image, #heroPh.has-image{ border: 0; background: none; padding: 0; }
 .placeholder.has-image .ph-label{ display:none }
+.placeholder .ph-img{
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  border-radius: inherit;
+}
 .placeholder.has-image .ph-corner,
 .placeholder.has-image .ph-corner-r{
   background: rgba(10,10,15,.55);
@@ -1045,6 +1051,35 @@ section{ position: relative; }
   color: var(--blanc);
   line-height: 1;
   letter-spacing: -0.025em;
+}
+.rc-value:has(span.rc-empty),
+.rc-value.is-empty{ color: rgba(201,168,76,.45); font-style: italic; font-size: 36px; }
+.rc-empty{ font-family: var(--ff-display); font-size: inherit; font-style: italic; }
+
+.resultats-banner{
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 22px;
+  background: rgba(201,168,76,.08);
+  border: 1px solid rgba(201,168,76,.28);
+  border-radius: 999px;
+  margin: 0 auto 36px;
+  max-width: fit-content;
+  font-family: var(--ff-mono); font-size: 12px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--or-soft);
+}
+.resultats-banner .dot{
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--or); flex-shrink: 0;
+  box-shadow: 0 0 0 3px rgba(201,168,76,.18);
+  animation: pulseDot 2.4s ease-in-out infinite;
+}
+@keyframes pulseDot{
+  0%, 100%{ box-shadow: 0 0 0 3px rgba(201,168,76,.18); }
+  50%{ box-shadow: 0 0 0 7px rgba(201,168,76,.04); }
+}
+@media (prefers-reduced-motion: reduce){
+  .resultats-banner .dot{ animation: none; }
 }
 .rc-label{
   font-family: var(--ff-display);
@@ -2305,34 +2340,39 @@ section{ position: relative; }
       </p>
     </div>
 
+    <div class="resultats-banner reveal" role="status">
+      <span class="dot" aria-hidden="true"></span>
+      <span>Première promotion 2026 · Résultats publiés à l'issue de la session</span>
+    </div>
+
     <div class="resultats-grid">
 
       <article class="result-card reveal" data-result="satisfaction">
         <div class="rc-icon">★</div>
-        <div class="rc-value" data-rc-val>—</div>
+        <div class="rc-value is-empty" data-rc-val><span class="rc-empty">à venir</span></div>
         <div class="rc-label">Taux de satisfaction</div>
-        <div class="rc-note">Première session en cours · données disponibles dès juillet 2026</div>
+        <div class="rc-note">Mesuré sur questionnaire de fin de formation · publication à l'issue de la 1ère session</div>
       </article>
 
       <article class="result-card reveal" style="transition-delay:.05s" data-result="reussite">
         <div class="rc-icon">✓</div>
-        <div class="rc-value" data-rc-val>—</div>
+        <div class="rc-value is-empty" data-rc-val><span class="rc-empty">à venir</span></div>
         <div class="rc-label">Taux de réussite à la certification RS6776</div>
-        <div class="rc-note">Calculé sur les stagiaires ayant terminé la formation</div>
+        <div class="rc-note">Calculé sur les stagiaires ayant terminé la formation · publication à l'issue de la 1ère session</div>
       </article>
 
       <article class="result-card reveal" style="transition-delay:.1s" data-result="recommandation">
         <div class="rc-icon">↻</div>
-        <div class="rc-value" data-rc-val>—</div>
+        <div class="rc-value is-empty" data-rc-val><span class="rc-empty">à venir</span></div>
         <div class="rc-label">Taux de recommandation</div>
-        <div class="rc-note">"Recommanderiez-vous cette formation à un confrère ?"</div>
+        <div class="rc-note">« Recommanderiez-vous cette formation à un confrère ? » · publication à l'issue de la 1ère session</div>
       </article>
 
       <article class="result-card reveal" style="transition-delay:.15s" data-result="abandon">
         <div class="rc-icon">⌀</div>
-        <div class="rc-value" data-rc-val>—</div>
+        <div class="rc-value is-empty" data-rc-val><span class="rc-empty">à venir</span></div>
         <div class="rc-label">Taux d'abandon</div>
-        <div class="rc-note">Stagiaires n'ayant pas finalisé les 14 heures de formation</div>
+        <div class="rc-note">Stagiaires n'ayant pas finalisé les 14 heures de formation · publication à l'issue de la 1ère session</div>
       </article>
 
     </div>
@@ -2563,7 +2603,9 @@ section{ position: relative; }
   <div class="wrap">
     <div class="about-grid">
       <div class="reveal">
-        <div class="placeholder tall" id="portraitPh" style="aspect-ratio: 4/5;"></div>
+        <div class="placeholder tall has-image" id="portraitPh" style="aspect-ratio: 4/5;">
+          <img src="/assets/johane_achouri.jpg" alt="Portrait de Johane Achouri, fondateur de Formaxia" class="ph-img" loading="lazy" width="800" height="1000" />
+        </div>
       </div>
       <div class="reveal" style="transition-delay:.1s">
         <span class="eyebrow light">06 · Johane Achouri</span>
@@ -2967,12 +3009,19 @@ document.querySelectorAll('.faq-item').forEach(d => {
 function applyImage(id, url){
   const el = document.getElementById(id);
   if (!el) return;
+  const img = el.querySelector('.ph-img');
   if (url && String(url).trim()){
-    el.style.backgroundImage = `url("${url}")`;
-    el.style.backgroundSize = 'cover';
-    el.style.backgroundPosition = 'center';
+    if (img){
+      // Image déjà rendue en <img loading="lazy"> — on remplace juste la src
+      img.src = url;
+    } else {
+      el.style.backgroundImage = `url("${url}")`;
+      el.style.backgroundSize = 'cover';
+      el.style.backgroundPosition = 'center';
+    }
     el.classList.add('has-image');
   } else {
+    if (img) img.removeAttribute('src');
     el.style.backgroundImage = '';
     el.classList.remove('has-image');
   }
@@ -2987,14 +3036,20 @@ window.applyImage = applyImage;
   applyImage('sessionPh', d.sessionImage);
   applyImage('portraitPh', d.portraitImage);
 
-  /* Indicateurs Qualiopi — applique les valeurs du config aux cards */
+  /* Indicateurs Qualiopi — applique les valeurs du config aux cards.
+     Valeur vide ou "—" → garde l'état "à venir" du HTML. Valeur réelle
+     (ex. "98%") → retire la classe is-empty pour passer en grand format. */
   if (d.resultats){
     document.querySelectorAll('[data-result]').forEach(card => {
       const key = card.getAttribute('data-result');
       const value = d.resultats[key];
-      if (value){
+      const isReal = value && value !== '—' && value !== '';
+      if (isReal){
         const valEl = card.querySelector('[data-rc-val]');
-        if (valEl) valEl.textContent = value;
+        if (valEl){
+          valEl.textContent = value;
+          valEl.classList.remove('is-empty');
+        }
       }
     });
   }
