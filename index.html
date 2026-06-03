@@ -1603,6 +1603,15 @@ section{ position: relative; }
 .contact-info-line .v{ font-size: 16px; font-weight: 500; }
 .contact-info-line .v a:hover{ color: var(--or-deep) }
 
+/* Honeypot anti-bot : invisible aux humains mais existant dans le DOM */
+.hp-field{
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  opacity: 0; pointer-events: none;
+}
+
 .form{
   background: var(--blanc-pure);
   border: 1px solid var(--gris-line);
@@ -2660,15 +2669,19 @@ section{ position: relative; }
         </div>
       </div>
 
-      <form class="form reveal" id="contactForm" style="max-width:760px; margin:0 auto; transition-delay:.1s">
-        <div class="row">
-          <div class="field"><label for="prenom">Prénom</label><input id="prenom" type="text" required /></div>
-          <div class="field"><label for="nom">Nom</label><input id="nom" type="text" required /></div>
+      <form class="form reveal" id="contactForm" style="max-width:760px; margin:0 auto; transition-delay:.1s" novalidate>
+        <!-- Honeypot anti-bot : champ invisible que les bots remplissent automatiquement -->
+        <div class="hp-field" aria-hidden="true">
+          <label>Ne pas remplir<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
         </div>
         <div class="row">
-          <div class="field"><label for="metier">Métier / Entreprise</label><input id="metier" type="text" placeholder="ex. Plombier — Dupont SARL" required /></div>
+          <div class="field"><label for="prenom">Prénom</label><input id="prenom" name="prenom" type="text" required autocomplete="given-name" /></div>
+          <div class="field"><label for="nom">Nom</label><input id="nom" name="nom" type="text" required autocomplete="family-name" /></div>
+        </div>
+        <div class="row">
+          <div class="field"><label for="metier">Métier / Entreprise</label><input id="metier" name="metier" type="text" placeholder="ex. Plombier — Dupont SARL" required autocomplete="organization" /></div>
           <div class="field"><label for="taille">Nombre à former</label>
-            <select id="taille">
+            <select id="taille" name="taille">
               <option>Moi seul·e</option>
               <option>2 à 5 personnes</option>
               <option>6 à 10 personnes</option>
@@ -2677,12 +2690,12 @@ section{ position: relative; }
           </div>
         </div>
         <div class="row">
-          <div class="field"><label for="email">Email professionnel</label><input id="email" type="email" required /></div>
-          <div class="field"><label for="tel">Téléphone</label><input id="tel" type="tel" required /></div>
+          <div class="field"><label for="email">Email professionnel</label><input id="email" name="email" type="email" required autocomplete="email" /></div>
+          <div class="field"><label for="tel">Téléphone</label><input id="tel" name="tel" type="tel" required autocomplete="tel" /></div>
         </div>
         <div class="row">
           <div class="field"><label for="format">Format souhaité</label>
-            <select id="format">
+            <select id="format" name="format">
               <option>Présentiel — Avignon</option>
               <option>Présentiel — Intra-entreprise</option>
               <option>Distanciel — Visio</option>
@@ -2690,7 +2703,7 @@ section{ position: relative; }
             </select>
           </div>
           <div class="field"><label for="periode">Période souhaitée</label>
-            <select id="periode">
+            <select id="periode" name="periode">
               <option>Le plus tôt possible (sous 4-6 sem.)</option>
               <option>Dans 1 à 2 mois</option>
               <option>Dans 2 à 3 mois</option>
@@ -2698,7 +2711,7 @@ section{ position: relative; }
             </select>
           </div>
         </div>
-        <div class="field"><label for="msg">Message (optionnel)</label><textarea id="msg" placeholder="Vos questions, votre contexte, vos contraintes…"></textarea></div>
+        <div class="field"><label for="msg">Message (optionnel)</label><textarea id="msg" name="msg" placeholder="Vos questions, votre contexte, vos contraintes…"></textarea></div>
 
         <div class="submit-row">
           <span class="legal">Réponse sous 24h · Sans engagement · <a href="/confidentialite/" style="color:inherit; text-decoration: underline;">Données protégées RGPD</a></span>
@@ -2886,13 +2899,13 @@ document.querySelectorAll('.modules .module').forEach(card => {
 });
 
 /* ─────────────────────────────────────────────────────────────────
-   Formulaire de contact → Web3Forms (POST, "Envoyé !" feedback)
-   Le mail arrive sur jo.achouri@gmail.com avec toutes les infos.
+   Formulaire de contact → /api/contact.php (proxy PHP Hostinger)
+   Le mail arrive sur info@formaxia.fr. La clé Web3Forms n'est plus
+   exposée côté client : tout passe par notre propre endpoint.
    ───────────────────────────────────────────────────────────────── */
 (function setupContactForm(){
   const form = document.getElementById('contactForm');
   if (!form) return;
-  const ACCESS_KEY = 'c5e6c9b7-ca8d-491b-84df-c9c9df02f348';
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -2905,29 +2918,18 @@ document.querySelectorAll('.modules .module').forEach(card => {
     btn.disabled = true;
     btn.innerHTML = 'Envoi en cours…';
 
-    const data = new FormData();
-    data.append('access_key', ACCESS_KEY);
-    data.append('subject', `Nouveau lead Formaxia — ${v('prenom')} ${v('nom')}`);
-    data.append('from_name', 'Formaxia.fr');
-    data.append('replyto', v('email'));
-    data.append('Prénom', v('prenom'));
-    data.append('Nom', v('nom'));
-    data.append('Métier / Entreprise', v('metier'));
-    data.append('Nombre à former', v('taille'));
-    data.append('Email', v('email'));
-    data.append('Téléphone', v('tel'));
-    data.append('Format souhaité', v('format'));
-    data.append('Période souhaitée', v('periode'));
-    data.append('Message', v('msg') || '(aucun message)');
+    // FormData récupère tous les champs (y compris le honeypot 'website')
+    const data = new FormData(form);
 
     try {
-      const response = await fetch('https://api.web3forms.com/submit', {
+      const response = await fetch('/api/contact.php', {
         method: 'POST',
-        body: data
+        body: data,
+        headers: { 'Accept': 'application/json' }
       });
       const result = await response.json();
 
-      if (result.success){
+      if (response.ok && result.success){
         const success = document.createElement('div');
         success.className = 'form-success';
         success.innerHTML = `
@@ -2948,7 +2950,7 @@ document.querySelectorAll('.modules .module').forEach(card => {
       btn.innerHTML = original;
       const legal = form.querySelector('.legal');
       if (legal){
-        legal.innerHTML = `Une erreur est survenue. Réessayez ou écrivez-nous sur WhatsApp (bouton en bas à droite).`;
+        legal.innerHTML = 'Une erreur est survenue. Réessayez ou écrivez-nous sur WhatsApp (bouton en bas à droite).';
         legal.style.color = '#c5443e';
       }
     }
