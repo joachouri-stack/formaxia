@@ -235,6 +235,14 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap" />
 
+<!-- Preload du hero (LCP boost) — la variante 900w WebP couvre la grande
+     majorité des navigateurs modernes et est la version utilisée en desktop. -->
+<link rel="preload" as="image" type="image/webp"
+      href="/assets/hero-900w.webp"
+      imagesrcset="/assets/hero-600w.webp 600w, /assets/hero-900w.webp 900w, /assets/hero-1200w.webp 1200w, /assets/hero-1400w.webp 1400w"
+      imagesizes="(max-width: 1080px) 95vw, 600px"
+      fetchpriority="high" />
+
 <script>
 /* TWEAKS: sector accent (BTP / Commerce / etc.) — single variable swap, per the brief.
    The brief is explicit that only the accent moves between sectors;
@@ -244,7 +252,7 @@ window.TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "accent": "#C9A84C",
   "showGoldRules": true,
   "density": "regular",
-  "heroImage": "assets/hero.jpg",
+  "heroImage": "",
   "sessionImage": "",
   "portraitImage": "assets/johane_achouri.jpg",
 
@@ -257,7 +265,7 @@ window.TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
     "recommandation": "—",
     "abandon":        "—"
   },
-  "resultatsUpdated": "Mai 2026"
+  "resultatsUpdated": "Juin 2026"
 }/*EDITMODE-END*/;
 </script>
 
@@ -307,6 +315,21 @@ img,svg{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;cursor:pointer;border:0;background:transparent}
 :focus-visible{outline:2px solid var(--or); outline-offset:3px}
+
+/* Skip link a11y : caché hors focus, apparaît en haut à gauche au tab */
+.skip-link{
+  position: absolute; top: -100px; left: 12px;
+  z-index: 10000;
+  padding: 10px 18px;
+  background: var(--noir); color: var(--or);
+  font-family: var(--ff-mono); font-size: 12px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  border: 1px solid var(--or);
+  border-radius: 4px;
+  transition: top .15s ease;
+}
+.skip-link:focus{ top: 12px; outline: none; }
+
 
 /* ─────────────────────────────────────────────────────────────────
    TYPOGRAPHIE
@@ -1959,6 +1982,10 @@ section{ position: relative; }
 </head>
 <body>
 
+<!-- Skip link : permet aux utilisateurs clavier/lecteur d'écran de sauter
+     directement au contenu principal sans avoir à parcourir toute la navigation. -->
+<a href="#accueil" class="skip-link">Aller au contenu principal</a>
+
 <!-- ════════════════════════════════════════════════════════════
      PROGRESS + HEADER
      ════════════════════════════════════════════════════════════ -->
@@ -2014,7 +2041,23 @@ section{ position: relative; }
       </div>
 
       <div class="hero-side reveal" style="transition-delay:.4s">
-        <div class="placeholder tall" id="heroPh" role="img" aria-label="Photo : artisan sur chantier avec tablette"></div>
+        <div class="placeholder tall has-image" id="heroPh">
+          <picture>
+            <source
+              type="image/webp"
+              srcset="/assets/hero-600w.webp 600w, /assets/hero-900w.webp 900w, /assets/hero-1200w.webp 1200w, /assets/hero-1400w.webp 1400w"
+              sizes="(max-width: 1080px) 95vw, 600px" />
+            <img
+              src="/assets/hero-900w.jpg"
+              srcset="/assets/hero-600w.jpg 600w, /assets/hero-900w.jpg 900w, /assets/hero-1200w.jpg 1200w, /assets/hero-1400w.jpg 1400w"
+              sizes="(max-width: 1080px) 95vw, 600px"
+              alt="Artisan du BTP sur chantier consultant sa tablette : un cas d'usage concret de l'IA pour gagner du temps administratif"
+              class="ph-img"
+              width="1400" height="1750"
+              fetchpriority="high"
+              decoding="async" />
+          </picture>
+        </div>
         <div class="spec-card">
           <div class="big num">+10h</div>
           <div class="lbl"><b>Par semaine, en moyenne</b>économisées dès la 1<sup>re</sup> semaine</div>
@@ -2481,7 +2524,7 @@ section{ position: relative; }
   <div class="wrap">
     <div class="faq-grid">
       <div class="reveal">
-        <span class="eyebrow">05 · Questions</span>
+        <span class="eyebrow">05 · 10 questions fréquentes</span>
         <h2 class="h-display" style="margin-top:18px">
           Toutes vos questions — <em>réponses honnêtes</em>.
         </h2>
@@ -3013,6 +3056,9 @@ document.querySelectorAll('.faq-item').forEach(d => {
 function applyImage(id, url){
   const el = document.getElementById(id);
   if (!el) return;
+  // Si l'élément contient un <picture> avec srcset, l'image est déjà gérée
+  // de manière responsive — on ne touche à rien pour ne pas casser le srcset.
+  if (el.querySelector('picture source[srcset]')) return;
   const img = el.querySelector('.ph-img');
   if (url && String(url).trim()){
     if (img){
