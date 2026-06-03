@@ -1350,6 +1350,129 @@ section{ position: relative; }
 /* ─────────────────────────────────────────────────────────────────
    FINANCEMENT
    ───────────────────────────────────────────────────────────────── */
+/* ─────────────────────────────────────────────────────────────────
+   LEAD MAGNET — Checklist 10 tâches
+   ───────────────────────────────────────────────────────────────── */
+.lead-magnet{ background: var(--blanc); }
+.lm-grid{
+  display: grid; grid-template-columns: 1.1fr 1fr;
+  gap: clamp(40px, 5vw, 72px);
+  align-items: center;
+}
+@media (max-width: 880px){ .lm-grid{ grid-template-columns: 1fr; } }
+.lm-text h2{ font-size: clamp(28px, 3.8vw, 44px); }
+.lm-text h2 em{ color: var(--or); font-style: italic; font-weight: 400; }
+.lm-bullets{
+  list-style: none; padding: 0; margin: 28px 0 0;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.lm-bullets li{
+  display: flex; align-items: center; gap: 14px;
+  font-family: var(--ff-mono); font-size: 13px;
+  letter-spacing: 0.04em; color: var(--gris-2);
+}
+.lm-bullets .dot{
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--or); flex-shrink: 0;
+}
+
+.lm-form{
+  background: var(--blanc-pure);
+  border: 1px solid var(--gris-line);
+  border-radius: 8px;
+  padding: 36px 32px;
+  box-shadow: 0 12px 32px rgba(10,10,15,.06);
+  display: flex; flex-direction: column; gap: 14px;
+}
+.lm-form-head{
+  margin-bottom: 8px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--gris-line);
+}
+.lm-tag{
+  display: inline-block;
+  font-family: var(--ff-mono); font-size: 11px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--or-deep);
+  padding: 4px 10px;
+  background: rgba(201,168,76,.1);
+  border-radius: 999px;
+  margin-bottom: 8px;
+}
+.lm-form-head h3{
+  font-family: var(--ff-display); font-size: 22px;
+  font-weight: 500; color: var(--noir);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+.lm-form .field{ display: flex; flex-direction: column; gap: 6px; margin: 0; }
+.lm-form label{
+  font-family: var(--ff-mono); font-size: 11px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--gris-3);
+}
+.lm-form input{
+  font: inherit; font-size: 15px;
+  padding: 12px 14px;
+  border: 1px solid var(--gris-line);
+  border-radius: 4px;
+  background: var(--blanc);
+  color: var(--noir);
+  outline: none;
+  transition: border-color .15s, background .15s;
+}
+.lm-form input:focus{
+  border-color: var(--or);
+  background: var(--blanc-pure);
+}
+
+.lm-cta{
+  margin-top: 8px;
+  appearance: none; border: 0; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 16px 20px;
+  background: var(--noir); color: var(--or);
+  border-radius: 999px;
+  font-family: var(--ff-text);
+  font-size: 15px; font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: background .2s, transform .15s;
+}
+.lm-cta:hover{ background: #1f1f2c; transform: translateY(-1px); }
+.lm-cta:disabled{ opacity: .6; cursor: wait; transform: none; }
+
+.lm-legal{
+  font-family: var(--ff-mono); font-size: 11px;
+  color: var(--gris-3); line-height: 1.5;
+  letter-spacing: 0.04em;
+  margin-top: 4px;
+}
+.lm-legal a{ color: var(--or-deep); text-decoration: underline; text-underline-offset: 2px; }
+
+.lm-form-success{
+  text-align: center; padding: 36px 28px;
+}
+.lm-form-success .ico{
+  width: 56px; height: 56px; margin: 0 auto 18px;
+  border-radius: 50%; background: var(--or);
+  color: var(--noir);
+  display: flex; align-items: center; justify-content: center;
+}
+.lm-form-success h3{
+  font-family: var(--ff-display); font-size: 24px;
+  font-weight: 500; color: var(--noir);
+  margin-bottom: 10px;
+}
+.lm-form-success p{ color: var(--gris-2); margin-bottom: 18px; }
+.lm-form-success .lm-direct{
+  display: inline-block;
+  font-family: var(--ff-mono); font-size: 12px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--or-deep);
+  border-bottom: 1px solid var(--or-soft);
+  text-decoration: none;
+}
+
 .financement{ background: var(--noir); color: var(--blanc); }
 .fin-grid{
   display:grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 5vw, 80px);
@@ -2182,6 +2305,55 @@ section{ position: relative; }
 </section>
 
 <!-- ════════════════════════════════════════════════════════════
+     LEAD MAGNET — Checklist gratuite par email
+     ════════════════════════════════════════════════════════════ -->
+<section class="lead-magnet section-pad" id="checklist" data-screen-label="Checklist">
+  <div class="wrap">
+    <div class="lm-grid">
+      <div class="lm-text reveal">
+        <span class="eyebrow">Ressource gratuite</span>
+        <h2 class="h-display" style="margin-top:18px">
+          La checklist <em>10 tâches</em> à automatiser.
+        </h2>
+        <p class="lede" style="margin-top:24px; max-width: 540px;">
+          On a compilé les 10 tâches administratives qui font perdre le plus de temps aux artisans du BTP — et le gain moyen quand l'IA s'en charge. Imprimable. À cocher sur la semaine. Vous serez surpris du total.
+        </p>
+        <ul class="lm-bullets">
+          <li><span class="dot" aria-hidden="true"></span>Devis, planning, emails, mémoires techniques…</li>
+          <li><span class="dot" aria-hidden="true"></span>Gain de temps chiffré pour chaque tâche</li>
+          <li><span class="dot" aria-hidden="true"></span>Reçue par mail en 30 secondes · 100% gratuit</li>
+        </ul>
+      </div>
+
+      <form class="lm-form reveal" id="checklistForm" style="transition-delay:.1s" novalidate>
+        <!-- Honeypot anti-bot -->
+        <div class="hp-field" aria-hidden="true">
+          <label>Ne pas remplir<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+        </div>
+
+        <div class="lm-form-head">
+          <span class="lm-tag">PDF · Imprimable</span>
+          <h3>Recevoir la checklist</h3>
+        </div>
+
+        <div class="field"><label for="lm-prenom">Prénom</label><input id="lm-prenom" name="prenom" type="text" required autocomplete="given-name" /></div>
+        <div class="field"><label for="lm-email">Email professionnel</label><input id="lm-email" name="email" type="email" required autocomplete="email" /></div>
+        <div class="field"><label for="lm-metier">Métier (optionnel)</label><input id="lm-metier" name="metier" type="text" placeholder="ex. Plombier, Maçon, Chef d'entreprise…" autocomplete="organization-title" /></div>
+
+        <button type="submit" class="lm-cta">
+          Recevoir la checklist
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+
+        <p class="lm-legal">
+          Email utilisé uniquement pour vous envoyer la checklist et 2-3 conseils dans les semaines qui suivent. Pas de spam · <a href="/confidentialite/">RGPD</a>.
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
      FINANCEMENT
      ════════════════════════════════════════════════════════════ -->
 <section class="financement section-pad" id="financement" data-screen-label="Financement">
@@ -2997,6 +3169,60 @@ document.querySelectorAll('.modules .module').forEach(card => {
       const legal = form.querySelector('.legal');
       if (legal){
         legal.innerHTML = 'Une erreur est survenue. Réessayez ou écrivez-nous sur WhatsApp (bouton en bas à droite).';
+        legal.style.color = '#c5443e';
+      }
+    }
+  });
+})();
+
+/* ─────────────────────────────────────────────────────────────────
+   Lead magnet — Formulaire Checklist → /api/checklist.php
+   ───────────────────────────────────────────────────────────────── */
+(function setupChecklistForm(){
+  const form = document.getElementById('checklistForm');
+  if (!form) return;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!form.reportValidity()) return;
+
+    const btn = form.querySelector('.lm-cta');
+    const original = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = 'Envoi en cours…';
+
+    const data = new FormData(form);
+
+    try {
+      const response = await fetch('/api/checklist.php', {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      const result = await response.json();
+
+      if (response.ok && result.success){
+        const prenom = (document.getElementById('lm-prenom')?.value || '').trim();
+        const success = document.createElement('div');
+        success.className = 'lm-form-success';
+        success.innerHTML = `
+          <div class="ico">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h3>C'est parti${prenom ? ', ' + prenom : ''} !</h3>
+          <p>Vérifiez votre boîte mail dans 30 secondes — la checklist vous y attend.</p>
+          <a href="/checklist/" class="lm-direct">Y accéder directement →</a>
+        `;
+        form.replaceWith(success);
+      } else {
+        throw new Error(result.message || 'Erreur inconnue');
+      }
+    } catch (err){
+      btn.disabled = false;
+      btn.innerHTML = original;
+      const legal = form.querySelector('.lm-legal');
+      if (legal){
+        legal.innerHTML = 'Une erreur est survenue. <a href="/checklist/">Accédez directement à la checklist →</a>';
         legal.style.color = '#c5443e';
       }
     }
