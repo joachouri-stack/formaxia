@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="any" />
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+<link rel="manifest" href="/assets/manifest.webmanifest" />
+<meta name="theme-color" content="#0a0a0f" />
+<title>Blog Formaxia · IA appliquée au BTP — méthodes, retours d'expérience, financement</title>
+<meta name="description" content="Le blog Formaxia partage des méthodes concrètes pour utiliser l'IA dans les métiers du bâtiment : devis, planning, mémoires techniques, RGPD chantier. Pour artisans et PME du BTP." />
+<link rel="canonical" href="https://formaxia.fr/blog/" />
+<meta name="robots" content="index,follow" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Blog Formaxia — IA appliquée au BTP" />
+<meta property="og:description" content="Méthodes concrètes pour utiliser l'IA dans le bâtiment : devis, planning, mémoires techniques, financement Constructys." />
+<meta property="og:url" content="https://formaxia.fr/blog/" />
+<meta property="og:image" content="https://formaxia.fr/assets/hero.jpg" />
+<meta property="og:site_name" content="Formaxia" />
+<meta property="og:locale" content="fr_FR" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "@id": "https://formaxia.fr/blog/#blog",
+  "name": "Blog Formaxia",
+  "description": "Le blog Formaxia partage des méthodes concrètes pour utiliser l'IA dans les métiers du bâtiment.",
+  "url": "https://formaxia.fr/blog/",
+  "inLanguage": "fr-FR",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://formaxia.fr/#organization",
+    "name": "FORMAXIA"
+  },
+  "blogPost": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://formaxia.fr/blog/ia-artisans-btp-avignon-vaucluse/#article",
+      "headline": "IA pour les artisans BTP du Vaucluse : comment gagner 10 heures par semaine sur les devis",
+      "url": "https://formaxia.fr/blog/ia-artisans-btp-avignon-vaucluse/",
+      "datePublished": "2026-06-03",
+      "dateModified": "2026-06-03",
+      "author": { "@type": "Person", "name": "Johane Achouri" }
+    }
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" />
+
+<style>
+:root{
+  --noir:#0a0a0f; --or:#c9a84c; --or-soft:#d8bb6a; --or-deep:#a88736;
+  --blanc:#f8f6f1; --blanc-pure:#fff; --gris:#2a2a35; --gris-3:#5a5a68;
+  --gris-line:#e6e1d6;
+}
+*{ box-sizing: border-box; margin: 0; padding: 0; }
+html{ scroll-behavior: smooth; }
+body{
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 16px; line-height: 1.6;
+  color: var(--noir); background: var(--blanc);
+  padding-top: 62px;
+}
+
+/* Top nav (cohérente avec les autres pages) */
+.site-nav{
+  position: fixed; top: 0; left: 0; right: 0; z-index: 90;
+  background: rgba(10,10,15,.85);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(201,168,76,.18);
+  padding: 14px 28px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.site-nav .brand{
+  display: inline-flex; align-items: center; gap: 12px;
+  color: var(--blanc); text-decoration: none;
+  font-weight: 500; font-size: 15px; transition: color .2s;
+}
+.site-nav .brand:hover{ color: var(--or); }
+.site-nav .brand .mark{ width: 22px; height: 22px; border-radius: 4px; background: var(--or); }
+.site-nav .brand .sep{ color: rgba(248,246,241,.3); font-family: 'DM Mono', monospace; font-size: 12px; margin: 0 4px; }
+.site-nav .brand .tag{ color: rgba(248,246,241,.6); font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+.site-nav-actions a{ color: rgba(248,246,241,.7); text-decoration: none; font-size: 14px; transition: color .2s; }
+.site-nav-actions a:hover{ color: var(--or); }
+@media (max-width: 640px){
+  .site-nav{ padding: 10px 14px; }
+  .site-nav .brand .tag{ display: none; }
+}
+
+.wrap{ max-width: 980px; margin: 0 auto; padding: 64px 24px 96px; }
+
+.blog-hero{ text-align: center; margin-bottom: 56px; }
+.blog-hero .eyebrow{
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--or-deep);
+}
+.blog-hero h1{
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(36px, 5.4vw, 64px);
+  font-weight: 500; line-height: 1.05;
+  margin: 16px 0 18px;
+  letter-spacing: -0.015em;
+}
+.blog-hero h1 em{ color: var(--or); font-style: italic; font-weight: 400; }
+.blog-hero .lede{
+  max-width: 620px; margin: 0 auto;
+  font-size: 18px; line-height: 1.55;
+  color: var(--gris-3);
+}
+
+/* Liste des articles */
+.posts{ display: grid; gap: 28px; margin-top: 48px; }
+@media (min-width: 720px){ .posts{ grid-template-columns: 1fr 1fr; } }
+
+.post-card{
+  background: var(--blanc-pure);
+  border: 1px solid var(--gris-line);
+  border-radius: 6px;
+  padding: 32px 28px;
+  display: flex; flex-direction: column; gap: 14px;
+  transition: border-color .25s, transform .25s, box-shadow .25s;
+  text-decoration: none; color: inherit;
+}
+.post-card:hover{
+  border-color: var(--or-soft);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0,0,0,.06);
+}
+.post-meta{
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--or-deep);
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+}
+.post-meta .dot{ width: 4px; height: 4px; border-radius: 50%; background: var(--or-soft); }
+.post-card h2{
+  font-family: 'Playfair Display', serif;
+  font-size: 24px; font-weight: 500; line-height: 1.2;
+  color: var(--noir);
+  letter-spacing: -0.01em;
+}
+.post-card p{ color: var(--gris-3); font-size: 15.5px; }
+.post-cta{
+  margin-top: auto;
+  font-family: 'DM Mono', monospace; font-size: 12px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--or-deep);
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.post-cta::after{ content: "→"; transition: transform .2s; }
+.post-card:hover .post-cta::after{ transform: translateX(4px); }
+
+.empty-soon{
+  margin-top: 32px;
+  padding: 28px;
+  background: rgba(201,168,76,.06);
+  border: 1px dashed rgba(201,168,76,.4);
+  border-radius: 6px;
+  text-align: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  color: var(--or-deep);
+  letter-spacing: 0.08em;
+}
+
+.back-cta{
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 56px;
+  padding: 12px 22px;
+  background: var(--noir); color: var(--blanc);
+  text-decoration: none; border-radius: 999px;
+  font-size: 14px; font-weight: 500;
+  transition: background .2s;
+}
+.back-cta:hover{ background: #1f1f2c; color: var(--or-soft); }
+</style>
+</head>
+<body>
+
+<nav class="site-nav" aria-label="Navigation principale">
+  <a href="/" class="brand">
+    <span class="mark"></span>
+    <span>Formaxia</span>
+    <span class="sep">·</span>
+    <span class="tag">Blog</span>
+  </a>
+  <div class="site-nav-actions">
+    <a href="/">← Accueil</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <header class="blog-hero">
+    <span class="eyebrow">Le blog Formaxia</span>
+    <h1>L'IA dans le BTP, expliquée <em>pour le terrain</em>.</h1>
+    <p class="lede">
+      Méthodes concrètes, retours d'expérience d'artisans, financement Constructys, mémoires techniques, RGPD chantier. Zéro jargon, zéro théorie.
+    </p>
+  </header>
+
+  <section class="posts" aria-label="Articles publiés">
+
+    <a class="post-card" href="/blog/ia-artisans-btp-avignon-vaucluse/">
+      <div class="post-meta">
+        <span>SEO local</span>
+        <span class="dot" aria-hidden="true"></span>
+        <span>3 juin 2026</span>
+        <span class="dot" aria-hidden="true"></span>
+        <span>9 min de lecture</span>
+      </div>
+      <h2>IA pour les artisans BTP du Vaucluse : comment gagner 10 heures par semaine sur vos devis</h2>
+      <p>Guide pratique pour les plombiers, électriciens, maçons et chefs d'entreprise du bâtiment d'Avignon, Carpentras, Orange et Cavaillon. 5 cas d'usage concrets, 3 erreurs à éviter, et le financement OPCO Constructys décrypté.</p>
+      <span class="post-cta">Lire l'article</span>
+    </a>
+
+  </section>
+
+  <div class="empty-soon">
+    Prochains articles en préparation · Devis IA pour électriciens · Mémoire technique BTP · RGPD chantier
+  </div>
+
+  <a href="/" class="back-cta">
+    ← Retour à l'accueil
+  </a>
+
+</main>
+
+</body>
+</html>
