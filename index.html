@@ -1237,7 +1237,7 @@ section{ position: relative; }
   align-items: center;
 }
 .avatar{
-  width: 52px; height:52px; border-radius:50%;
+  width: 56px; height:56px; border-radius:50%;
   background:
     repeating-linear-gradient(135deg, rgba(201,168,76,.18) 0 1px, transparent 1px 5px),
     linear-gradient(135deg, #d8c89b, #b7945a);
@@ -1245,6 +1245,13 @@ section{ position: relative; }
   display:flex; align-items:center; justify-content:center;
   font-family: var(--ff-mono); font-size: 14px; font-weight:500;
   color: var(--noir);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.avatar img{
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  display: block;
 }
 .t-author .nm{ font-weight: 500; font-size: 15px; }
 .t-author .rl{ font-family: var(--ff-mono); font-size: 12px; color: var(--gris-3); letter-spacing: 0.08em; }
@@ -2217,7 +2224,9 @@ section{ position: relative; }
       <article class="t-card reveal">
         <p class="quote">Avant je passais 3 heures sur un devis. Maintenant c'est 10 minutes. J'ai signé 2 clients de plus ce mois-ci.</p>
         <div class="t-author">
-          <div class="avatar" aria-hidden="true">MD</div>
+          <div class="avatar">
+            <img src="/assets/temoin-marc.jpg" alt="Portrait de Marc D., plombier indépendant à Lyon" loading="lazy" width="56" height="56" />
+          </div>
           <div>
             <div class="nm">Marc D.</div>
             <div class="rl">Plombier indépendant · Lyon</div>
@@ -2229,7 +2238,9 @@ section{ position: relative; }
       <article class="t-card reveal" style="transition-delay:.1s">
         <p class="quote">J'ai cinq équipes sur cinq chantiers en parallèle. Le planning, les rapports, tout passe par l'IA maintenant. Mes week-ends sont à moi.</p>
         <div class="t-author">
-          <div class="avatar" aria-hidden="true">SL</div>
+          <div class="avatar">
+            <img src="/assets/temoin-sophie.jpg" alt="Portrait de Sophie L., cheffe d'entreprise BTP à Marseille" loading="lazy" width="56" height="56" />
+          </div>
           <div>
             <div class="nm">Sophie L.</div>
             <div class="rl">Cheffe d'entreprise BTP · Marseille</div>
@@ -2241,7 +2252,9 @@ section{ position: relative; }
       <article class="t-card reveal" style="transition-delay:.2s">
         <p class="quote">Honnêtement, j'étais sceptique. Deux jours plus tard, je faisais mes comptes-rendus en parlant à mon téléphone. C'est terminé pour moi le bureau du soir.</p>
         <div class="t-author">
-          <div class="avatar" aria-hidden="true">KB</div>
+          <div class="avatar">
+            <img src="/assets/temoin-karim.jpg" alt="Portrait de Karim B., chef de chantier à Bordeaux" loading="lazy" width="56" height="56" />
+          </div>
           <div>
             <div class="nm">Karim B.</div>
             <div class="rl">Chef de chantier · Bordeaux</div>
